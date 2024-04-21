@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Objects/Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ground_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://sprites/ParallaxBackgroundSprite.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
+
+[node name="Stage01" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 144, 128 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 4, 0, 30, 5, 0, 65536, 4, 0, 65566, 5, 0, 131072, 4, 0, 131102, 5, 0, 196608, 4, 0, 196638, 5, 0, 262144, 4, 0, 262152, 2, 0, 262153, 3, 0, 262174, 5, 0, 327680, 4, 0, 327692, 10, 0, 327693, 11, 0, 327694, 11, 0, 327695, 13, 0, 327710, 5, 0, 393216, 2, 0, 393217, 1, 0, 393218, 3, 0, 393222, 6, 0, 393228, 1610612739, 0, 393229, 1610612737, 0, 393230, 1610612737, 0, 393231, 1610612738, 0, 393239, 10, 0, 393240, 13, 0, 393246, 5, 0, 458752, 5, 0, 458753, 8, 0, 458754, 4, 0, 458757, 2, 0, 458758, 9, 0, 458759, 3, 0, 458770, 6, 0, 458774, 10, 0, 458775, 8, 0, 458776, 4, 0, 458781, 6, 0, 458782, 5, 0, 524288, 5, 0, 524289, 9, 0, 524290, 4, 0, 524293, 5, 0, 524294, 8, 0, 524295, 4, 0, 524306, 7, 0, 524309, 10, 0, 524310, 9, 0, 524311, 9, 0, 524312, 4, 0, 524316, 2, 0, 524317, 8, 0, 524318, 3, 0, 589824, 9, 0, 589825, 9, 0, 589826, 8, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 11, 0, 589831, 11, 0, 589832, 11, 0, 589833, 11, 0, 589834, 13, 0, 589839, 2, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 11, 0, 589844, 1, 0, 589845, 9, 0, 589846, 9, 0, 589847, 9, 0, 589848, 9, 0, 589849, 1, 0, 589850, 1, 0, 589851, 1, 0, 589852, 9, 0, 589853, 9, 0, 589854, 9, 0, 655360, 9, 0, 655361, 9, 0, 655362, 9, 0, 655363, 9, 0, 655364, 9, 0, 655365, 9, 0, 655366, 8, 0, 655367, 8, 0, 655368, 9, 0, 655369, 9, 0, 655370, 9, 0, 655371, 1, 0, 655372, 11, 0, 655373, 11, 0, 655374, 11, 0, 655375, 9, 0, 655376, 8, 0, 655377, 9, 0, 655378, 9, 0, 655379, 9, 0, 655380, 9, 0, 655381, 9, 0, 655382, 9, 0, 655383, 9, 0, 655384, 9, 0, 655385, 9, 0, 655386, 9, 0, 655387, 9, 0, 655388, 9, 0, 655389, 9, 0, 655390, 9, 0 )
+
+[node name="Enemy" parent="." instance=ExtResource( 1 )]
+position = Vector2( 138, 51 )
+health = 3
+
+[node name="Enemy2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 15, 74 )
+speed = 15
+health = 2
+
+[node name="Enemy3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 411, 129 )
+speed = 20
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2( 0.5, 0.5 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 256, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 1.2, 1.42188 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="ScreenShake" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="ScreenShake"]
+
+[connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]
