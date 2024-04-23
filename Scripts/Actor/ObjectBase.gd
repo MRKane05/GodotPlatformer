@@ -1,0 +1,22 @@
+extends KinematicBody2D
+class_name ObjectBase
+
+#Essentially this is the bottom of the tree for anything that could be attackable. Naturally everything else branches off of this class
+export(float) var current_knockback = 0
+var stuntime = 0
+var health = 30
+var is_dead = false
+
+func dead():
+	is_dead = true
+
+#Basic hurt function
+func take_damage(damageAmount, knockback, attackstun, instigator):
+	current_knockback = knockback
+	health -= damageAmount
+	stuntime = 0.25	#Stun our enemy with the hit
+	if health < 0:
+		dead()
+
+func do_stun(knockback : float, stunamount : float, instigator):
+	stuntime = stunamount

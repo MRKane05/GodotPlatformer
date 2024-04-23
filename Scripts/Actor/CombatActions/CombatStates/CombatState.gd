@@ -6,6 +6,10 @@ class_name CombatState
 #export(String) var attack_name = "attack"	#Make the attack into the name of the node
 export(int) var attack_chain_order = 0		#Where should this attack sit in a combo?
 export(String) var next_combo_state = ""
+export(float) var attack_damage = 5	#What's the expected damage of this attack?
+export(float) var knockback_force = 20	#How big is our standard knockback force?
+export(float) var attack_stun = 1 #How long will we apply the standard stun on hit?
+#This'll need to have some "evolving" done to see what'll happen
 export(bool) var combo_finish = false
 export(bool) var only_ground = false
 export(bool) var only_air = false

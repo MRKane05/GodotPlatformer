@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends ObjectBase
 class_name Actor
 
 #A stack of variables which won't be configerable...
@@ -37,7 +37,7 @@ var combat_states = {} # Dictionary of different combat actions we can do
 
 var velocity = Vector2(0,0)	#our movement as defined by our state class
 
-var move_dir = 0	#sent through from our controller
+export(float) var move_dir = 0	#sent through from our controller
 
 #combat systems
 var combo_counter = 0
@@ -220,3 +220,11 @@ func attack_animation_finished():
 func anim_finished(anim_name: String):
 	if action_state:
 		action_state.anim_finished(anim_name)
+
+#Callback from one of our strike areas. I might have to think of a novel way to figure out what the damage will be...
+#this is called when we manage to hit something
+func _on_AttackArea2D_body_entered(body):
+	if body.has_method("take_damage"):	#ducktyping to see if we're hitting something that's generically hittable
+		#Look to our current action state to see what damage we should be doing
+		if action_state is CombatState:
+			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, self)
