@@ -138,7 +138,7 @@ func _physics_process(delta):
 		#Handle our collisions
 		handlemovementcontacts()
 		#set our globals. This position will be referenced by AI and probably other functions
-		Global.playerpos = self.position
+		#Global.playerpos = self.position
 
 #Check to see if we're against a wall
 func touchingwall():

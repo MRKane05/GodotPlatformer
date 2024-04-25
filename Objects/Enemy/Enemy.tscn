@@ -1,10 +1,12 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/AI/EnemyAI.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd" type="Script" id=3]
 [ext_resource path="res://Objects/Enemy/Actor_Enemy.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/AI/AIStates/AI_Amble.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnGround.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/AI/AIStates/AI_Spar.gd" type="Script" id=7]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Idle.png" type="Texture" id=10]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Run.png" type="Texture" id=11]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Jump.png" type="Texture" id=12]
@@ -689,9 +691,10 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
-MAX_SPEED_RUN = 40.0
+MAX_SPEED_RUN = 20.0
 initial_state = NodePath("ActorStates/Actor_OnGround")
 _animation_player = NodePath("AnimationPlayer")
+viewlimit = Vector2( 150, 50 )
 
 [node name="ActorStates" type="Node" parent="."]
 
@@ -724,6 +727,15 @@ only_ground = true
 script = ExtResource( 2 )
 ActorTarget = NodePath("..")
 move_dir = 1.0
+initial_state = NodePath("AI_Amble")
+
+[node name="AI_Amble" type="Node" parent="EnemyAI"]
+script = ExtResource( 5 )
+
+[node name="AI_Spar" type="Node" parent="EnemyAI"]
+script = ExtResource( 7 )
+
+[node name="PlayerRayCheck" type="RayCast2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
@@ -767,6 +779,15 @@ disabled = true
 
 [node name="EdgeCheck" type="RayCast2D" parent="FlipElements"]
 position = Vector2( 6, 7 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 6
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="EdgeCheck_Back" type="RayCast2D" parent="FlipElements"]
+position = Vector2( -6, 7 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 6

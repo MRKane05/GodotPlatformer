@@ -40,6 +40,11 @@ var dash_time = 0 #Time remaining on our dash (might be handled elsewhere)
 var dash_hold = false
 var redash_time = 0 #Time until we can dash again
 
+func _ready():
+	._ready()
+	Global.Player = self
+	Global.PlayerCollider = $CollisionShape2D
+
 #Player countdowns
 func handlecountdowns(delta):
 		cyote_time -= delta
@@ -86,3 +91,5 @@ func handlemovementcontacts():
 	else:	#character is airbourne
 		on_ground = false
 
+func _physics_process(delta):
+	Global.playerpos = self.position

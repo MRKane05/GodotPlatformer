@@ -43,35 +43,7 @@ position = Vector2( 11, -161 )
 target_stage = "res://Scenes/Stage02.tscn"
 
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
-position = Vector2( 478, 141 )
-move_dir = 1.0
-
-[node name="Enemy2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 191, 97 )
-move_dir = -1.0
-
-[node name="Enemy3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 193, 52 )
-move_dir = 1.0
-
-[node name="Enemy4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 405, -45 )
-move_dir = 1.0
-
-[node name="Enemy5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 404, 51 )
-move_dir = -1.0
-
-[node name="Enemy6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 244, 4 )
-move_dir = 1.0
-
-[node name="Enemy7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 719, 130 )
-move_dir = -1.0
-
-[node name="Enemy8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 847, 129 )
+position = Vector2( 198, 107 )
 move_dir = 1.0
 
 [connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]
