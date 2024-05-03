@@ -692,6 +692,7 @@ __meta__ = {
 "_edit_group_": true
 }
 MAX_SPEED_RUN = 20.0
+strike_plain = "Attack01"
 initial_state = NodePath("ActorStates/Actor_OnGround")
 _animation_player = NodePath("AnimationPlayer")
 viewlimit = Vector2( 150, 50 )

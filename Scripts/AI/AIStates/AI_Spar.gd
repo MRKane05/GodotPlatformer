@@ -40,6 +40,11 @@ func update(_delta: float) -> void:
 		if base_AI.targetactor.backed_to_edge():
 			player_sign = 0	
 	
+	#if our player gets close enough lets take a swing at them
+	if (abs(Global.playerpos.x - base_AI.targetactor.position.x) < 15) && !base_AI.targetactor.is_attacking: #This will need expanded
+		base_AI.targetactor.change_action_state(base_AI.targetactor.strike_plain, false)
 	#send driving command to move
-	base_AI.targetactor.set_move_dir(player_sign, facing_dir)
-
+	if !base_AI.targetactor.is_attacking:
+		base_AI.targetactor.set_move_dir(player_sign, facing_dir)
+	else:
+		base_AI.targetactor.set_move_dir(0, facing_dir)	#Stop our player movement, keep our facing (this is going to glitch)

@@ -18,6 +18,8 @@ var on_wall = 0			#Wallbased raycasts to allow for wallgrabs
 var facing_dir = 1 #Which direction should our sprite nominally be facing?
 var sprite_flipped = false	#The direction of our sprite as defined by the different functions
 
+export(String) var strike_plain = "" #What is our attack if we're not putting in any input? This promises to get overly complex
+
 # Path to the initial active state. We export it to be able to pick the initial state in the inspector.
 export var initial_state := NodePath()
 
@@ -176,12 +178,20 @@ func make_attack_press():
 	combo_counter += 1
 	#Logic time! Lets see if we can find something to use as an attack in our combat_states dictionary...
 	#for the moment lets just jump straight into the action select
-	#select_attack_action()
+	select_attack_action()
 
 #This isn't a good system and will need changing
 func select_attack_action():
 	var best_attack
 	var best_attack_name
+	
+	#So I want to modify this a bit to try and have the attacks driven by the actions themselves
+	#for the moment
+	if (strike_plain != "" && combat_states[strike_plain]):
+		var attack = combat_states[strike_plain]
+		change_action_state(strike_plain, false)
+	return
+	
 	for key in combat_states:
 		var thisAttack = combat_states[key]
 		#check our state for ground/air first

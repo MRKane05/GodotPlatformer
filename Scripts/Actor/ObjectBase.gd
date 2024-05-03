@@ -4,11 +4,12 @@ class_name ObjectBase
 #Essentially this is the bottom of the tree for anything that could be attackable. Naturally everything else branches off of this class
 export(float) var current_knockback = 0
 var stuntime = 0
-var health = 30
+export(float) var health = 30
 var is_dead = false
 
 func dead():
 	is_dead = true
+	queue_free() #For the moment lets just vanish whatever dies
 
 #Basic hurt function
 func take_damage(damageAmount, knockback, attackstun, instigator):

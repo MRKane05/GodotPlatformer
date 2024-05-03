@@ -695,6 +695,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+strike_plain = "Attack01"
 initial_state = NodePath("ActorStates/Actor_OnGround")
 _animation_player = NodePath("AnimationPlayer")
 
