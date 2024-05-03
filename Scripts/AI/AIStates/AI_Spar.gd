@@ -4,8 +4,10 @@ class_name AI_Spar
 var next_shift = 0 #How long until we change what we're doing
 var advance_on = true
 var ai_pause = false
+var next_strike_time = 0
 
 func update(_delta: float) -> void:
+	next_strike_time -= _delta
 	next_shift -= _delta #Tick down our counter
 	if next_shift <= 0:	#reset our ticker and make another seed
 		var rng = RandomNumberGenerator.new()
@@ -40,9 +42,12 @@ func update(_delta: float) -> void:
 		if base_AI.targetactor.backed_to_edge():
 			player_sign = 0	
 	
-	#if our player gets close enough lets take a swing at them
-	if (abs(Global.playerpos.x - base_AI.targetactor.position.x) < 15) && !base_AI.targetactor.is_attacking: #This will need expanded
+	#if our player gets close enough lets take a swing at them. We should include a little more logic here for finesse
+	if next_strike_time <= 0 && abs(Global.playerpos.x - base_AI.targetactor.position.x) < 15 && abs(Global.playerpos.y - base_AI.targetactor.position.y) < 7 && !base_AI.targetactor.is_attacking: #This will need expanded
 		base_AI.targetactor.change_action_state(base_AI.targetactor.strike_plain, false)
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		next_strike_time = rng.randf_range(1,3) #Just so that we don't sit there slashing
 	#send driving command to move
 	if !base_AI.targetactor.is_attacking:
 		base_AI.targetactor.set_move_dir(player_sign, facing_dir)
