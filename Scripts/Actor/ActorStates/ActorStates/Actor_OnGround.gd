@@ -1,6 +1,10 @@
 extends ActorState
 class_name Actor_OnGround
 
+export(String) var fall_anim_name = "fall"
+export(String) var move_anim_name = "run"
+export(String) var idle_anim_name = "idle"
+
 func enter(_msg := {}) -> bool:
 	
 	return true
@@ -8,13 +12,13 @@ func enter(_msg := {}) -> bool:
 # Virtual function. Corresponds to the `_process()` callback.
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
 	if !base_actor.on_ground:
-		base_actor.set_animation("fall")
+		base_actor.set_animation(fall_anim_name)
 	else:
 		#animation handling
 		if abs(_velocity.x) > 0:
-			base_actor.set_animation("run")
+			base_actor.set_animation(move_anim_name)
 		else:
-			base_actor.set_animation("idle")
+			base_actor.set_animation(idle_anim_name)
 	
 	#While we're on the ground we really only need to worry about movement and falling
 	_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
