@@ -230,6 +230,13 @@ func anim_finished(anim_name: String):
 	if action_state:
 		action_state.anim_finished(anim_name)
 
+func take_damage(damageAmount, knockback, attackstun, instigator):
+	if action_state.has_method("take_damage"):	#if this can be handled by the action state then do so
+		action_state.take_damage(damageAmount, knockback, attackstun, instigator)
+	else:
+		.take_damage(damageAmount, knockback, attackstun, instigator)
+
+
 func do_hurt():
 	interrupt_change_action_state("Actor_Hurt", false)
 

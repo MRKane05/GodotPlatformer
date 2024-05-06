@@ -46,5 +46,8 @@ func processplaininputs(delta):
 	#So our player wants to try and make an attack action...
 	if Input.is_action_just_pressed("ui_focus_next"):
 		targetactor.make_attack_press()
-	
+		
+	#Handle our blocking action
+	if Input.is_action_just_pressed("ui_shift_right"):
+		targetactor.change_action_state("Actor_Block", false)
 	
