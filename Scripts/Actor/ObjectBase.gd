@@ -16,8 +16,12 @@ func take_damage(damageAmount, knockback, attackstun, instigator):
 	current_knockback = knockback
 	health -= damageAmount
 	stuntime = 0.25	#Stun our enemy with the hit
+	do_hurt()
 	if health < 0:
 		dead()
+
+func do_hurt():
+	pass
 
 func do_stun(knockback : float, stunamount : float, instigator):
 	stuntime = stunamount

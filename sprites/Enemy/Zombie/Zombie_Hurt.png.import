@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Zombie_Attack.png-35749832eae9140e83c496b041ae8316.stex"
+path="res://.import/Zombie_Hurt.png-73a7eac4f92d9fd98ac6f4a48f560696.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Enemy/Zombie/Zombie_Attack.png"
-dest_files=[ "res://.import/Zombie_Attack.png-35749832eae9140e83c496b041ae8316.stex" ]
+source_file="res://sprites/Enemy/Zombie/Zombie_Hurt.png"
+dest_files=[ "res://.import/Zombie_Hurt.png-73a7eac4f92d9fd98ac6f4a48f560696.stex" ]
 
 [params]
 

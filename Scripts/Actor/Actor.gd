@@ -130,7 +130,6 @@ func _process(delta):
 	if attack_presses > 0 && !is_attacking: #we want to do an attack, and we can do an attacdk
 		select_attack_action()
 
-
 func _physics_process(delta):
 	handlecountdowns(delta) #Important for our built-in tickers
 	if action_state: #Call through to our state so that we can do stuff!

@@ -82,3 +82,6 @@ func playerwithinlimit():
 	if abs(self.position.x - Global.playerpos.x) < viewlimit.x && abs(self.position.y - Global.playerpos.y) < viewlimit.y:
 		return true
 	return false
+
+func do_hurt():
+	interrupt_change_action_state("Actor_Hurt", false)

@@ -24,7 +24,6 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 func enter(_msg := {}) -> bool:
 	return true
 
-
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
 func exit() -> bool: #There's a possibility that we won't be able to let the player do what they want to do

@@ -174,6 +174,9 @@ func take_damage(damageAmount, knockback, instigator):
 	if health < 0:
 		dead()
 
+func do_hurt():
+	state
+
 func do_stun(knockback : float, stunamount : float, instigator):
 	stuntime = stunamount
 	#this needs to be an interrupt...
