@@ -230,6 +230,9 @@ func anim_finished(anim_name: String):
 	if action_state:
 		action_state.anim_finished(anim_name)
 
+func do_hurt():
+	interrupt_change_action_state("Actor_Hurt", false)
+
 #Callback from one of our strike areas. I might have to think of a novel way to figure out what the damage will be...
 #this is called when we manage to hit something
 func _on_AttackArea2D_body_entered(body):

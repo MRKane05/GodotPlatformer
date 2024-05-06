@@ -83,5 +83,4 @@ func playerwithinlimit():
 		return true
 	return false
 
-func do_hurt():
-	interrupt_change_action_state("Actor_Hurt", false)
+
