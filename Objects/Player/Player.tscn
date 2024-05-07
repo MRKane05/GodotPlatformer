@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Player/Actor_Player.gd" type="Script" id=2]
@@ -20,6 +20,10 @@
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Hurt.gd" type="Script" id=18]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Block.gd" type="Script" id=19]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Block.png" type="Texture" id=20]
+[ext_resource path="res://sprites/UI/HealthBar_Progress.png" type="Texture" id=21]
+[ext_resource path="res://sprites/UI/HealthBar_Border.png" type="Texture" id=22]
+[ext_resource path="res://sprites/UI/HealthBar_Under.png" type="Texture" id=23]
+[ext_resource path="res://Scripts/Helpers/GameplayUI.gd" type="Script" id=24]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 5, 9.5 )
@@ -882,6 +886,34 @@ smoothing_enabled = true
 smoothing_speed = 7.0
 script = ExtResource( 16 )
 
+[node name="HUD" type="CanvasLayer" parent="Camera2D"]
+script = ExtResource( 24 )
+
+[node name="HealthUnder" type="TextureProgress" parent="Camera2D/HUD"]
+margin_left = 25.0
+margin_top = 15.0
+margin_right = 281.0
+margin_bottom = 47.0
+rect_scale = Vector2( 0.424775, 0.410541 )
+value = 100.0
+texture_under = ExtResource( 23 )
+texture_over = ExtResource( 22 )
+texture_progress = ExtResource( 21 )
+tint_progress = Color( 0.254902, 0, 0, 1 )
+
+[node name="HealthOver" type="TextureProgress" parent="Camera2D/HUD"]
+margin_left = 25.0
+margin_top = 15.0
+margin_right = 281.0
+margin_bottom = 47.0
+rect_scale = Vector2( 0.42497, 0.416834 )
+value = 100.0
+texture_over = ExtResource( 22 )
+texture_progress = ExtResource( 21 )
+tint_progress = Color( 1, 0, 0, 1 )
+
+[node name="HealthTween" type="Tween" parent="Camera2D/HUD"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/Attack01 = SubResource( 154 )
@@ -933,6 +965,9 @@ __meta__ = {
 }
 
 [node name="FlipElements" type="Position2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -5.5 )
@@ -949,8 +984,5 @@ collision_mask = 3
 position = Vector2( 12.585, -1.489 )
 shape = SubResource( 112 )
 disabled = true
-
-[node name="Actor_Block" type="Node" parent="."]
-script = ExtResource( 19 )
 
 [connection signal="body_entered" from="FlipElements/AttackArea2D" to="." method="_on_AttackArea2D_body_entered"]

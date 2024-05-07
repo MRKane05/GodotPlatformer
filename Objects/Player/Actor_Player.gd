@@ -92,5 +92,10 @@ func handlemovementcontacts():
 	else:	#character is airbourne
 		on_ground = false
 
+func take_damage(damageAmount, knockback, attackstun, instigator):
+	.take_damage(damageAmount, knockback, attackstun, instigator)
+	#And update our health bar!
+	$Camera2D/HUD._on_health_updated((health/30.0) * 100.0, 30)
+
 func _physics_process(delta):
 	Global.playerpos = self.position
