@@ -5,6 +5,7 @@ class_name Actor_Block
 var move_while_blocking = false
 var combat_float = false
 var reblock_time = 0.75 #Just a number I pulled out of my ass
+var block_strength = 12 #How much damage can this block soak before it's broken and the remaining damage is passed back onto the actor?
 
 var parry_time = 1.0	#How long should our parry last for?
 
@@ -35,6 +36,9 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 
 #Basic hurt function
 func handle_take_damage(damageAmount, knockback, attackstun, instigator):
+	block_strength -= damageAmount
+	if block_strength <= 0: #our block has been broken
+		return false
 	#of course if we're being attacked from behind we should take damage. That'll be something to get in
 	if sign(knockback) + sign(base_actor.facing_dir) != 0: #See if the damage is coming from the direction we're not facing
 		#We need to call the super from the function that called this...
