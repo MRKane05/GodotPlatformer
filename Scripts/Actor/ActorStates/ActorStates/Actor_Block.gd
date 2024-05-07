@@ -6,7 +6,7 @@ var move_while_blocking = false
 var combat_float = false
 var reblock_time = 0.75 #Just a number I pulled out of my ass
 
-var parry_time = 0.75	#How long should our parry last for?
+var parry_time = 1.0	#How long should our parry last for?
 
 func enter(_msg := {}) -> bool:
 	if base_actor.next_block_time > 0:
@@ -39,8 +39,11 @@ func handle_take_damage(damageAmount, knockback, attackstun, instigator):
 	if sign(knockback) + sign(base_actor.facing_dir) != 0: #See if the damage is coming from the direction we're not facing
 		#We need to call the super from the function that called this...
 		return false
-	if (parry_time > 0):
+	
+	if (parry_time > 0): #While not all attacks will be parryable (is that a word?) lets just roll with the basics for now
+		instigator.get_parried(20*base_actor.facing_dir, 3, base_actor)
 		print("Did Parry")
+		return true
 	
 	return true
 	#Don't take damage while blocking, but instead erode our block state

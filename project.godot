@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/ActorStates/ActorStates/Actor_OnWall.gd"
 }, {
+"base": "Actor_Hurt",
+"class": "Actor_Parried",
+"language": "GDScript",
+"path": "res://Scripts/Actor/ActorStates/ActorStates/Actor_Parried.gd"
+}, {
 "base": "Actor",
 "class": "Actor_Player",
 "language": "GDScript",
@@ -118,6 +123,7 @@ _global_script_class_icons={
 "Actor_OnDash": "",
 "Actor_OnGround": "",
 "Actor_OnWall": "",
+"Actor_Parried": "",
 "Actor_Player": "",
 "Attack_Slam": "",
 "CombatState": "",

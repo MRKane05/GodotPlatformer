@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/AI/EnemyAI.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://sprites/Enemy/Zombie/Zombie_Hurt.png" type="Texture" id=10]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Run.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Hurt.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Parried.gd" type="Script" id=13]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Slide.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=25]
@@ -381,6 +382,71 @@ tracks/3/keys = {
 "values": [ 0, 3, 3 ]
 }
 
+[sub_resource type="Animation" id=156]
+resource_name = "parried"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+
 [sub_resource type="Animation" id=148]
 resource_name = "slide"
 length = 0.7
@@ -471,6 +537,9 @@ move_anim_name = "move"
 [node name="Actor_Hurt" type="Node" parent="ActorStates"]
 script = ExtResource( 12 )
 
+[node name="Actor_Parried" type="Node" parent="ActorStates"]
+script = ExtResource( 13 )
+
 [node name="CombatStates" type="Node" parent="."]
 script = ExtResource( 3 )
 
@@ -508,6 +577,7 @@ anims/fall = SubResource( 130 )
 anims/hurt = SubResource( 155 )
 anims/idle = SubResource( 124 )
 anims/move = SubResource( 125 )
+anims/parried = SubResource( 156 )
 anims/slide = SubResource( 148 )
 
 [node name="FlipElements" type="Position2D" parent="."]

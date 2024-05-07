@@ -246,6 +246,10 @@ func take_damage(damageAmount, knockback, attackstun, instigator):
 func do_hurt():
 	interrupt_change_action_state("Actor_Hurt", false)
 
+func get_parried(knockback, parrystun, instigator):
+	current_knockback = knockback
+	interrupt_change_action_state("Actor_Parried", false)
+
 #Callback from one of our strike areas. I might have to think of a novel way to figure out what the damage will be...
 #this is called when we manage to hit something
 func _on_AttackArea2D_body_entered(body):
