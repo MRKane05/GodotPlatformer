@@ -45,6 +45,8 @@ export(float) var move_dir = 0	#sent through from our controller
 var combo_counter = 0
 var attack_presses = 0
 var attack_refresh = 0
+
+var next_block_time = 0
 var is_attacking = false
 #export(CollisionShape2D) var combatstikers = []	# well that's a pain in the ass...
 var combatstrikers = []
@@ -231,8 +233,12 @@ func anim_finished(anim_name: String):
 		action_state.anim_finished(anim_name)
 
 func take_damage(damageAmount, knockback, attackstun, instigator):
-	if action_state.has_method("take_damage"):	#if this can be handled by the action state then do so
-		action_state.take_damage(damageAmount, knockback, attackstun, instigator)
+	if action_state.has_method("handle_take_damage"):	#if this can be handled by the action state then do so
+		if action_state.handle_take_damage(damageAmount, knockback, attackstun, instigator):
+			#Our function has handled this, and logically we'll not be taking damage
+			pass
+		else:
+			.take_damage(damageAmount, knockback, attackstun, instigator)
 	else:
 		.take_damage(damageAmount, knockback, attackstun, instigator)
 

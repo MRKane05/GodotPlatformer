@@ -51,6 +51,7 @@ func handlecountdowns(delta):
 		walljump_time -= delta
 		dash_time -= delta
 		redash_time -= delta
+		next_block_time -= delta
 		#stuntime -= delta
 		#parry_time -= delta
 		
