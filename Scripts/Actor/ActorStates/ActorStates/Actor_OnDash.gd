@@ -18,7 +18,7 @@ func enter(_msg := {}) -> bool:
 		base_actor.dash_hold = true
 		base_actor.set_animation("slide")
 	else:
-		base_actor.set_animation("jump")
+		base_actor.set_animation("airdash")
 	return true
 
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
