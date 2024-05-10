@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bone-crack-121580.wav-9c6ec67ebcfd3a4ed2ee6b379255309f.sample"
+
+[deps]
+
+source_file="res://Audio/Sounds/Character/Zombie/bone-crack-121580.wav"
+dest_files=[ "res://.import/bone-crack-121580.wav-9c6ec67ebcfd3a4ed2ee6b379255309f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
