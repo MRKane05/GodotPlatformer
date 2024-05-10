@@ -531,7 +531,7 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=112]
 extents = Vector2( 6.5, 8 )
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=["Enemy"]]
 z_index = 1
 script = ExtResource( 4 )
 __meta__ = {
