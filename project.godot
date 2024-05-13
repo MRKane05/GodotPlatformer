@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Actor",
 "class": "Actor_Enemy",
 "language": "GDScript",
-"path": "res://Objects/Enemy/Actor_Enemy.gd"
+"path": "res://Objects/Actors/Enemy/Actor_Enemy.gd"
 }, {
 "base": "ActorState",
 "class": "Actor_Hurt",
@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Actor",
 "class": "Actor_Player",
 "language": "GDScript",
-"path": "res://Objects/Player/Actor_Player.gd"
+"path": "res://Objects/Actors/Player/Actor_Player.gd"
 }, {
 "base": "ActorState",
 "class": "Actor_Shoot",
@@ -168,6 +168,11 @@ common/drop_mouse_on_gui_input_disabled=true
 
 [input]
 
+ui_select={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 ui_focus_next={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
