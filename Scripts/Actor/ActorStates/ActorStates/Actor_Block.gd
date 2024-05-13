@@ -24,7 +24,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	if !Input.is_action_pressed("ui_shift_right"): #We're not holding down block anymore to transition back to our standard state
 		base_actor.change_action_state("Actor_OnGround", false)
 	
-	if move_while_blocking:
+	if move_while_blocking || !base_actor.on_ground:
 		#While we're on the ground we really only need to worry about movement and falling
 		_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
 		_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity

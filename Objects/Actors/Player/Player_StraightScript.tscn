@@ -1,6 +1,6 @@
 [gd_scene load_steps=70 format=2]
 
-[ext_resource path="res://Objects/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Actors/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Jump.png" type="Texture" id=2]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/WallGrab.png" type="Texture" id=3]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Death.png" type="Texture" id=4]

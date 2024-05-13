@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/AI/EnemyAI.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd" type="Script" id=3]
-[ext_resource path="res://Objects/Enemy/Actor_Enemy.gd" type="Script" id=4]
+[ext_resource path="res://Objects/Actors/Enemy/Actor_Enemy.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/AI/AIStates/AI_Amble.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnGround.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/AI/AIStates/AI_Spar.gd" type="Script" id=7]
@@ -533,6 +533,8 @@ extents = Vector2( 6.5, 8 )
 
 [node name="Enemy" type="KinematicBody2D" groups=["Enemy"]]
 z_index = 1
+collision_layer = 6
+collision_mask = 6
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true

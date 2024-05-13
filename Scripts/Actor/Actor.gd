@@ -151,6 +151,11 @@ func touchingwall():
 		return 1
 	return 0
 
+func do_platform_drop():
+	if $DowncastGround.is_colliding():
+		var downcast_ground_collider = $DowncastGround.get_collider()
+		
+
 	#All the contacts that the actor could make in the level (ground, walls)
 func handlemovementcontacts():
 	#Get our contacts======================================

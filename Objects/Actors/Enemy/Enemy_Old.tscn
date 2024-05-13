@@ -1,6 +1,6 @@
 [gd_scene load_steps=40 format=2]
 
-[ext_resource path="res://Objects/Enemy/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Actors/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Knight/slash_knight_assetsparallax/Enemy/Dark Knight.png" type="Texture" id=2]
 [ext_resource path="res://sprites/Knight/spritesheet.png" type="Texture" id=3]
 

@@ -19,6 +19,7 @@ func enter(_msg := {}) -> bool:
 		base_actor.set_animation("slide")
 	else:
 		base_actor.set_animation("airdash")
+	base_actor.setdashcollisions(true)
 	return true
 
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
@@ -45,4 +46,9 @@ func anim_finished(anim_name: String) -> void:
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
 func exit(): #Don't allow a state change while we're dashing. An interrupt will be fine however
+	base_actor.setdashcollisions(false)
 	return base_actor.dash_time <= 0
+	
+func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) is this action ok with handing over (as exit may have failed)
+	base_actor.setdashcollisions(false)
+	return true

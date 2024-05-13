@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Objects/Enemy/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Actors/Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Actors/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ground_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://sprites/ParallaxBackgroundSprite.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
 [ext_resource path="res://Objects/Function/ChangeStage.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Audio/Music/stranger-things-124008.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Objects/Environmental/Platforms/DropThroughPlatform.tscn" type="PackedScene" id=8]
 
 [node name="Stage01" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -51,6 +52,14 @@ move_dir = 1.0
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
 volume_db = -17.736
-autoplay = true
+
+[node name="DropThroughPlatform" parent="." instance=ExtResource( 8 )]
+position = Vector2( 65, 132 )
+
+[node name="DropThroughPlatform2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 66, 100 )
+
+[node name="DropThroughPlatform3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 67, 69 )
 
 [connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]

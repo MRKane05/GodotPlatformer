@@ -175,7 +175,7 @@ func take_damage(damageAmount, knockback, instigator):
 		dead()
 
 func do_hurt():
-	state
+	pass
 
 func do_stun(knockback : float, stunamount : float, instigator):
 	stuntime = stunamount

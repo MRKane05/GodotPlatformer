@@ -37,8 +37,15 @@ func processplaininputs(delta):
 	#So now we need to get this information through to our Actor...
 	targetactor.set_move_dir(move_dir, facing_dir)
 	
+	#See if we want to drop through a platform, and if we're not holding down it's a normal jump. Try not to let this get too convoluted	
 	if Input.is_action_just_pressed("ui_accept"):	#try to jump
-		targetactor.change_action_state("Actor_Jump", true)
+		if Input.is_action_pressed("ui_down"):
+			if targetactor.on_ground: #try to fall through ground
+				if targetactor.check_drop_function(): #We can try dropping through this platform
+					targetactor.change_action_state("Actor_OnGround", false) #Set us to standing on ground
+					targetactor.set_drop_collision(true)
+		else:
+			targetactor.change_action_state("Actor_Jump", true)
 	
 	if Input.is_action_just_pressed("ui_shift_left"):
 		targetactor.change_action_state("Actor_OnDash", false)
@@ -53,4 +60,7 @@ func processplaininputs(delta):
 		
 	if Input.is_action_just_pressed("ui_select"):
 		targetactor.change_action_state("Actor_Shoot", false)
+		
+
+	
 	

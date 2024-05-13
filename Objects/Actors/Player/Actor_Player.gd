@@ -19,9 +19,11 @@ const MAX_CYOTETIME = 0.15		#How long does our cyote time last for after leaving
 const WALLJUMP_LOCKTIME = 0.3	#The duration that we'll "lose" movement control following a walljump to stop the player from turning and latching straight back on
 const DASH_DURATION = 0.4		#The duration that we'll dash for
 const REDASH_WAIT = 0.5			#How long we have to wait until we can dash again
-
+const DASH_LAYER = 1			#What layer do we disalbe for dashing
+const DROP_LAYER = 2			#The layer that our fall-through platforms are on
 
 #var on_ground = false	#Are we grounded by touching or with raycasts?
+var jump_free = false #Set by the raycasts to allow for a jump just before our player contacts the ground
 #var on_wall = 0			#Wallbased raycasts to allow for wallgrabs
 var dash_dir = 0	#The direction -1, 0, 1 that we're dashing in, also used as a check to see if we're dashing dash_dir == 0
 #var facing_dir = 1 #Which direction should our sprite nominally be facing?
@@ -83,14 +85,22 @@ func handlemovementcontacts():
 	
 	#Check our object grounded========================================================================
 	#use raycasts to see if we're colliding with the ground to give us a little jump buffer
-	if ($DowncastLeft.is_colliding() || $DowncastRight.is_colliding() || is_on_floor()) && velocity.y  >= 0: #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
-		
+	if $DowncastLeft.is_colliding() || $DowncastRight.is_colliding():
+		jump_free = true
+	else:
+		jump_free = false
+	
+	if (is_on_floor()) && velocity.y  >= 0: #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
 		on_ground = true
 		jumps_left = 1 #reset our double jump counter
 		dashes_left = 1 #reset our dash counter
 		cyote_time = MAX_CYOTETIME #Set our cyote time as we're not touching the ground
 	else:	#character is airbourne
 		on_ground = false
+
+func setdashcollisions(is_dashing):
+	set_collision_layer_bit(DASH_LAYER, !is_dashing)
+	set_collision_mask_bit(DASH_LAYER, !is_dashing)
 
 func take_damage(damageAmount, knockback, attackstun, instigator):
 	.take_damage(damageAmount, knockback, attackstun, instigator)
@@ -99,3 +109,16 @@ func take_damage(damageAmount, knockback, attackstun, instigator):
 
 func _physics_process(delta):
 	Global.playerpos = self.position
+
+func check_drop_function():
+	if $DowncastGround.is_colliding():
+		if $DowncastGround.get_collider().has_method("player_fall_through"):
+			$DowncastGround.get_collider().player_fall_through(self)
+			return true
+	
+	return false
+
+func set_drop_collision(is_dropping):
+	set_collision_layer_bit(DROP_LAYER, !is_dropping)
+	set_collision_mask_bit(DROP_LAYER, !is_dropping)
+

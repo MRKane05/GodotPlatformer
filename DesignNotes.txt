@@ -1,0 +1,6 @@
+Layers:
+1: Player
+2: Enemies
+3: Drop through platforms
+
+So enemies need to collide with layers 2 & 3 crucially

@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
-[ext_resource path="res://Objects/Player/Actor_Player.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Idle.png" type="Texture" id=3]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Run.png" type="Texture" id=4]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Jump.png" type="Texture" id=5]
@@ -814,8 +814,7 @@ extents = Vector2( 6.5, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
-collision_layer = 7
-collision_mask = 7
+collision_layer = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

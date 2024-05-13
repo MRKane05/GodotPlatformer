@@ -1,7 +1,7 @@
 [gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
-[ext_resource path="res://Objects/Player/Actor_Player.gd" type="Script" id=2]
+[ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Player/Idle.png" type="Texture" id=3]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Run.png" type="Texture" id=4]
 [ext_resource path="res://sprites/Player/Jump.png" type="Texture" id=5]
@@ -34,7 +34,7 @@
 [ext_resource path="res://Audio/Sounds/Character/Player/JumpOff.wav" type="AudioStream" id=32]
 [ext_resource path="res://sprites/Player/ShootMarker.png" type="Texture" id=33]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Shoot.gd" type="Script" id=34]
-[ext_resource path="res://Objects/Projectiles/PlayerShot.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Objects/Actors/Projectiles/PlayerShot.tscn" type="PackedScene" id=35]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 5, 9.5 )
@@ -1025,7 +1025,7 @@ extents = Vector2( 6.5, 8 )
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
 collision_layer = 7
-collision_mask = 7
+collision_mask = 5
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -1150,6 +1150,15 @@ position = Vector2( -3, 5 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 5
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DowncastGround" type="RayCast2D" parent="."]
+position = Vector2( 0, 5 )
+enabled = true
+cast_to = Vector2( 0, 4 )
+collision_mask = 4
 __meta__ = {
 "_edit_group_": true
 }

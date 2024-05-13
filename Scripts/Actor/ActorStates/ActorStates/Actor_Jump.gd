@@ -3,7 +3,7 @@ class_name Actor_Jump
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> bool:
-	if !base_actor.on_ground && base_actor.on_wall == 0 && base_actor.cyote_time <=0 && base_actor.jumps_left <= 0:
+	if !base_actor.on_ground && !base_actor.jump_free && base_actor.on_wall == 0 && base_actor.cyote_time <=0 && base_actor.jumps_left <= 0:
 		return false	#we can't fesiably enter this state
 	#Assume we're good and set our velocity
 	base_actor.velocity = dojumplogic(base_actor.velocity)

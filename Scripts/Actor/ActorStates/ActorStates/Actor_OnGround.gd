@@ -23,4 +23,5 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	#While we're on the ground we really only need to worry about movement and falling
 	_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
 	_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity
+	
 	return _velocity
