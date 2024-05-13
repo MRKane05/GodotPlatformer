@@ -42,6 +42,8 @@ var dash_time = 0 #Time remaining on our dash (might be handled elsewhere)
 var dash_hold = false
 var redash_time = 0 #Time until we can dash again
 
+var quick_respawn_location = Vector2(0,0) #Where will we zoom back to if we land in spikes?
+
 func _ready():
 	._ready()
 	Global.Player = self
@@ -110,15 +112,25 @@ func take_damage(damageAmount, knockback, attackstun, instigator):
 func _physics_process(delta):
 	Global.playerpos = self.position
 
+#Used for dropping through platforms that can be dropped through
 func check_drop_function():
 	if $DowncastGround.is_colliding():
 		if $DowncastGround.get_collider().has_method("player_fall_through"):
 			$DowncastGround.get_collider().player_fall_through(self)
 			return true
-	
 	return false
 
 func set_drop_collision(is_dropping):
 	set_collision_layer_bit(DROP_LAYER, !is_dropping)
 	set_collision_mask_bit(DROP_LAYER, !is_dropping)
 
+func set_quick_respawn_location():
+	quick_respawn_location = self.position
+	
+func touched_killspikes():
+	if quick_respawn_location != Vector2(0,0): #we've got a quick respawn location set
+		#do the animation and then move after it
+		#Move using something eloquent
+		#Do set amount of damage as penalty
+		#For the moment just snap to location
+		self.position = quick_respawn_location

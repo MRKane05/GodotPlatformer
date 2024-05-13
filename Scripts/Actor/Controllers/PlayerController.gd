@@ -24,6 +24,12 @@ func processplaininputs(delta):
 			facing_dir = sign(move_dir)
 		else:
 			move_dir=0
+		
+		var yAxis = Input.get_joy_axis(0, JOY_ANALOG_LY)
+		if (abs(yAxis) > DEADZONE):
+			vertical_move_dir = yAxis
+		else:
+			vertical_move_dir = 0
 	else: #Without an attached controller default to button inputs
 		#horizontal movement input controller
 		if Input.is_action_pressed("ui_right"):
@@ -39,7 +45,7 @@ func processplaininputs(delta):
 	
 	#See if we want to drop through a platform, and if we're not holding down it's a normal jump. Try not to let this get too convoluted	
 	if Input.is_action_just_pressed("ui_accept"):	#try to jump
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("ui_down") || vertical_move_dir > 0.75:
 			if targetactor.on_ground: #try to fall through ground
 				if targetactor.check_drop_function(): #We can try dropping through this platform
 					targetactor.change_action_state("Actor_OnGround", false) #Set us to standing on ground
@@ -62,5 +68,3 @@ func processplaininputs(delta):
 		targetactor.change_action_state("Actor_Shoot", false)
 		
 
-	
-	

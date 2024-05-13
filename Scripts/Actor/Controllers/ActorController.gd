@@ -5,6 +5,7 @@ export var ActorTarget := NodePath()
 var targetactor : Actor
 
 export(float) var move_dir = 0 				#The direction we want to move in
+export(float) var vertical_move_dir = 0
 export(float) var facing_dir = 1
 #export var DEADZONE = 0.2			#Children don't expose export variables due to a bug
 # Declare member variables here. Examples:

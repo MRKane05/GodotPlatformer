@@ -66,3 +66,6 @@ func handlefallfunctions(delta, velocity) -> Vector2:
 	var maxFallSpeed = base_actor.MAX_FALL_SPEED
 	velocity.y = clamp(velocity.y, base_actor.JUMP_POWER, maxFallSpeed) #Axis are down positive. Giggity
 	return velocity
+	
+func touched_killspikes():
+	pass
