@@ -12,6 +12,7 @@ const GRAVITY = 500				#Gravity acceleration. Assume 60fps
 const MAX_FALL_SPEED = 180		#Maxiumum falling speed
 const JUMP_POWER = -200			#Jump velocity
 const FLOOR = Vector2(0, -1)	#The normal direction of the floor (used with move_and_slide system to see where collisions should happen with the ground)
+const CROUCH_THRESHOLD = 0.8	#At what point in our analogue control do we stop moving and start crouching? This might need to be higher
 
 var on_ground = false	#Are we grounded by touching or with raycasts?
 var on_wall = 0			#Wallbased raycasts to allow for wallgrabs
@@ -39,7 +40,8 @@ var combat_states = {} # Dictionary of different combat actions we can do
 
 var velocity = Vector2(0,0)	#our movement as defined by our state class
 
-export(float) var move_dir = 0	#sent through from our controller
+var move_dir = 0	#sent through from our controller
+var vertical_move_dir = 0 #Another through controller value
 
 #combat systems
 var combo_counter = 0
@@ -172,9 +174,10 @@ func handlemovementcontacts():
 	else:	#character is airbourne
 		on_ground = false
 
-func set_move_dir(new_move_dir: float, new_facing_dir):
+func set_move_dir(new_move_dir: float, new_facing_dir, new_vertical_move_dir):
 	move_dir = new_move_dir
 	facing_dir = new_facing_dir
+	vertical_move_dir = new_vertical_move_dir
 	set_facing_scale(facing_dir)
 
 func make_attack_press():
@@ -262,3 +265,7 @@ func _on_AttackArea2D_body_entered(body):
 		#Look to our current action state to see what damage we should be doing
 		if action_state is CombatState:
 			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, self)
+
+#Boilerplate function used by the player
+func set_collision_crouched(is_crouched):
+	pass

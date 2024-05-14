@@ -17,6 +17,7 @@ func enter(_msg := {}) -> bool:
 	if base_actor.on_ground:
 		base_actor.dash_hold = true
 		base_actor.set_animation("slide")
+		base_actor.set_collision_crouched(true)
 	else:
 		base_actor.set_animation("airdash")
 	base_actor.setdashcollisions(true)
@@ -47,8 +48,10 @@ func anim_finished(anim_name: String) -> void:
 # to clean up the state.
 func exit(): #Don't allow a state change while we're dashing. An interrupt will be fine however
 	base_actor.setdashcollisions(false)
+	base_actor.set_collision_crouched(false)
 	return base_actor.dash_time <= 0
 	
 func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) is this action ok with handing over (as exit may have failed)
 	base_actor.setdashcollisions(false)
+	base_actor.set_collision_crouched(false)
 	return true

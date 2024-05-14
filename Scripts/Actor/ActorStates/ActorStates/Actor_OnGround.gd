@@ -4,6 +4,7 @@ class_name Actor_OnGround
 export(String) var fall_anim_name = "fall"
 export(String) var move_anim_name = "run"
 export(String) var idle_anim_name = "idle"
+export(String) var crouch_anim_name = "crouch"
 
 func enter(_msg := {}) -> bool:
 	
@@ -18,10 +19,28 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 		if abs(_velocity.x) > 0:
 			base_actor.set_animation(move_anim_name)
 		else:
-			base_actor.set_animation(idle_anim_name)
-	
-	#While we're on the ground we really only need to worry about movement and falling
-	_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
+			if base_actor.vertical_move_dir > base_actor.CROUCH_THRESHOLD:
+				base_actor.set_animation(crouch_anim_name)
+				base_actor.set_collision_crouched(true)
+			else:
+				#We need some way of knowing if we're holding down to crouch. It seems logical to handle that here
+				base_actor.set_animation(idle_anim_name)
+				base_actor.set_collision_crouched(false)
+		
+	if base_actor.vertical_move_dir > base_actor.CROUCH_THRESHOLD:	#Don't move while crouching
+		_velocity = calculatehorizontalmovement(_delta, Vector2(0, _velocity.y), base_actor.move_dir)
+	else:
+		#While we're on the ground we really only need to worry about movement and falling
+		_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
 	_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity
 	
 	return _velocity
+
+
+func exit(): #Don't allow a state change while we're dashing. An interrupt will be fine however
+	base_actor.set_collision_crouched(false)
+	return true
+	
+func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) is this action ok with handing over (as exit may have failed)
+	base_actor.set_collision_crouched(false)
+	return true

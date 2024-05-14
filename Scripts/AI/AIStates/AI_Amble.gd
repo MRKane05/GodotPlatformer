@@ -12,4 +12,4 @@ func update(_delta: float) -> void:
 		base_AI.facing_dir *= -1
 		
 	#send driving command to move
-	base_AI.targetactor.set_move_dir(base_AI.move_dir, base_AI.facing_dir)
+	base_AI.targetactor.set_move_dir(base_AI.move_dir, base_AI.facing_dir, 0)

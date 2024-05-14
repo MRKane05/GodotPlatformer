@@ -50,6 +50,6 @@ func update(_delta: float) -> void:
 		next_strike_time = rng.randf_range(1,3) #Just so that we don't sit there slashing
 	#send driving command to move
 	if !base_AI.targetactor.is_attacking:
-		base_AI.targetactor.set_move_dir(player_sign, facing_dir)
+		base_AI.targetactor.set_move_dir(player_sign, facing_dir, 0)
 	else:
-		base_AI.targetactor.set_move_dir(0, facing_dir)	#Stop our player movement, keep our facing (this is going to glitch)
+		base_AI.targetactor.set_move_dir(0, facing_dir, 0)	#Stop our player movement, keep our facing (this is going to glitch)

@@ -134,3 +134,7 @@ func touched_killspikes():
 		#Do set amount of damage as penalty
 		#For the moment just snap to location
 		self.position = quick_respawn_location
+
+func set_collision_crouched(is_crouched):
+	$CollisionShape2D.disabled = is_crouched
+	$CollisionShapeCrouched.disabled = !is_crouched

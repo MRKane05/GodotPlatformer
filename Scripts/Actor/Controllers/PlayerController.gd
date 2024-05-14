@@ -40,8 +40,15 @@ func processplaininputs(delta):
 			facing_dir = -1
 		else:
 			move_dir = 0
+		
+		if Input.is_action_pressed("ui_up"):
+			vertical_move_dir = -1
+		elif Input.is_action_pressed("ui_down"):
+			vertical_move_dir = 1
+		else:
+			vertical_move_dir = 0
 	#So now we need to get this information through to our Actor...
-	targetactor.set_move_dir(move_dir, facing_dir)
+	targetactor.set_move_dir(move_dir, facing_dir, vertical_move_dir)
 	
 	#See if we want to drop through a platform, and if we're not holding down it's a normal jump. Try not to let this get too convoluted	
 	if Input.is_action_just_pressed("ui_accept"):	#try to jump
