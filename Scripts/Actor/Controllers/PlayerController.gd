@@ -73,5 +73,7 @@ func processplaininputs(delta):
 		
 	if Input.is_action_just_pressed("ui_select"):
 		targetactor.change_action_state("Actor_Shoot", false)
-		
+	
+	if Input.is_action_just_pressed("ui_menu"): #Restart our level
+		get_tree().reload_current_scene()
 

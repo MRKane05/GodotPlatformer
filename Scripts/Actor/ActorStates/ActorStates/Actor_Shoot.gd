@@ -12,8 +12,11 @@ export(String) var idle_anim_name = "idle"
 
 var target_vector = Vector2(1, 0)
 
+var action_fall_hold = 0
+
 func enter(_msg := {}) -> bool:
 	shoot_marker.visible = true	#Turn our marker on
+	action_fall_hold = 0.5 #How long until we stop setting the fall hold so that our charcter won't fall
 	return true
 
 func exit() -> bool: 
@@ -25,8 +28,12 @@ func interruptexit() -> bool:
 	return true
 	
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
+	action_fall_hold -= _delta
+	
 	if !base_actor.on_ground:
 		base_actor.set_animation(fall_anim_name)
+		if action_fall_hold > 0:
+			base_actor.fall_hold = 0.25
 	else:
 		#animation handling
 		if abs(_velocity.x) > 0:

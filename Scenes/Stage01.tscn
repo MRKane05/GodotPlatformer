@@ -65,11 +65,11 @@ target_stage = "res://Scenes/Stage02.tscn"
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
 position = Vector2( 201, 102 )
 health = 14.0
-move_dir = 1.0
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
 volume_db = -17.736
+autoplay = true
 
 [node name="DropThroughPlatform" parent="." instance=ExtResource( 8 )]
 position = Vector2( 65, 132 )

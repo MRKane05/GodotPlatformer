@@ -47,7 +47,7 @@ var walljump_time = 0 #Control lock time based off of when we jumped off a wall
 
 #Player countdowns
 func handlecountdowns(delta):
-	pass
+	.handlecountdowns(delta)
 
 func handlemovementcontacts():
 	#Super simplified contacts return

@@ -64,6 +64,9 @@ func handlefallfunctions(delta, velocity) -> Vector2:
 	
 	#Clamp our fallspeed so that we don't keep accellerating because it's not fun
 	var maxFallSpeed = base_actor.MAX_FALL_SPEED
+	if base_actor.fall_hold > 0: #Don't let this actor fall if they've got a fall hold active
+		maxFallSpeed = 0
+		
 	velocity.y = clamp(velocity.y, base_actor.JUMP_POWER, maxFallSpeed) #Axis are down positive. Giggity
 	return velocity
 	

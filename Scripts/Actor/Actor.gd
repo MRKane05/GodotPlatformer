@@ -43,6 +43,8 @@ var velocity = Vector2(0,0)	#our movement as defined by our state class
 var move_dir = 0	#sent through from our controller
 var vertical_move_dir = 0 #Another through controller value
 
+var fall_hold = 0	#Used when doing air combat, this value arrests gravity for a duration
+
 #combat systems
 var combo_counter = 0
 var attack_presses = 0
@@ -82,7 +84,7 @@ func _ready():
 
 #handle timing variables
 func handlecountdowns(delta):
-	pass
+	fall_hold -= delta
 
 
 #This promises to become more complicated

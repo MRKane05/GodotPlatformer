@@ -51,23 +51,24 @@ func _ready():
 
 #Player countdowns
 func handlecountdowns(delta):
-		cyote_time -= delta
-		walljump_time -= delta
-		dash_time -= delta
-		redash_time -= delta
-		next_block_time -= delta
-		#stuntime -= delta
-		#parry_time -= delta
-		
-		if dash_time <= 0 && dash_dir != 0:
-			dash_dir = 0	#Clear our dash direction
-			#setdashcollisions(false)
-			redash_time = REDASH_WAIT
-		
-		attack_refresh -= delta
-		if attack_refresh <=0: #reset our combo systems
-			attack_presses = 0
-			combo_counter = 0
+	.handlecountdowns(delta)
+	cyote_time -= delta
+	walljump_time -= delta
+	dash_time -= delta
+	redash_time -= delta
+	next_block_time -= delta
+	#stuntime -= delta
+	#parry_time -= delta
+	
+	if dash_time <= 0 && dash_dir != 0:
+		dash_dir = 0	#Clear our dash direction
+		#setdashcollisions(false)
+		redash_time = REDASH_WAIT
+	
+	attack_refresh -= delta
+	if attack_refresh <=0: #reset our combo systems
+		attack_presses = 0
+		combo_counter = 0
 
 func handlemovementcontacts():
 	#Get our contacts======================================
