@@ -141,7 +141,9 @@ func _physics_process(delta):
 	if action_state: #Call through to our state so that we can do stuff!
 		velocity = action_state.physics_update(delta, velocity, move_dir)
 		#Move according to what our velocity says we should do
-		velocity = move_and_slide(velocity, FLOOR) #this automatically includes delta time behind the scenes
+		#velocity = move_and_slide(velocity, FLOOR) #this automatically includes delta time behind the scenes
+		var snap = Vector2.DOWN * 0.2 if is_on_floor() else Vector2.ZERO
+		velocity = move_and_slide_with_snap(velocity, snap, FLOOR) #this automatically includes delta time behind the scenes
 		#Handle our collisions
 		handlemovementcontacts()
 		#set our globals. This position will be referenced by AI and probably other functions
