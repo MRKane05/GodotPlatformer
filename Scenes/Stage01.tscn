@@ -83,12 +83,15 @@ position = Vector2( 67, 69 )
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 11 )]
 position = Vector2( -136, 112 )
+move_to = Vector2( 80, 0 )
 
 [node name="MovingPlatform2" parent="." instance=ExtResource( 11 )]
-position = Vector2( -66, 75 )
+position = Vector2( -23, 75 )
+move_to = Vector2( 0, 60 )
 
 [node name="MovingPlatform3" parent="." instance=ExtResource( 11 )]
 position = Vector2( -144, 38 )
+move_to = Vector2( 50, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -316, 150 )
