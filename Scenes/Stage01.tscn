@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Objects/Actors/Enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Actors/Player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Objects/Environmental/GameControl/QuickRespawnArea.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/Environmental/SpikesHandler.gd" type="Script" id=10]
 [ext_resource path="res://Objects/Environmental/Platforms/MovingPlatform.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Environmental/Doors/BasicDoor.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Environmental/Switches/BasicLever.tscn" type="PackedScene" id=13]
 
 [node name="Stage01" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -85,16 +87,19 @@ position = Vector2( 67, 69 )
 position = Vector2( -136, 112 )
 move_to = Vector2( 80, 0 )
 
-[node name="MovingPlatform2" parent="." instance=ExtResource( 11 )]
-position = Vector2( -23, 75 )
-move_to = Vector2( 0, 60 )
-
 [node name="MovingPlatform3" parent="." instance=ExtResource( 11 )]
 position = Vector2( -144, 38 )
 move_to = Vector2( 50, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -316, 150 )
+
+[node name="CellDoor" parent="." instance=ExtResource( 12 )]
+position = Vector2( -189, 144 )
+
+[node name="BasicLever" parent="." instance=ExtResource( 13 )]
+position = Vector2( -243, 152 )
+target_switchable = NodePath("../CellDoor")
 
 [connection signal="body_entered" from="LevelSpikes" to="LevelSpikes" method="_on_LevelSpikes_body_entered"]
 [connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]
