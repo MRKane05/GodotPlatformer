@@ -7,7 +7,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 9 )
 
-[node name="BasicLever" type="Node2D"]
+[node name="BasicLever" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="FlipNode" type="Node2D" parent="."]
@@ -18,9 +20,13 @@ texture = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SwitchCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
@@ -30,6 +36,5 @@ position = Vector2( 0, -14 )
 scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 3 )
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_InteractionArea_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_InteractionArea_body_exited"]

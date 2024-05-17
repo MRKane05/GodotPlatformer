@@ -46,3 +46,15 @@ func _process(delta):
 		if Input.is_action_pressed("ui_up") || Input.get_joy_axis(0, JOY_ANALOG_LY) < -0.9:
 			do_toggle()
 		
+
+
+func _on_InteractionArea_body_entered(body):
+	if body.name =="Player":
+		$InteractionIcon.visible = !disabled
+		player_over = true
+
+
+func _on_InteractionArea_body_exited(body):
+	if body.name =="Player":
+		$InteractionIcon.visible = false
+		player_over = false

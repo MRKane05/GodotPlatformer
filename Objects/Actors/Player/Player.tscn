@@ -1266,7 +1266,7 @@ frame = 1
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
-collision_mask = 3
+collision_mask = 15
 
 [node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
 position = Vector2( 12.585, -1.489 )
