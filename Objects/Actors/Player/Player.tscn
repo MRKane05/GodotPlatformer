@@ -1260,9 +1260,9 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
 scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 36 )
+texture = ExtResource( 26 )
 hframes = 2
-frame = 1
+vframes = 3
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mechanical1-107614.mp3-2e9ba422f6974d604d90a763cbd7a6e5.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sounds/Objects/mechanical1-107614.mp3"
+dest_files=[ "res://.import/mechanical1-107614.mp3-2e9ba422f6974d604d90a763cbd7a6e5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

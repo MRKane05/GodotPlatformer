@@ -18,9 +18,10 @@ func do_toggle():
 		can_trigger = false
 		$Timer.wait_time = retrigger_time #reset our timer
 		$Timer.start()
-		print("Doing toggle")
+		$AudioStreamPlayer2D.play()
 		if switchable && switchable.has_method("do_action"):
 			switchable.do_action()
+			
 		if toggle_once:
 			disabled = true
 			$InteractionIcon.visible = false	#Turn off our icon after toggling this switch

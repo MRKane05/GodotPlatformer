@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/jaildoorclose-6173.mp3-66496ba9f7ebc323120f135863775df6.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sounds/Objects/jaildoorclose-6173.mp3"
+dest_files=[ "res://.import/jaildoorclose-6173.mp3-66496ba9f7ebc323120f135863775df6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
