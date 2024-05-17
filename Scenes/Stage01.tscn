@@ -99,6 +99,7 @@ position = Vector2( -189, 144 )
 
 [node name="BasicLever" parent="." instance=ExtResource( 13 )]
 position = Vector2( -243, 152 )
+toggle_once = true
 target_switchable = NodePath("../CellDoor")
 
 [connection signal="body_entered" from="LevelSpikes" to="LevelSpikes" method="_on_LevelSpikes_body_entered"]
