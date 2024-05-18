@@ -28,6 +28,11 @@ export var initial_state := NodePath()
 export (NodePath) var _animation_player
 onready var animation_player:AnimationPlayer = get_node(_animation_player)
 
+#The setup just doesn't like this - apparently it's making a cyclic dependency
+#export (NodePath) var _controller
+#onready var char_controller:ActorController = get_node(_controller)
+var controller #This will be assigned by our controller at runtime
+
 # The current active state. At the start of the game, we get the `initial_state`.
 onready var action_state: ActorState = get_node(initial_state)
 onready var Global = get_node("/root/Global") #Collect and assign our globals for referencing
@@ -245,6 +250,11 @@ func anim_finished(anim_name: String):
 		action_state.anim_finished(anim_name)
 
 func take_damage(damageAmount, knockback, attackstun, instigator):
+	if controller:
+		controller.on_take_damage(damageAmount, knockback, attackstun, instigator)
+	else:
+		print("Controller not assigned")
+	
 	if action_state.has_method("handle_take_damage"):	#if this can be handled by the action state then do so
 		if action_state.handle_take_damage(damageAmount, knockback, attackstun, instigator):
 			#Our function has handled this, and logically we'll not be taking damage

@@ -17,8 +17,11 @@ func _ready():
 	yield(owner, "ready")
 	#Find our TargetActor as we can't export it
 	targetactor = get_parent() as Actor
+	targetactor.controller = self
 	
 
+func on_take_damage(damageAmount, knockback, attackstun, instigator):
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

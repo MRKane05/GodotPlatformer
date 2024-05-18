@@ -3,7 +3,6 @@ class_name AI_Amble
 
 func update(_delta: float) -> void:
 	if base_AI.targetactor.seeplayer(): # && base_AI.see_player_state: #Leave the amble state if we see the player (or a target I guess)
-		print("AI Seen Player")
 		base_AI.change_action_state(base_AI.see_player_state, false)
 	
 	#keep an eye out for having to change movement directions
@@ -13,3 +12,8 @@ func update(_delta: float) -> void:
 		
 	#send driving command to move
 	base_AI.targetactor.set_move_dir(base_AI.move_dir, base_AI.facing_dir, 0)
+
+#Notify our AI of our player (if it is our player)
+func on_take_damage(damageAmount, knockback, attackstun, instigator):
+	if instigator is Actor_Player:
+		base_AI.change_action_state(base_AI.see_player_state, false)

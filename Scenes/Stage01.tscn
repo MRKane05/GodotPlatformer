@@ -92,7 +92,7 @@ position = Vector2( -144, 38 )
 move_to = Vector2( 50, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -316, 150 )
+position = Vector2( 224, 148 )
 
 [node name="CellDoor" parent="." instance=ExtResource( 12 )]
 position = Vector2( -189, 144 )
