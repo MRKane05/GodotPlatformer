@@ -3,5 +3,6 @@ Layers:
 2: Enemies
 3: Drop through platforms
 4: Switches
+5: Player collectable pickups
 
 So enemies need to collide with layers 2 & 3 crucially

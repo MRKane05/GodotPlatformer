@@ -139,3 +139,8 @@ func touched_killspikes():
 func set_collision_crouched(is_crouched):
 	$CollisionShape2D.disabled = is_crouched
 	$CollisionShapeCrouched.disabled = !is_crouched
+
+#Used with our pickups
+func get_health(amount):
+	health = clamp(health + amount, 0, 30)
+	$Camera2D/HUD._on_health_given((health/30.0) * 100.0, 30)
