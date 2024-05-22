@@ -4,6 +4,8 @@ onready var health_over = $HealthOver
 onready var health_under = $HealthUnder
 onready var health_tween = $HealthTween
 
+onready var shots_label = $ShotsLabel
+
 func _on_health_updated(health, amount):
 	print (health)
 	health_over.value = health
@@ -13,3 +15,6 @@ func _on_health_updated(health, amount):
 func _on_health_given(health, amount):
 	health_over.value = health
 	health_under.value = health
+
+func _set_pistol_shots(shotnum):
+	shots_label.text = str(shotnum)

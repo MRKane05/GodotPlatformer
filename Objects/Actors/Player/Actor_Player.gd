@@ -42,6 +42,9 @@ var dash_time = 0 #Time remaining on our dash (might be handled elsewhere)
 var dash_hold = false
 var redash_time = 0 #Time until we can dash again
 
+#Details for our pistol (I assume this is only as complicated as it'll be for the moment...)
+var pistol_shots = 6
+
 var quick_respawn_location = Vector2(0,0) #Where will we zoom back to if we land in spikes?
 
 func _ready():
@@ -144,3 +147,8 @@ func set_collision_crouched(is_crouched):
 func get_health(amount):
 	health = clamp(health + amount, 0, 30)
 	$Camera2D/HUD._on_health_given((health/30.0) * 100.0, 30)
+
+#this function will go both ways
+func change_shots(amount):
+	pistol_shots += amount
+	$Camera2D/HUD._set_pistol_shots(pistol_shots)

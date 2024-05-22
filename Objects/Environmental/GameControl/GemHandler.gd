@@ -4,6 +4,7 @@ extends Node2D
 #an enemy dies, and perhaps also some other group math to try and speed things up
 onready var Global = get_node("/root/Global") #Collect and assign our globals for referencing
 export (PackedScene) var HealthPickup
+export (PackedScene) var BulletPickup
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +15,13 @@ func spawn_collectables(start_position: Vector2, count: int):
 	print("Spawning collectables")
 	#for the moment we're just doing something to test
 	for n in count:
-		var b = HealthPickup.instance()
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		var b
+		if rng.randf() > 0.6:
+			b = HealthPickup.instance()
+		else:
+			b = BulletPickup.instance()
+		
 		self.add_child(b)
 		b.position = start_position

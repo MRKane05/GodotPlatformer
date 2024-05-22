@@ -1,6 +1,4 @@
 extends Area2D
-onready var  area = $Area2D
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#set_deferred("monitoring", true)

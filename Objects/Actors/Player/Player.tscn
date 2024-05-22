@@ -1162,6 +1162,9 @@ limit_bottom = 180
 smoothing_enabled = true
 smoothing_speed = 7.0
 script = ExtResource( 16 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="HUD" type="CanvasLayer" parent="Camera2D"]
 script = ExtResource( 24 )
@@ -1190,6 +1193,16 @@ texture_progress = ExtResource( 21 )
 tint_progress = Color( 1, 0, 0, 1 )
 
 [node name="HealthTween" type="Tween" parent="Camera2D/HUD"]
+
+[node name="ShotsLabel" type="Label" parent="Camera2D/HUD"]
+margin_left = 138.0
+margin_top = 15.0
+margin_right = 178.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 0.960784, 1, 0.309804, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 5
+text = "6"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -1283,5 +1296,8 @@ __meta__ = {
 visible = false
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 33 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [connection signal="body_entered" from="FlipElements/AttackArea2D" to="." method="_on_AttackArea2D_body_entered"]

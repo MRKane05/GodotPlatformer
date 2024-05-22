@@ -48,7 +48,7 @@ var walljump_time = 0 #Control lock time based off of when we jumped off a wall
 func dead():
 	#Mostly for testing
 	#if Global.gemhandler:
-	Global.gemhandler.spawn_collectables(self.position, 5)		
+	Global.gemhandler.call_deferred("spawn_collectables", self.position, 5)		
 	.dead()
 
 #Player countdowns

@@ -15,6 +15,8 @@ var target_vector = Vector2(1, 0)
 var action_fall_hold = 0
 
 func enter(_msg := {}) -> bool:
+	if base_actor.pistol_shots <= 0:
+		return false
 	shoot_marker.visible = true	#Turn our marker on
 	action_fall_hold = 0.5 #How long until we stop setting the fall hold so that our charcter won't fall
 	return true
@@ -70,6 +72,8 @@ func do_shoot():
 		b.setup_projectile(target_vector, base_actor)
 	else:
 		b.setup_projectile(Vector2(base_actor.facing_dir, 0), base_actor)
+	
+	base_actor.change_shots(-1)
 	pass
 
 func do_weapon_aim():
