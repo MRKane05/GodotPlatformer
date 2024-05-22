@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/Environmental/GameControl/GemHandler.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Collectables/pickup_health.tscn" type="PackedScene" id=2]
+
+[node name="GemHandler" type="Node2D"]
+script = ExtResource( 1 )
+HealthPickup = ExtResource( 2 )
