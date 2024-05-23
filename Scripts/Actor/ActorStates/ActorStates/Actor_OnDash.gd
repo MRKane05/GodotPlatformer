@@ -5,21 +5,25 @@ class_name Actor_OnDash
 func enter(_msg := {}) -> bool:
 	if base_actor.redash_time > 0 || base_actor.dash_dir != 0:
 		return false	#we can't fesiably enter this state
+		
+	if base_actor.on_ground: #We can always dash on the ground
+		base_actor.dash_hold = true
+		base_actor.set_animation("slide")
+		base_actor.set_collision_crouched(true)
+	else:
+		if base_actor.dashes_left <= 0:
+			return false #We don't have enough dashes left
+		base_actor.set_animation("airdash")
 	
 	#Setup our Dash logic
 	base_actor.dashes_left -= 1	#decrease our dash counter to keep with form
 	base_actor.dash_time = base_actor.DASH_DURATION
 	base_actor.dash_dir = base_actor.facing_dir
-	if base_actor.on_wall != 0:
+	if base_actor.on_wall != 0: #We're on a wall...is this an airdash?
 		base_actor.dash_dir = base_actor.on_wall
 		base_actor.facing_dir = base_actor.dash_dir
 	#setdashcollisions(true)
-	if base_actor.on_ground:
-		base_actor.dash_hold = true
-		base_actor.set_animation("slide")
-		base_actor.set_collision_crouched(true)
-	else:
-		base_actor.set_animation("airdash")
+
 	base_actor.setdashcollisions(true)
 	return true
 

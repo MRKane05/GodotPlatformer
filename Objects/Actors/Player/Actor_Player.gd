@@ -22,14 +22,19 @@ const REDASH_WAIT = 0.5			#How long we have to wait until we can dash again
 const DASH_LAYER = 1			#What layer do we disalbe for dashing
 const DROP_LAYER = 2			#The layer that our fall-through platforms are on
 
+#Essentially these control and limit our players movement so we can unlock abilities with powerups
+export(bool) var can_wallgrab = false
+export(int) var max_airdashes = 0
+export(int) var max_airjumps = 0
+
 #var on_ground = false	#Are we grounded by touching or with raycasts?
 var jump_free = false #Set by the raycasts to allow for a jump just before our player contacts the ground
 #var on_wall = 0			#Wallbased raycasts to allow for wallgrabs
 var dash_dir = 0	#The direction -1, 0, 1 that we're dashing in, also used as a check to see if we're dashing dash_dir == 0
 #var facing_dir = 1 #Which direction should our sprite nominally be facing?
 #var sprite_flipped = false	#The direction of our sprite as defined by the different functions
-var jumps_left = 1	#how many jumps we've got left. Reset on contact with wall or floor, or bonus
-var dashes_left = 1	#how many dashes we've got left. Reset on contact with wall, floor, or bonus
+var jumps_left = max_airjumps	#how many jumps we've got left. Reset on contact with wall or floor, or bonus
+var dashes_left = max_airdashes	#how many dashes we've got left. Reset on contact with wall, floor, or bonus
 
 #var combo_counter = 0
 #var attack_presses = 0
@@ -75,7 +80,7 @@ func handlecountdowns(delta):
 
 func handlemovementcontacts():
 	#Get our contacts======================================
-	if !on_ground:
+	if !on_ground && can_wallgrab:
 		on_wall = touchingwall()
 		#This piece of logic promises to have a substantial number of hiccoughs, which we may want to end up changing
 		#especially because it's handled as an interrupt...
@@ -83,8 +88,8 @@ func handlemovementcontacts():
 			change_action_state("Actor_OnWall", false)
 			#canceldash()	#stop our dash if we hit a wall
 			facing_dir = on_wall #Set our players facing direction while on a wall
-			jumps_left = 1 #reset our double jump counter
-			dashes_left = 1 #reset our dash counter
+			jumps_left = max_airjumps #reset our double jump counter
+			dashes_left = max_airdashes #reset our dash counter
 	else:
 		on_wall = 0
 		walljump_time = 0
@@ -98,8 +103,8 @@ func handlemovementcontacts():
 	
 	if (is_on_floor()) && velocity.y  >= 0: #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
 		on_ground = true
-		jumps_left = 1 #reset our double jump counter
-		dashes_left = 1 #reset our dash counter
+		jumps_left = max_airjumps #reset our double jump counter
+		dashes_left = max_airdashes #reset our dash counter
 		cyote_time = MAX_CYOTETIME #Set our cyote time as we're not touching the ground
 	else:	#character is airbourne
 		on_ground = false
