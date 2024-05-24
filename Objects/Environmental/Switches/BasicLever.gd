@@ -7,7 +7,7 @@ export var toggle_once = false
 var disabled = false
 
 export (NodePath) var target_switchable
-onready var switchable:BasicDoor = get_node(target_switchable)
+onready var switchable:switch_trigger_object = get_node(target_switchable)
 
 func take_damage(damageAmount, knockback, attackstun, instigator):
 	do_toggle()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
@@ -36,6 +36,10 @@
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Shoot.gd" type="Script" id=34]
 [ext_resource path="res://Objects/Actors/Projectiles/PlayerShot.tscn" type="PackedScene" id=35]
 [ext_resource path="res://sprites/Player/Crouch.png" type="Texture" id=36]
+
+[sub_resource type="CapsuleShape2D" id=165]
+radius = 4.0
+height = 11.0
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 5, 9.5 )
@@ -1138,7 +1142,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2( 0, -1 )
-shape = SubResource( 25 )
+shape = SubResource( 165 )
 __meta__ = {
 "_edit_group_": true
 }

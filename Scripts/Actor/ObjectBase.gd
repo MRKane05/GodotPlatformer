@@ -16,9 +16,11 @@ func take_damage(damageAmount, knockback, attackstun, instigator):
 	current_knockback = knockback
 	health -= damageAmount
 	stuntime = 0.25	#Stun our enemy with the hit
-	do_hurt()
-	if health < 0:
+	
+	if health < 0:	#Don't call a hurt state if we should be dying. This'll create all sorts of horrible
 		dead()
+	else:
+		do_hurt()
 
 func do_hurt():
 	pass

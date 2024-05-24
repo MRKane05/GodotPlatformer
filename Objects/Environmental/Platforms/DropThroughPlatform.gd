@@ -2,7 +2,7 @@ extends StaticBody2D
 
 
 onready var collision = $CollisionShape2D
-onready var  area = $Area2D
+onready var area = $Area2D
 
 var notification_player
 

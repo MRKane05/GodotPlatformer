@@ -36,6 +36,12 @@ var dash_dir = 0	#The direction -1, 0, 1 that we're dashing in, also used as a c
 var jumps_left = max_airjumps	#how many jumps we've got left. Reset on contact with wall or floor, or bonus
 var dashes_left = max_airdashes	#how many dashes we've got left. Reset on contact with wall, floor, or bonus
 
+func set_ability(ability_name, state):
+	match ability_name:
+		"wallgrab":
+			can_wallgrab = bool(state)
+			
+
 #var combo_counter = 0
 #var attack_presses = 0
 #var attack_refresh = 0
@@ -48,7 +54,7 @@ var dash_hold = false
 var redash_time = 0 #Time until we can dash again
 
 #Details for our pistol (I assume this is only as complicated as it'll be for the moment...)
-var pistol_shots = 6
+export(int) var pistol_shots = 6
 
 var quick_respawn_location = Vector2(0,0) #Where will we zoom back to if we land in spikes?
 

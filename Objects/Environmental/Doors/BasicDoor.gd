@@ -1,6 +1,5 @@
-extends Node2D
+extends switch_trigger_object
 class_name BasicDoor
 
 func do_action():
-	print ("Got action trigger")
 	$AnimationPlayer.play("Open")
