@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BaseAreaTilset.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/Environmental/Doors/BasicDoor.tscn" type="PackedScene" id=2]
@@ -18,9 +18,11 @@
 [ext_resource path="res://Objects/Collectables/pickup_wallgrab.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Objects/Environmental/DynamicProps/FallCage.tscn" type="PackedScene" id=17]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=18]
+[ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=19]
 
 [node name="Stage01" type="Node2D"]
 position = Vector2( 0, 1 )
+script = ExtResource( 19 )
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
 z_index = -1
@@ -91,7 +93,7 @@ position = Vector2( -78, 334 )
 position = Vector2( -21, 325 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 298, 252 )
+position = Vector2( 306, 258 )
 pistol_shots = 0
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]

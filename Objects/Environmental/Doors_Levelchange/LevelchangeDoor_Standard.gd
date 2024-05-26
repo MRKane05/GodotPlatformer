@@ -12,3 +12,7 @@ func do_toggle():
 		LoadingScreen.change_scene(target_scene, scene_base, null) #load our first scene!
 	else: #throw an error
 		print("NO SCENE BASE ASSIGNED TO DOOR: " + self.get_name())
+	
+
+func get_positioning():
+	return $PositioningCollider.global_position

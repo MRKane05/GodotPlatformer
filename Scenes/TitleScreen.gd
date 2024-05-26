@@ -15,7 +15,7 @@ func _physics_process(delta):
 
 func _on_StartButton_pressed():
 	#get_tree().change_scene("res://Scenes/Stage01.tscn") #load our first scene!
-	LoadingScreen.change_scene("res://Rooms/Room001.tscn", self, null) #load our first scene!
+	LoadingScreen.change_scene("res://Rooms/Room001.tscn", self, "Door_Standard") #load our first scene!
 	#SceneChanger.goto_scene("res://Scenes/LoadingScreen.tscn", self)
 
 func _on_QuitButton_pressed():

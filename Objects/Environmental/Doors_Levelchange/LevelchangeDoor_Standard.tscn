@@ -6,7 +6,7 @@
 [ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18, 19.5 )
+extents = Vector2( 18, 1.375 )
 
 [node name="LevelchangeDoor_Standard" type="KinematicBody2D"]
 collision_layer = 0
@@ -41,8 +41,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="DoorCollider" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 10 )
+[node name="PositioningCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 20 )
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_InteractionArea_body_entered"]

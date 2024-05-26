@@ -30,7 +30,12 @@ func change_scene(target_scene: String, current_scene, target_door) -> void:
 		if err == ERR_FILE_EOF:
 			#Loading complete
 			var resource = loader.get_resource()
-			get_tree().get_root().call_deferred("add_child", resource.instance())
+			var resource_instance = resource.instance()
+			get_tree().get_root().call_deferred("add_child", resource_instance)
+			if target_door:
+				resource_instance.call_deferred("set_player_door", target_door)
+			#if target_door:
+			#	new_scene.set_player_door(target_door)
 			current_scene.queue_free()
 			break
 		if err == OK:
@@ -45,3 +50,5 @@ func change_scene(target_scene: String, current_scene, target_door) -> void:
 		yield(get_tree(), "idle_frame")	#Prevent frame from blocking bar
 	$AnimationPlayer.play_backwards('dissolve')
 	#Need a control command to release control to player following loading
+
+
