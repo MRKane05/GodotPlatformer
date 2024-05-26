@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+onready var Global = get_node("/root/Global") #Collect and assign our globals for referencing
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -13,7 +14,7 @@ func _ready():
 func set_bar_progress(progress):
 	$ProgressBar.value = progress
 	
-func change_scene(target_scene: String, current_scene) -> void:
+func change_scene(target_scene: String, current_scene, target_door) -> void:
 	print("changing scene")
 	$AnimationPlayer.play("dissolve")
 	yield($AnimationPlayer, "animation_finished")

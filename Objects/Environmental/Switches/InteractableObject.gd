@@ -1,31 +1,15 @@
-extends Interactable_Object
-class_name Basic_Lever
+extends Node2D
+class_name Interactable_Object
 
-var retrigger_time = 1
-#var can_trigger = true
-#var player_over = false
-export var toggle_once = false
-#var disabled = false
-
-export (NodePath) var target_switchable
-onready var switchable:switch_trigger_object = get_node(target_switchable)
+var can_trigger = true
+var player_over = false
+var disabled = false
 
 func take_damage(damageAmount, knockback, attackstun, instigator):
-	do_toggle()
+	pass
 
 func do_toggle():
-	if can_trigger && ! disabled:
-		$FlipNode.scale.x *=-1
-		can_trigger = false
-		$Timer.wait_time = retrigger_time #reset our timer
-		$Timer.start()
-		$AudioStreamPlayer2D.play()
-		if switchable && switchable.has_method("do_action"):
-			switchable.do_action()
-			
-		if toggle_once:
-			disabled = true
-			$InteractionIcon.visible = false	#Turn off our icon after toggling this switch
+	pass
 
 func _on_Timer_timeout():
 	can_trigger = true

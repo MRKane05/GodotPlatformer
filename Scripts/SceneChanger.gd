@@ -1,8 +1,5 @@
 extends Node
 
-export(Resource) var loading_screen_scene
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -26,7 +23,8 @@ func goto_scene(path, current_scene):
 		if err == ERR_FILE_EOF:
 			#Loading complete
 			var resource = loader.get_resource()
-			get_tree().get_root().call_deferred("add_child", resource.instance())
+			
+			Global.current_loaded_scene = get_tree().get_root().call_deferred("add_child", resource.instance())
 			current_scene.queue_free()
 			loading_screen.queue_free()
 			break
