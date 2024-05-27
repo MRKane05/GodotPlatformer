@@ -94,10 +94,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd"
 }, {
-"base": "Node2D",
+"base": "switch_trigger_object",
 "class": "BasicDoor",
 "language": "GDScript",
 "path": "res://Objects/Environmental/Doors/BasicDoor.gd"
+}, {
+"base": "Interactable_Object",
+"class": "Basic_Lever",
+"language": "GDScript",
+"path": "res://Objects/Environmental/Switches/BasicLever.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Collectable_Base",
+"language": "GDScript",
+"path": "res://Scripts/Collectables/CollectableBase.gd"
 }, {
 "base": "ActorState",
 "class": "CombatState",
@@ -109,6 +119,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/AI/EnemyAI.gd"
 }, {
+"base": "Node2D",
+"class": "Interactable_Object",
+"language": "GDScript",
+"path": "res://Objects/Environmental/Switches/InteractableObject.gd"
+}, {
+"base": "Interactable_Object",
+"class": "LC_Door_Standard",
+"language": "GDScript",
+"path": "res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "ObjectBase",
 "language": "GDScript",
@@ -118,6 +138,31 @@ _global_script_classes=[ {
 "class": "PlayerController",
 "language": "GDScript",
 "path": "res://Scripts/Actor/Controllers/PlayerController.gd"
+}, {
+"base": "ObjectBase",
+"class": "breakable_prop",
+"language": "GDScript",
+"path": "res://Objects/Environmental/DynamicProps/breakable_prop.gd"
+}, {
+"base": "Collectable_Base",
+"class": "collectable_ability",
+"language": "GDScript",
+"path": "res://Scripts/Collectables/collectable_ability.gd"
+}, {
+"base": "switch_trigger_object",
+"class": "moving_platform",
+"language": "GDScript",
+"path": "res://Objects/Environmental/Platforms/MovingPlatformBase.gd"
+}, {
+"base": "Collectable_Base",
+"class": "pickup_bullet",
+"language": "GDScript",
+"path": "res://Scripts/Collectables/pickup_bullet.gd"
+}, {
+"base": "Node2D",
+"class": "switch_trigger_object",
+"language": "GDScript",
+"path": "res://Scripts/Environmental/SwitchTriggerObject.gd"
 } ]
 _global_script_class_icons={
 "AI_Amble": "",
@@ -138,21 +183,31 @@ _global_script_class_icons={
 "Actor_Shoot": "",
 "Attack_Slam": "",
 "BasicDoor": "",
+"Basic_Lever": "",
+"Collectable_Base": "",
 "CombatState": "",
 "EnemyAI": "",
+"Interactable_Object": "",
+"LC_Door_Standard": "",
 "ObjectBase": "",
-"PlayerController": ""
+"PlayerController": "",
+"breakable_prop": "",
+"collectable_ability": "",
+"moving_platform": "",
+"pickup_bullet": "",
+"switch_trigger_object": ""
 }
 
 [application]
 
 config/name="Godot Platformer"
-run/main_scene="res://Scenes/Stage01.tscn"
+run/main_scene="res://Scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+LoadingScreen="*res://Scenes/LoadingScreen.tscn"
 
 [display]
 
