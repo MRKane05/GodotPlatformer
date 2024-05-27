@@ -1,14 +1,11 @@
 extends CanvasLayer
 
-onready var Global = get_node("/root/Global") #Collect and assign our globals for referencing
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+#Details for our player that are carried over between loads
+var player_health = 30
+var player_shots = 6
+var can_wallgrab = false
+var player_airdashes = 0
+var player_airjumps = 0
 
 
 func set_bar_progress(progress):
@@ -16,6 +13,18 @@ func set_bar_progress(progress):
 	
 func change_scene(target_scene: String, current_scene, target_door) -> void:
 	print("changing scene")
+	if current_scene:
+		if current_scene.has_method("get_player"):
+			var cur_player = current_scene.get_player()
+			if cur_player:
+				print ("Caching player details")
+				player_health = cur_player.health
+				player_shots = cur_player.pistol_shots
+				can_wallgrab = cur_player.can_wallgrab
+				player_airdashes = cur_player.max_airdashes
+				player_airjumps = cur_player.max_airjumps
+	
+	$dissolve_rect.visible = true #Because it should be disabled to save process
 	$AnimationPlayer.play("dissolve")
 	yield($AnimationPlayer, "animation_finished")
 	#get_tree().change_scene(target_scene)
@@ -34,14 +43,14 @@ func change_scene(target_scene: String, current_scene, target_door) -> void:
 			get_tree().get_root().call_deferred("add_child", resource_instance)
 			if target_door:
 				resource_instance.call_deferred("set_player_door", target_door)
-			#if target_door:
-			#	new_scene.set_player_door(target_door)
+			
+			if resource_instance.has_method("set_player_details"):
+				resource_instance.call_deferred("set_player_details", player_health, player_shots, can_wallgrab, player_airdashes, player_airjumps)
 			current_scene.queue_free()
 			break
 		if err == OK:
 			#Still loading
 			var progress = float(loader.get_stage())/loader.get_stage_count()
-			print(progress)
 			$dissolve_rect/ProgressBar.value = progress * 100 #.set_bar_progress(progress)
 		else:
 			print("Error while loading file")
@@ -49,6 +58,8 @@ func change_scene(target_scene: String, current_scene, target_door) -> void:
 		
 		yield(get_tree(), "idle_frame")	#Prevent frame from blocking bar
 	$AnimationPlayer.play_backwards('dissolve')
+	yield($AnimationPlayer, "animation_finished")
+	$dissolve_rect.visible = false #Because it should be disabled to save process
 	#Need a control command to release control to player following loading
 
 

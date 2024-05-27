@@ -37,6 +37,7 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 
 [node name="dissolve_rect" type="ColorRect" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0

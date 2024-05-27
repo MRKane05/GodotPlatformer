@@ -34,7 +34,8 @@ tile_data = PoolIntArray( 851959, 0, 0, 851963, 0, 0, 786433, 0, 0, 786435, 2, 0
 
 [node name="Door_Standard" parent="." instance=ExtResource( 10 )]
 position = Vector2( 249, 242 )
-target_scene = "res://Scenes/TitleScreen.tscn"
+target_scene = "res://Rooms/Room001.tscn"
+target_doorway = "Door_Standard"
 _scene_base = NodePath("..")
 
 [node name="WalkableTilemap" type="TileMap" parent="."]
@@ -94,7 +95,6 @@ position = Vector2( -21, 325 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 306, 258 )
-pistol_shots = 0
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2( -191, -258 )
@@ -104,7 +104,7 @@ autoplay = true
 attenuation = 1.07177
 
 [node name="FallCage" parent="." instance=ExtResource( 17 )]
-position = Vector2( 192, 289 )
+position = Vector2( 77, 138 )
 
 [node name="CellDoor01" parent="." instance=ExtResource( 2 )]
 position = Vector2( 181, 384 )
