@@ -94,7 +94,7 @@ func handlecountdowns(delta):
 
 #This promises to become more complicated
 func change_action_state(new_state_name: String, reset_if_same: bool):
-
+	#print(new_state_name)
 	if (actor_states.has(new_state_name)):
 		if !reset_if_same && action_state.name.to_lower() == new_state_name.to_lower():
 			return	#don't change if we're calling through the same state again, and not doing a re-call

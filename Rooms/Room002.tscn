@@ -1,0 +1,155 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BaseAreaTilset.tres" type="TileSet" id=2]
+[ext_resource path="res://Scripts/Environmental/SpikesHandler.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
+[ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=6]
+[ext_resource path="res://Audio/Music/stranger-things-124008.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Objects/Collectables/pickup_wallgrab.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Environmental/GameControl/GemHandler.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Environmental/Platforms/DropThroughPlatform.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Actors/Enemy/Enemy.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Environmental/Switches/BasicLever.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Environmental/Doors/BasicDoor.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Objects/Environmental/DynamicProps/FallCage.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Function/ChangeStage.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Objects/Actors/Player/Player.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/Environmental/Platforms/MovingPlatform.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Objects/Environmental/GameControl/QuickRespawnArea.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scripts/Environmental/HurtSpikes.gd" type="Script" id=20]
+
+[node name="Stage01" type="Node2D"]
+position = Vector2( 0, 1 )
+script = ExtResource( 1 )
+
+[node name="BackgroundTileMap" type="TileMap" parent="."]
+visible = false
+z_index = -1
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 16, 16 )
+occluder_light_mask = 0
+format = 1
+tile_data = PoolIntArray( 851959, 0, 0, 851963, 0, 0, 786433, 0, 0, 786435, 2, 0, 786439, 0, 0, 786445, 0, 0, 786451, 0, 0, 1114102, 0, 0, 1114104, 2, 0, 1114108, 0, 0, 1048578, 0, 0, 1048586, 0, 0, 1179661, 0, 0, 1179662, 3, 0, 1179663, 3, 0, 1179667, 2, 0, 1179668, 3, 0, 1245205, 3, 0, 1245206, 3, 0, 1441782, 0, 0, 1441788, 0, 0, 1441789, 1, 0, 1376258, 0, 0, 1376264, 0, 0, 1376270, 0, 0, 1376278, 3, 0, 1441811, 3, 0, 1441812, 3, 0, 1441814, 3, 0, 1507341, 3, 0, 1507342, 3, 1, 1507343, 3, 2, 1638392, 3, 0, 1638393, 3, 1, 1638394, 3, 1, 1638395, 3, 2, 1572877, 3, 65536, 1572878, 3, 65537, 1572879, 3, 65538, 1703928, 3, 65536, 1703929, 3, 65537, 1703930, 3, 65537, 1703931, 3, 65538, 1638413, 3, 131072, 1638414, 3, 131073, 1638415, 3, 131074, 1769464, 3, 131072, 1769465, 3, 131073, 1769466, 3, 131073, 1769467, 3, 131074 )
+
+[node name="Door_Left" parent="." instance=ExtResource( 9 )]
+position = Vector2( 48, 221 )
+target_scene = "res://Rooms/Room001.tscn"
+target_doorway = "Door_Standard"
+_scene_base = NodePath("..")
+
+[node name="WalkableTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+collision_layer = 23
+collision_mask = 23
+format = 1
+tile_data = PoolIntArray( 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 720911, 0, 0, 786447, 0, 0, 851983, 0, 0, 851986, 0, 0, 851987, 0, 2, 917522, 0, 65536, 917523, 0, 65538, 983058, 0, 65536, 983059, 0, 65538, 1048576, 0, 0, 1048577, 0, 1, 1048578, 0, 1, 1048579, 0, 1, 1048580, 0, 1, 1048581, 0, 1, 1048582, 0, 1, 1048583, 0, 1, 1048584, 0, 1, 1048585, 0, 1, 1048586, 0, 1, 1048587, 0, 1, 1048588, 0, 1, 1048589, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1048592, 0, 1, 1048593, 0, 1, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 1, 1048597, 0, 1, 1048598, 0, 1, 1048599, 0, 1, 1048600, 0, 2, 1114112, 0, 65536, 1114113, 0, 65537, 1114114, 0, 65537, 1114115, 0, 65537, 1114116, 0, 65537, 1114117, 0, 65537, 1114118, 0, 65537, 1114119, 0, 65537, 1114120, 0, 65537, 1114121, 0, 65537, 1114122, 0, 65537, 1114123, 0, 65537, 1114124, 0, 65537, 1114125, -1073741824, 65537, 1114126, -1073741824, 65537, 1114127, -1073741824, 65537, 1114128, -1073741824, 65537, 1114129, -1073741824, 65537, 1114130, 0, 65537, 1114131, 0, 65537, 1114132, 0, 65537, 1114133, 0, 65537, 1114134, 0, 65537, 1114135, 0, 65537, 1114136, 0, 65538, 1179648, 0, 65536, 1179649, 0, 65537, 1179650, 0, 65537, 1179651, 0, 65537, 1179652, 0, 65537, 1179653, 0, 65537, 1179654, 0, 65537, 1179655, 0, 65537, 1179656, 0, 65537, 1179657, 0, 65537, 1179658, 0, 65537, 1179659, 0, 65537, 1179660, 0, 65537, 1179661, 0, 65537, 1179662, 0, 65537, 1179663, 0, 65537, 1179664, 0, 65537, 1179665, 0, 65537, 1179666, 0, 65537, 1179667, 0, 65537, 1179668, 0, 65537, 1179669, 0, 65537, 1179670, 0, 65537, 1179671, 0, 65537, 1179672, 0, 65538, 1245184, 0, 131072, 1245185, 0, 131073, 1245186, 0, 131073, 1245187, 0, 131073, 1245188, 0, 131073, 1245189, 0, 131073, 1245190, 0, 131073, 1245191, 0, 131073, 1245192, 0, 131073, 1245193, 0, 131073, 1245194, 0, 131073, 1245195, 0, 131073, 1245196, 0, 131073, 1245197, 0, 131073, 1245198, 0, 131073, 1245199, 0, 131073, 1245200, 0, 131073, 1245201, 0, 131073, 1245202, 0, 131073, 1245203, 0, 131073, 1245204, 0, 131073, 1245205, 0, 131073, 1245206, 0, 131073, 1245207, 0, 131073, 1245208, 0, 131074 )
+
+[node name="LevelSpikes" type="Area2D" parent="."]
+visible = false
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="LevelSpikes"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_use_parent = true
+format = 1
+tile_data = PoolIntArray( 917494, 14, 0, 917495, 14, 0, 917496, 14, 0, 917497, 14, 0, 917498, 14, 0, 917499, 14, 0, 917500, 14, 0, 917501, 14, 0, 917502, 14, 0, 917503, 14, 0, 851968, 14, 0, 851969, 14, 0, 851970, 14, 0, 851971, 14, 0, 851972, 14, 0, 851973, 14, 0, 851974, 14, 0, 851975, 14, 0 )
+
+[node name="HurtSpikes_Left" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 20 )
+knockback = -20.0
+
+[node name="TileMap" type="TileMap" parent="HurtSpikes_Left"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+collision_use_parent = true
+format = 1
+tile_data = PoolIntArray( 917494, 14, 0, 917495, 14, 0, 917496, 14, 0, 917497, 14, 0, 917498, 14, 0, 917499, 14, 0, 917500, 14, 0, 917501, 14, 0, 917502, 14, 0, 917503, 14, 0, 851968, 14, 0, 851969, 14, 0, 851970, 14, 0, 851971, 14, 0, 851972, 14, 0, 851973, 14, 0, 851974, 14, 0, 851975, 14, 0, 851985, -1073741817, 0, 917521, -1073741817, 0, 983057, -1073741817, 0 )
+
+[node name="QuickRespawnArea" parent="." instance=ExtResource( 19 )]
+position = Vector2( -198, 142 )
+scale = Vector2( 0.774194, 2.175 )
+
+[node name="QuickRespawnArea2" parent="." instance=ExtResource( 19 )]
+position = Vector2( 144, 139 )
+scale = Vector2( 0.774194, 2.175 )
+
+[node name="ScreenShake" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="ScreenShake"]
+
+[node name="ChangeStage" parent="." instance=ExtResource( 16 )]
+position = Vector2( 11, -161 )
+target_stage = "res://Scenes/Stage02.tscn"
+
+[node name="Enemy" parent="." instance=ExtResource( 12 )]
+position = Vector2( 66, 307 )
+health = 14.0
+
+[node name="GemHandler" parent="." instance=ExtResource( 10 )]
+
+[node name="DropThroughPlatform" parent="." instance=ExtResource( 11 )]
+position = Vector2( 112, 323 )
+scale = Vector2( 1.065, 1 )
+
+[node name="DropThroughPlatform2" parent="." instance=ExtResource( 11 )]
+position = Vector2( -78, 334 )
+
+[node name="DropThroughPlatform3" parent="." instance=ExtResource( 11 )]
+position = Vector2( -21, 325 )
+
+[node name="Player" parent="." instance=ExtResource( 17 )]
+position = Vector2( 192, 245 )
+can_wallgrab = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( -191, -258 )
+stream = ExtResource( 7 )
+volume_db = -29.272
+autoplay = true
+attenuation = 1.07177
+
+[node name="FallCage" parent="." instance=ExtResource( 15 )]
+position = Vector2( 77, 138 )
+
+[node name="CellDoor01" parent="." instance=ExtResource( 14 )]
+position = Vector2( 181, 384 )
+
+[node name="BasicLever01" parent="." instance=ExtResource( 13 )]
+position = Vector2( 223, 392 )
+toggle_once = true
+target_switchable = NodePath("../CellDoor01")
+
+[node name="CellDoor02" parent="." instance=ExtResource( 14 )]
+position = Vector2( 52, 304 )
+
+[node name="BasicLever02" parent="." instance=ExtResource( 13 )]
+position = Vector2( 86, 392 )
+toggle_once = true
+target_switchable = NodePath("../CellDoor02")
+
+[node name="MovingPlatform03" parent="." instance=ExtResource( 18 )]
+position = Vector2( -78, 375 )
+move_to = Vector2( 93, 0 )
+needs_trigger = true
+
+[node name="BasicLever03" parent="." instance=ExtResource( 13 )]
+position = Vector2( -88, 408 )
+toggle_once = true
+target_switchable = NodePath("../MovingPlatform03")
+
+[node name="pickup_wallgrab" parent="." instance=ExtResource( 8 )]
+position = Vector2( 112, 305 )
+
+[connection signal="body_entered" from="LevelSpikes" to="LevelSpikes" method="_on_LevelSpikes_body_entered"]
+[connection signal="body_entered" from="HurtSpikes_Left" to="HurtSpikes_Left" method="_on_LevelSpikes_body_entered"]
+[connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]
