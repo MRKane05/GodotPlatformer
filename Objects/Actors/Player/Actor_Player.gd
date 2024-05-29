@@ -139,8 +139,8 @@ func set_drop_collision(is_dropping):
 	set_collision_layer_bit(DROP_LAYER, !is_dropping)
 	set_collision_mask_bit(DROP_LAYER, !is_dropping)
 
-func set_quick_respawn_location():
-	quick_respawn_location = self.position
+func set_quick_respawn_location(new_position):
+	quick_respawn_location = new_position - Vector2(0, 10) #This may need configured for player height
 	
 func touched_killspikes():
 	if quick_respawn_location != Vector2(0,0): #we've got a quick respawn location set
