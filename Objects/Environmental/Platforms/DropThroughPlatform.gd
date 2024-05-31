@@ -1,5 +1,5 @@
 extends StaticBody2D
-
+class_name DropThroughPlatform
 
 onready var collision = $CollisionShape2D
 onready var area = $Area2D

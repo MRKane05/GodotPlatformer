@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd"
 }, {
+"base": "StaticBody2D",
+"class": "DropThroughPlatform",
+"language": "GDScript",
+"path": "res://Objects/Environmental/Platforms/DropThroughPlatform.gd"
+}, {
 "base": "ActorController",
 "class": "EnemyAI",
 "language": "GDScript",
@@ -186,6 +191,7 @@ _global_script_class_icons={
 "Basic_Lever": "",
 "Collectable_Base": "",
 "CombatState": "",
+"DropThroughPlatform": "",
 "EnemyAI": "",
 "Interactable_Object": "",
 "LC_Door_Standard": "",
