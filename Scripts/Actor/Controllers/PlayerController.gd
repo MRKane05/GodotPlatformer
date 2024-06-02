@@ -55,6 +55,7 @@ func processplaininputs(delta):
 		if Input.is_action_pressed("ui_down") || vertical_move_dir > 0.75:
 			if targetactor.on_ground: #try to fall through ground
 				if targetactor.check_drop_function(): #We can try dropping through this platform
+					print("Doing fall through platform")
 					targetactor.change_action_state("Actor_OnGround", false) #Set us to standing on ground
 					targetactor.set_drop_collision(true)
 		else:
