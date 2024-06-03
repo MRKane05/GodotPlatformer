@@ -64,10 +64,10 @@ position = Vector2( -184, 467 )
 scale = Vector2( 1.065, 1 )
 
 [node name="DropThroughPlatform2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 104, 322 )
+position = Vector2( 79, 320 )
 
 [node name="DropThroughPlatform3" parent="." instance=ExtResource( 7 )]
-position = Vector2( -49, 326 )
+position = Vector2( -72, 331 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -106, 333 )
