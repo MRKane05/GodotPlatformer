@@ -41,7 +41,7 @@
 extents = Vector2( 6, 14 )
 
 [sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 5, 9.5 )
+extents = Vector2( 6, 14.75 )
 
 [sub_resource type="Animation" id=154]
 resource_name = "Attack01"
@@ -1148,7 +1148,7 @@ __meta__ = {
 }
 
 [node name="CollisionShapeCrouched" type="CollisionShape2D" parent="." groups=["Player"]]
-position = Vector2( 0, 4 )
+position = Vector2( 0, 5.375 )
 scale = Vector2( 1, 0.5 )
 shape = SubResource( 25 )
 disabled = true
@@ -1238,7 +1238,7 @@ __meta__ = {
 [node name="DowncastGround" type="RayCast2D" parent="."]
 position = Vector2( 0, 5 )
 enabled = true
-cast_to = Vector2( 0, 4 )
+cast_to = Vector2( 0, 10 )
 collision_mask = 4
 __meta__ = {
 "_edit_group_": true
@@ -1276,10 +1276,8 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 26 )
+texture = ExtResource( 36 )
 hframes = 2
-vframes = 3
-frame = 2
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
