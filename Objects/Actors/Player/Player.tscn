@@ -1078,7 +1078,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=112]
-extents = Vector2( 11, 11.3778 )
+extents = Vector2( 11.5, 14.5 )
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
@@ -1131,6 +1131,7 @@ attack_chain_order = 1
 [node name="Attack01" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 only_ground = true
+combat_float = true
 
 [node name="Attack02" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
@@ -1278,13 +1279,15 @@ __meta__ = {
 position = Vector2( 0, -2.519 )
 texture = ExtResource( 36 )
 hframes = 2
+frame = 1
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
 collision_mask = 15
 
 [node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
-position = Vector2( 18, -1.62225 )
+visible = false
+position = Vector2( 19.5, -1.5 )
 shape = SubResource( 112 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

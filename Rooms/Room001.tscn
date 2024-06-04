@@ -54,7 +54,7 @@ position = Vector2( 11, -161 )
 target_stage = "res://Scenes/Stage02.tscn"
 
 [node name="Enemy" parent="." instance=ExtResource( 6 )]
-position = Vector2( 66, 307 )
+position = Vector2( 73, 306 )
 health = 14.0
 
 [node name="GemHandler" parent="." instance=ExtResource( 14 )]
@@ -70,7 +70,7 @@ position = Vector2( 79, 320 )
 position = Vector2( -72, 331 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( -106, 333 )
+position = Vector2( 200, 293 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2( -191, -258 )
@@ -91,7 +91,7 @@ toggle_once = true
 target_switchable = NodePath("../CellDoor01")
 
 [node name="CellDoor02" parent="." instance=ExtResource( 2 )]
-position = Vector2( 46, 296 )
+position = Vector2( 64, 296 )
 
 [node name="BasicLever02" parent="." instance=ExtResource( 3 )]
 position = Vector2( 86, 392 )

@@ -12,7 +12,7 @@ export(String) var idle_anim_name = "idle"
 
 var target_vector = Vector2(1, 0)
 
-var action_fall_hold = 0
+var action_fall_hold = 0.25
 
 func enter(_msg := {}) -> bool:
 	if base_actor.pistol_shots <= 0:
@@ -35,7 +35,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	if !base_actor.on_ground:
 		base_actor.set_animation(fall_anim_name)
 		if action_fall_hold > 0:
-			base_actor.fall_hold = 0.25
+			base_actor.fall_hold = max(action_fall_hold, base_actor.fall_hold)
 	else:
 		#animation handling
 		if abs(_velocity.x) > 0:

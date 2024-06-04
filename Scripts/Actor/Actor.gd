@@ -50,7 +50,9 @@ var vertical_move_dir = 0 #Another through controller value
 
 var fall_hold = 0	#Used when doing air combat, this value arrests gravity for a duration
 
+
 #combat systems
+var combat_fall_hold = 0.6
 var combo_counter = 0
 var attack_presses = 0
 var attack_refresh = 0
@@ -278,6 +280,8 @@ func _on_AttackArea2D_body_entered(body):
 	if body.has_method("take_damage"):	#ducktyping to see if we're hitting something that's generically hittable
 		#Look to our current action state to see what damage we should be doing
 		if action_state is CombatState:
+			if action_state.combat_float:
+				fall_hold = combat_fall_hold
 			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, self)
 
 #Boilerplate function used by the player

@@ -30,9 +30,10 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 		_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
 		_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity
 	else:
-		if combat_float: #this begs to have yet more expansion done
-			_velocity = Vector2(0,0)
-		_velocity = Vector2(0,0)
+		#Need to check and see if we're hitting something, and if so do the float...
+		#if combat_float: #this begs to have yet more expansion done
+		#_velocity = Vector2(0,0)
+		_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity
 	return _velocity
 
 # Virtual function. Corresponds to the `_process()` callback.
