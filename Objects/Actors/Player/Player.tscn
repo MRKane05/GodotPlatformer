@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnDash.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Actor/Controllers/PlayerController.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnGround.gd" type="Script" id=11]
-[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Attacks.png" type="Texture" id=12]
+[ext_resource path="res://sprites/Player/Attack03.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=13]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd" type="Script" id=14]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/attack_from_air.png" type="Texture" id=15]
@@ -135,9 +135,100 @@ tracks/6/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=158]
+[sub_resource type="Animation" id=166]
 resource_name = "Attack02"
 length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 26 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 30 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="Animation" id=167]
+resource_name = "Attack03"
 tracks/0/type = "value"
 tracks/0/path = NodePath("FlipElements/Sprite:texture")
 tracks/0/interp = 1
@@ -160,7 +251,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 8 ]
+"values": [ 2 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("FlipElements/Sprite:vframes")
@@ -172,7 +263,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5 ]
+"values": [ 3 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -181,10 +272,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 6, 9 ]
+"values": [ 0, 1, 1, 5 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
@@ -193,7 +284,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.1, 0.2, 0.5, 0.6 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, false, true ]
@@ -205,12 +296,26 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 30 )
+} ],
+"times": PoolRealArray( 0.1 )
 }
 
 [sub_resource type="Animation" id=160]
@@ -1130,10 +1235,17 @@ attack_chain_order = 1
 
 [node name="Attack01" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
+next_combo_state = "Attack02"
 only_ground = true
 combat_float = true
 
 [node name="Attack02" type="Node" parent="CombatStates"]
+script = ExtResource( 13 )
+attack_chain_order = 1
+next_combo_state = "Attack03"
+only_ground = true
+
+[node name="Attack03" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 attack_chain_order = 1
 only_ground = true
@@ -1212,7 +1324,8 @@ text = "6"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/Attack01 = SubResource( 154 )
-anims/Attack02 = SubResource( 158 )
+anims/Attack02 = SubResource( 166 )
+anims/Attack03 = SubResource( 167 )
 anims/Attack_Slam_Land = SubResource( 160 )
 anims/Attack_Slam_Start = SubResource( 159 )
 anims/RESET = SubResource( 123 )
@@ -1277,9 +1390,10 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 36 )
+texture = ExtResource( 12 )
 hframes = 2
-frame = 1
+vframes = 3
+frame = 5
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
@@ -1289,9 +1403,10 @@ collision_mask = 15
 visible = false
 position = Vector2( 19.5, -1.5 )
 shape = SubResource( 112 )
+disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 29 )
+stream = ExtResource( 30 )
 __meta__ = {
 "_edit_group_": true
 }

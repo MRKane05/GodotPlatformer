@@ -81,7 +81,8 @@ func handlecountdowns(delta):
 	
 	attack_refresh -= delta
 	if attack_refresh <=0: #reset our combo systems
-		attack_presses = 0
+		#attack_presses = 0
+		#print("Zeroed attack presses")
 		combo_counter = 0
 
 func handlemovementcontacts():

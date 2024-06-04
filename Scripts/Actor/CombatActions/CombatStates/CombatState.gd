@@ -5,7 +5,9 @@ class_name CombatState
 #and a state by and which we'll call it
 #export(String) var attack_name = "attack"	#Make the attack into the name of the node
 export(int) var attack_chain_order = 0		#Where should this attack sit in a combo?
-export(String) var next_combo_state = ""
+export(String) var next_combo_state = ""	#Which attack comes after this one?
+export(String) var next_combo_held_state = "" #If we hold the attack button what state will we go to? (Intended for use with float lifts and jumping to attack enemies in the air)
+export(String) var on_function_call = ""	#If we're doing something special this is the function we call
 export(float) var attack_damage = 5	#What's the expected damage of this attack?
 export(float) var knockback_force = 20	#How big is our standard knockback force?
 export(float) var attack_stun = 1 #How long will we apply the standard stun on hit?
@@ -22,6 +24,7 @@ var animation_cleared = false
 func enter(_msg := {}) -> bool:
 	base_actor.set_animation(get_name())	#In theory we should use our node name...
 	base_actor.is_attacking = true
+	base_actor.attack_presses -=1	#Detriment our attack presses (although this will be changed to an attack queue or something)
 	return true
 
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
@@ -43,6 +46,8 @@ func anim_finished(anim_name: String) -> void:
 		if base_actor.attack_presses > 0 && next_combo_state != "": #We want to do a chain attack
 			base_actor.change_action_state(next_combo_state, false)
 		else:
+			#Assume that this is the combo ending action
+			base_actor.attack_presses = 0
 			base_actor.change_action_state("Actor_OnGround", false)
 
 func exit(): #Don't allow a state change while we're dashing. An interrupt will be fine however

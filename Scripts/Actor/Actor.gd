@@ -194,42 +194,39 @@ func set_move_dir(new_move_dir: float, new_facing_dir, new_vertical_move_dir):
 func make_attack_press():
 	#I'd really like to think of a way to try and put this system somewhere else....but here we are for the moment
 	attack_presses += 1
-	attack_refresh = 0.5	#Essentially the time we've got until we can't press fire again to keep doing the combo
+	attack_refresh = 0.8	#Essentially the time we've got until we can't press fire again to keep doing the combo
 	combo_counter += 1
+	print(attack_presses)
 	#Logic time! Lets see if we can find something to use as an attack in our combat_states dictionary...
 	#for the moment lets just jump straight into the action select
 	select_attack_action()
 
+#See about having the animations themselves handle the next step in the combo. This will need expanded
+func has_attack_press():
+	return attack_presses > 0
+
 #This isn't a good system and will need changing
+#This will be called after an attack finishes
 func select_attack_action():
 	var best_attack
 	var best_attack_name
+	#Can we interrupt what we're doing?
+	if is_attacking:
+		return;
 	
-	#So I want to modify this a bit to try and have the attacks driven by the actions themselves
-	#for the moment
-	if (strike_plain != "" && combat_states[strike_plain]):
-		var attack = combat_states[strike_plain]
-		change_action_state(strike_plain, false)
-	return
-	
-	for key in combat_states:
-		var thisAttack = combat_states[key]
-		#check our state for ground/air first
-		if thisAttack.only_ground && !on_ground || thisAttack.only_air && on_ground:
-			#we can't use this attack as we're not in the correct state
-			print ("attack not viable")
-		else:
-			if !best_attack: #make sure we've got something
-				best_attack = thisAttack
-				best_attack_name = key
-			#subtract 1 from the combo counter as we'll always be incrementing it by one anyway
-			if (combo_counter-1) == thisAttack.attack_chain_order: #this is probably the better pick
-				best_attack = thisAttack
-				best_attack_name = key
-	
-	if best_attack_name:
-		attack_presses = clamp(attack_presses-1, 0, 5)	#Currently clamped our combo to 5. Lets see that become a bug later
-		change_action_state(best_attack_name, false)
+	if action_state is CombatState:
+		pass
+		#Sure this seems like a good idea, but I'm not sure that it is...
+		#if action_state.next_combo_state != "": #if we have an action after this
+		#	attack_presses -=1 #Remove one from our attack presses
+		#	change_action_state(action_state.next_combo_state, false)
+	else:
+		#So I want to modify this a bit to try and have the attacks driven by the actions themselves
+		#for the moment
+		if (strike_plain != "" && combat_states[strike_plain]):
+			var attack = combat_states[strike_plain]
+			change_action_state(strike_plain, false)
+
 
 #Just in case something funky as all hell manages to happen while our character is undergoing an attack
 func clear_all_combat_strikers():
@@ -245,7 +242,9 @@ func anim_slide_finished():
 	anim_finished("slide")
 
 func attack_animation_finished():
+	#print("Attack animation finished")
 	anim_finished("attack")
+	#select_attack_action()
 
 func anim_finished(anim_name: String):
 	if action_state:
@@ -265,7 +264,6 @@ func take_damage(damageAmount, knockback, attackstun, instigator):
 			.take_damage(damageAmount, knockback, attackstun, instigator)
 	else:
 		.take_damage(damageAmount, knockback, attackstun, instigator)
-
 
 func do_hurt():
 	interrupt_change_action_state("Actor_Hurt", false)
