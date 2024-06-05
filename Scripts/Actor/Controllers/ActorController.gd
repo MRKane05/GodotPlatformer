@@ -2,7 +2,7 @@ extends Node
 class_name ActorController
 
 export var ActorTarget := NodePath()
-var targetactor : Actor
+var targetactor# : Actor
 
 export(float) var move_dir = 0 				#The direction we want to move in
 export(float) var vertical_move_dir = 0
@@ -16,8 +16,10 @@ export(float) var facing_dir = 1
 func _ready():
 	yield(owner, "ready")
 	#Find our TargetActor as we can't export it
-	targetactor = get_parent() as Actor
+	targetactor = get_parent()# as Actor
 	targetactor.controller = self
+	print("Target Actor")
+	print(targetactor)
 	
 
 func on_take_damage(damageAmount, knockback, attackstun, instigator):

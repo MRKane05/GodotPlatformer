@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Shoot.gd" type="Script" id=34]
 [ext_resource path="res://Objects/Actors/Projectiles/PlayerShot.tscn" type="PackedScene" id=35]
 [ext_resource path="res://sprites/Player/Crouch.png" type="Texture" id=36]
+[ext_resource path="res://sprites/Player/Attack_Lift.png" type="Texture" id=37]
 
 [sub_resource type="RectangleShape2D" id=165]
 extents = Vector2( 6, 14 )
@@ -276,6 +277,97 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 1, 1, 5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 30 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="Animation" id=168]
+resource_name = "Attack_Lift"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 37 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 5 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
@@ -1194,6 +1286,7 @@ __meta__ = {
 "_edit_group_": true
 }
 strike_plain = "Attack01"
+strike_up = "Attack_Lift"
 initial_state = NodePath("ActorStates/Actor_OnGround")
 _animation_player = NodePath("AnimationPlayer")
 
@@ -1236,18 +1329,21 @@ attack_chain_order = 1
 [node name="Attack01" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 next_combo_state = "Attack02"
-only_ground = true
 combat_float = true
 
 [node name="Attack02" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 attack_chain_order = 1
 next_combo_state = "Attack03"
-only_ground = true
 
 [node name="Attack03" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 attack_chain_order = 1
+
+[node name="Attack_Lift" type="Node" parent="CombatStates"]
+script = ExtResource( 13 )
+attack_chain_order = 1
+on_function_call = "do_lift"
 only_ground = true
 
 [node name="PlayerController" type="Node" parent="."]
@@ -1326,6 +1422,7 @@ reset_on_save = false
 anims/Attack01 = SubResource( 154 )
 anims/Attack02 = SubResource( 166 )
 anims/Attack03 = SubResource( 167 )
+anims/Attack_Lift = SubResource( 168 )
 anims/Attack_Slam_Land = SubResource( 160 )
 anims/Attack_Slam_Start = SubResource( 159 )
 anims/RESET = SubResource( 123 )
@@ -1390,7 +1487,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 12 )
+texture = ExtResource( 37 )
 hframes = 2
 vframes = 3
 frame = 5

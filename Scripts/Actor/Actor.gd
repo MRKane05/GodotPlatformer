@@ -20,7 +20,7 @@ var facing_dir = 1 #Which direction should our sprite nominally be facing?
 var sprite_flipped = false	#The direction of our sprite as defined by the different functions
 
 export(String) var strike_plain = "" #What is our attack if we're not putting in any input? This promises to get overly complex
-
+export(String) var strike_up = "" #What is our attack if we're holdin up and striking? I can't help but think there needs to be different logic here...
 # Path to the initial active state. We export it to be able to pick the initial state in the inspector.
 export var initial_state := NodePath()
 
@@ -50,6 +50,7 @@ var vertical_move_dir = 0 #Another through controller value
 
 var fall_hold = 0	#Used when doing air combat, this value arrests gravity for a duration
 
+var attack_actions = [] #A list of combat actions sent through from the controller. This may or may not be used by the AI
 
 #combat systems
 var combat_fall_hold = 0.6
@@ -140,8 +141,8 @@ func _process(delta):
 	if action_state: #Call through to our state so that we can do stuff!
 		action_state.update(delta)
 	#this feels like a good place to put our combat action stuff
-	if attack_presses > 0 && !is_attacking: #we want to do an attack, and we can do an attacdk
-		select_attack_action()
+	#if attack_presses > 0 && !is_attacking: #we want to do an attack, and we can do an attacdk
+	#	select_attack_action()
 
 func _physics_process(delta):
 	handlecountdowns(delta) #Important for our built-in tickers
@@ -191,28 +192,31 @@ func set_move_dir(new_move_dir: float, new_facing_dir, new_vertical_move_dir):
 	vertical_move_dir = new_vertical_move_dir
 	set_facing_scale(facing_dir)
 
-func make_attack_press():
-	#I'd really like to think of a way to try and put this system somewhere else....but here we are for the moment
-	attack_presses += 1
-	attack_refresh = 0.8	#Essentially the time we've got until we can't press fire again to keep doing the combo
-	combo_counter += 1
-	print(attack_presses)
-	#Logic time! Lets see if we can find something to use as an attack in our combat_states dictionary...
-	#for the moment lets just jump straight into the action select
-	select_attack_action()
-
 #See about having the animations themselves handle the next step in the combo. This will need expanded
 func has_attack_press():
 	return attack_presses > 0
 
+func deque_attack_action():
+	if attack_actions.size() == 0:
+		return ""
+	
+	var attack_action = attack_actions[0]
+	attack_actions.remove(0)
+	return attack_action
+
 #This isn't a good system and will need changing
 #This will be called after an attack finishes
-func select_attack_action():
-	var best_attack
-	var best_attack_name
+func select_attack_action(new_attack_action):
+	attack_actions.append(new_attack_action)
+	print(new_attack_action)
+	attack_presses += 1
+	attack_refresh = 0.8	#Essentially the time we've got until we can't press fire again to keep doing the combo
+	combo_counter += 1
 	#Can we interrupt what we're doing?
-	if is_attacking:
+	if is_attacking || attack_actions.size() == 0:
 		return;
+	
+	var attack_action = deque_attack_action()
 	
 	if action_state is CombatState:
 		pass
@@ -221,12 +225,16 @@ func select_attack_action():
 		#	attack_presses -=1 #Remove one from our attack presses
 		#	change_action_state(action_state.next_combo_state, false)
 	else:
-		#So I want to modify this a bit to try and have the attacks driven by the actions themselves
-		#for the moment
-		if (strike_plain != "" && combat_states[strike_plain]):
-			var attack = combat_states[strike_plain]
-			change_action_state(strike_plain, false)
-
+		#So at this point we want to figure out which attack animation we need to start with (or switch with)
+		match attack_action:
+			"a":
+				if (strike_plain != "" && combat_states[strike_plain]):
+					var attack = combat_states[strike_plain]
+					change_action_state(strike_plain, false)
+			"u":
+				if (strike_up != "" && combat_states[strike_up]):
+					var attack = combat_states[strike_up]
+					change_action_state(strike_up, false)
 
 #Just in case something funky as all hell manages to happen while our character is undergoing an attack
 func clear_all_combat_strikers():

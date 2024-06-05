@@ -7,10 +7,12 @@ class_name PlayerController
 #Input constants
 export var DEADZONE = 0.2			#What is our thumbstick deadzone?
 
+var button_released = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	processplaininputs(delta)	#Handle our directional movement
-	
+
 
 func processplaininputs(delta):
 	if !targetactor:
@@ -66,8 +68,18 @@ func processplaininputs(delta):
 	
 	#So our player wants to try and make an attack action...
 	if Input.is_action_just_pressed("ui_focus_next"):
-		targetactor.make_attack_press()
-		
+		button_released = false
+		if vertical_move_dir < - 0.8:
+			targetactor.select_attack_action("u") #Strike up
+		elif vertical_move_dir > 0.8:
+			targetactor.select_attack_action("d")
+		else:
+			targetactor.select_attack_action("a")
+	
+	#see if our player has kept olding the attack button down or not
+	if Input.is_action_just_released("ui_focus_next"):
+		button_released = true
+	
 	#Handle our blocking action
 	if Input.is_action_just_pressed("ui_shift_right"):
 		targetactor.change_action_state("Actor_Block", false)

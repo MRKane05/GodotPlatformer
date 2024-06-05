@@ -43,8 +43,12 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 func anim_finished(anim_name: String) -> void:
 	if (anim_name == "attack"):
 		animation_cleared = true
-		if base_actor.attack_presses > 0 && next_combo_state != "": #We want to do a chain attack
+		#This could be a good place to see if our player as kept the button depressed
+		#Need a little more logic with the next step after this command...
+		if base_actor.attack_actions.size() > 0 && next_combo_state != "": #We want to do a chain attack
 			base_actor.change_action_state(next_combo_state, false)
+		elif base_actor.controller is PlayerController && !base_actor.controller.button_released && next_combo_held_state != "": #The player has held the button
+			base_actor.change_action_state(next_combo_held_state, false)
 		else:
 			#Assume that this is the combo ending action
 			base_actor.attack_presses = 0
