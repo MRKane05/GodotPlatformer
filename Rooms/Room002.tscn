@@ -152,7 +152,7 @@ position = Vector2( 1264, 222 )
 position = Vector2( 1168, 165 )
 
 [node name="Player" parent="." instance=ExtResource( 17 )]
-position = Vector2( 1592, 184 )
+position = Vector2( 422, 255 )
 can_wallgrab = true
 max_airdashes = 1
 max_airjumps = 1
@@ -163,6 +163,11 @@ stream = ExtResource( 7 )
 volume_db = -29.272
 autoplay = true
 attenuation = 1.07177
+
+[node name="Enemy2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 494, 252 )
+initial_state = NodePath("../Enemy/ActorStates/Actor_OnGround")
+_animation_player = NodePath("../Enemy/AnimationPlayer")
 
 [node name="FallCage" parent="." instance=ExtResource( 15 )]
 position = Vector2( 77, 138 )

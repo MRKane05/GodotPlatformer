@@ -1343,7 +1343,7 @@ attack_chain_order = 1
 [node name="Attack_Lift" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 attack_chain_order = 1
-on_function_call = "do_lift"
+on_function_call = "do_float_lift"
 only_ground = true
 
 [node name="PlayerController" type="Node" parent="."]

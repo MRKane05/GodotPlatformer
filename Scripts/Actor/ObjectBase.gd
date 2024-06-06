@@ -21,9 +21,15 @@ func take_damage(damageAmount, knockback, attackstun, on_damage_function, instig
 		dead()
 	else:
 		do_hurt()
+	
+	if self.has_method(on_damage_function):
+		call(on_damage_function)
 
 func do_hurt():
 	pass
 
 func do_stun(knockback : float, stunamount : float, instigator):
 	stuntime = stunamount
+
+func do_float_lift():
+	pass

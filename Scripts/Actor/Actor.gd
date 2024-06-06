@@ -304,7 +304,7 @@ func _on_AttackArea2D_body_entered(body):
 		if action_state is CombatState:
 			if action_state.combat_float:
 				fall_hold = combat_fall_hold
-			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, "", self)
+			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, action_state.on_function_call, self)
 
 #Boilerplate function used by the player
 func set_collision_crouched(is_crouched):
