@@ -10,7 +10,7 @@ export var toggle_once = false
 export (NodePath) var target_switchable
 onready var switchable:switch_trigger_object = get_node(target_switchable)
 
-func take_damage(damageAmount, knockback, attackstun, instigator):
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
 	do_toggle()
 
 func do_toggle():

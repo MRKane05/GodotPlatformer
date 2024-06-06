@@ -8,5 +8,5 @@ func _on_LevelSpikes_body_entered(body):
 	if body is Actor:
 		#func take_damage(damageAmount, knockback, attackstun, instigator):
 		#Somehow we've got to get the rotation of our tile to figure out which direction to push the player...
-		body.take_damage(damage, knockback, 1, self)
+		body.take_damage(damage, knockback, 1, "", self)
 

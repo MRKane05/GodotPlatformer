@@ -53,5 +53,5 @@ func interrupt_change_action_state(new_state_name: String, reset_if_same: bool):
 				action_state = new_actor_state
 
 #For when we've just been hit by something - most likely our player
-func on_take_damage(damageAmount, knockback, attackstun, instigator):
-	action_state.on_take_damage(damageAmount, knockback, attackstun, instigator)
+func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+	action_state.on_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)

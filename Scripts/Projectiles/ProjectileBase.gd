@@ -23,7 +23,7 @@ func _on_Area2D_body_entered(body):
 		if body.is_in_group("Enemy"): #So we've got to figure out if we've hit something that's not the player...
 			#body.queue_free()
 			if body.has_method("take_damage"):	#if this can be handled by the action state then do so
-				body.take_damage(damageAmount, direction.x*knockback, 3, instigator)
+				body.take_damage(damageAmount, direction.x*knockback, 3, "", instigator)
 		
 		queue_free()
 	

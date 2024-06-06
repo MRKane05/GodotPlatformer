@@ -120,8 +120,8 @@ func setdashcollisions(is_dashing):
 	set_collision_layer_bit(DASH_LAYER, !is_dashing)
 	set_collision_mask_bit(DASH_LAYER, !is_dashing)
 
-func take_damage(damageAmount, knockback, attackstun, instigator):
-	.take_damage(damageAmount, knockback, attackstun, instigator)
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+	.take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
 	#And update our health bar!
 	$Camera2D/HUD._on_health_updated((health/30.0) * 100.0, 30)
 

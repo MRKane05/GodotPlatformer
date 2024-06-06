@@ -12,7 +12,7 @@ func dead():
 	queue_free() #For the moment lets just vanish whatever dies
 
 #Basic hurt function
-func take_damage(damageAmount, knockback, attackstun, instigator):
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
 	current_knockback = knockback
 	health -= damageAmount
 	stuntime = 0.25	#Stun our enemy with the hit

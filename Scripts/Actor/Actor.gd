@@ -204,6 +204,14 @@ func deque_attack_action():
 	attack_actions.remove(0)
 	return attack_action
 
+func get_next_attack_action():
+	if attack_actions.size() == 0:
+		return ""
+	return attack_actions[0]
+
+func clear_action_stack():
+	attack_actions.clear()
+
 #This isn't a good system and will need changing
 #This will be called after an attack finishes
 func select_attack_action(new_attack_action):
@@ -225,6 +233,8 @@ func select_attack_action(new_attack_action):
 		#	attack_presses -=1 #Remove one from our attack presses
 		#	change_action_state(action_state.next_combo_state, false)
 	else:
+		#I think we're at the point where maybe my prior idea of having a "best selection" approach won't be a terrible idea...
+		
 		#So at this point we want to figure out which attack animation we need to start with (or switch with)
 		match attack_action:
 			"a":
@@ -232,9 +242,15 @@ func select_attack_action(new_attack_action):
 					var attack = combat_states[strike_plain]
 					change_action_state(strike_plain, false)
 			"u":
-				if (strike_up != "" && combat_states[strike_up]):
-					var attack = combat_states[strike_up]
-					change_action_state(strike_up, false)
+				#Some player specific case handling. This isn't the way to go about this...
+				if on_ground:
+					if (strike_up != "" && combat_states[strike_up]):
+						var attack = combat_states[strike_up]
+						change_action_state(strike_up, false)
+				else:
+					if (strike_plain != "" && combat_states[strike_plain]):
+						var attack = combat_states[strike_plain]
+						change_action_state(strike_plain, false)
 
 #Just in case something funky as all hell manages to happen while our character is undergoing an attack
 func clear_all_combat_strikers():
@@ -258,20 +274,20 @@ func anim_finished(anim_name: String):
 	if action_state:
 		action_state.anim_finished(anim_name)
 
-func take_damage(damageAmount, knockback, attackstun, instigator):
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
 	if controller:
-		controller.on_take_damage(damageAmount, knockback, attackstun, instigator)
+		controller.on_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
 	else:
 		print("Controller not assigned")
 	
 	if action_state.has_method("handle_take_damage"):	#if this can be handled by the action state then do so
-		if action_state.handle_take_damage(damageAmount, knockback, attackstun, instigator):
+		if action_state.handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
 			#Our function has handled this, and logically we'll not be taking damage
 			pass
 		else:
-			.take_damage(damageAmount, knockback, attackstun, instigator)
+			.take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
 	else:
-		.take_damage(damageAmount, knockback, attackstun, instigator)
+		.take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
 
 func do_hurt():
 	interrupt_change_action_state("Actor_Hurt", false)
@@ -288,7 +304,7 @@ func _on_AttackArea2D_body_entered(body):
 		if action_state is CombatState:
 			if action_state.combat_float:
 				fall_hold = combat_fall_hold
-			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, self)
+			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, "", self)
 
 #Boilerplate function used by the player
 func set_collision_crouched(is_crouched):

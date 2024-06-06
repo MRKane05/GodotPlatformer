@@ -27,7 +27,7 @@ func anim_finished(anim_name: String) -> void:
 	pass
 
 #When we take damage. This could be the birth of something amazing, or it could just be for when our player manages to chump the AI
-func on_take_damage(damageAmount, knockback, attackstun, instigator):
+func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
 	pass
 
 #Tickers to help our AI
