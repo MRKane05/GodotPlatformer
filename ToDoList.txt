@@ -1,0 +1,13 @@
+() Make a system to help targetting for shooting and latching
+() Add option of "do action if hit and hold"
+() Add collision shape for jumping as the standard one is too large
+() Get wall jumps with tile positioned sprites working
+() Hook up circle button abilities
+=>() write boilerplate for circle button abilities
+=>() create circle button ability selector, with UI
+==> Circle button abilities:
+==> () return point
+==> () void grab
+==> () bomb throw
+==> () ribbon latch/pull
+==> () slow area (could be a monumental PITA)
