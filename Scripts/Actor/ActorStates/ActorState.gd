@@ -45,7 +45,7 @@ func calculatehorizontalmovement(delta: float, velocity: Vector2, move_dir: floa
 	if move_dir != 0 && base_actor.walljump_time <=0: #Handle our standard movement
 			velocity.x += base_actor.MOVE_ACCEL * delta * move_dir	#directional acceleration
 			var maxspeed = base_actor.MAX_SPEED_RUN
-
+			
 			velocity.x = clamp(velocity.x, -maxspeed, maxspeed)
 	elif base_actor.walljump_time <=0 || base_actor.on_ground:	#Handle our stopping, but only if we're not walljumping
 		if (velocity.x > 0):
@@ -58,7 +58,7 @@ func handlefallfunctions(delta, velocity) -> Vector2:
 	#Implement gravity===========================================================
 	#var relativegravity = lerp(MIN_GRAVITY, GRAVITY, abs(velocity.y)/GRAVITY)
 	var relativegravity = base_actor.GRAVITY
-	if velocity.y >0:
+	if velocity.y > 0:
 		relativegravity = base_actor.GRAVITY*base_actor.GRAVITYMULTIPLIER
 	velocity.y += relativegravity*delta 
 	

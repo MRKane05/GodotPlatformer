@@ -20,6 +20,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	#	base_actor.set_animation(fall_anim_name)
 	#While we're on the ground we really only need to worry about movement and falling
 	#_velocity = calculatehorizontalmovement(_delta, _velocity + Vector2(base_actor.current_knockback,0), base_actor.move_dir)
+	#PROBLEM: Our velocity on hurt might need to be put into a different state to handle being tossed aside
 	_velocity = calculatehorizontalmovement(_delta, Vector2(base_actor.current_knockback,0), base_actor.move_dir)
 	_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity
 	return _velocity

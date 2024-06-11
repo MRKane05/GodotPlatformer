@@ -12,7 +12,7 @@ export(Vector2) var viewlimit = Vector2(50,100)
 #const MOVE_DECEL = 300		#Delta time affected also
 #const GRAVITY = 500				#Gravity acceleration. Assume 60fps
 const GRAVITYMULTIPLIER = 1.5	#The suggested value for marioesque gravity behavior
-#const WALL_SLIDE_SPEED = 50	#if we're not holding against the wall how quickly do we slide down?
+#const WALL_SLIDE_SPEED = 50	#if we're not holdinsg against the wall how quickly do we slide down?
 #const MAX_FALL_SPEED = 180		#Maxiumum falling speed
 #const JUMP_POWER = -200			#Jump velocity
 #const WALLJUMP_POWER = -180		#Vertical jump off walls
@@ -57,7 +57,7 @@ func handlecountdowns(delta):
 
 func handlemovementcontacts():
 	#Super simplified contacts return
-	if is_on_floor(): #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
+	if is_on_floor() || $FlipElements/EdgeCheck.is_colliding(): #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
 		on_ground = true
 	else:	#character is airbourne
 		on_ground = false
@@ -73,7 +73,6 @@ func backed_to_edge():
 #Dirt basic function to see if we can see our player (exclusion based)
 func seeplayer():
 	if sign(Global.playerpos.x - self.position.x) * facing_dir > 0: #our player is in "front" of this actor
-		
 		if playerwithinlimit():	#See if we're within our box of "caring about"
 			$PlayerRayCheck.enabled = true #Turn our our raycast
 			$PlayerRayCheck.cast_to = Global.playerpos -  self.position

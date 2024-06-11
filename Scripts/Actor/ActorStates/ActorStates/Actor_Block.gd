@@ -35,7 +35,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	return _velocity
 
 #Basic hurt function
-func handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+func handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	block_strength -= damageAmount
 	if block_strength <= 0: #our block has been broken
 		return false

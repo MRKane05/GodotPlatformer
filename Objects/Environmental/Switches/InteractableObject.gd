@@ -5,7 +5,7 @@ var can_trigger = true
 var player_over = false
 var disabled = false
 
-func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	pass
 
 func do_toggle():

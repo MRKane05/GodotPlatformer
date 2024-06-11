@@ -2,8 +2,11 @@ extends ActorState
 class_name CombatState
 
 #So I want something that's really freeform for this node, essentially it just stores an action,
+#So I want something that's really freeform for this node, essentially it just stores an action,
 #and a state by and which we'll call it
 #export(String) var attack_name = "attack"	#Make the attack into the name of the node
+export (String) var hurt_type = "hurt" #Just standard damage, with nothing special going on
+
 export(int) var attack_chain_order = 0		#Where should this attack sit in a combo?
 export(String) var next_combo_action = "a"	#What action we have to press to engage in this combo. This will help us dismiss actions for a new one (such as pressing up/down halfway through an attack)
 export(String) var next_combo_state = ""	#Which attack comes after this one?
@@ -23,9 +26,10 @@ export(bool) var combat_float = false
 var animation_cleared = false
 
 func enter(_msg := {}) -> bool:
-	base_actor.set_animation(get_name())	#In theory we should use our node name...
+	var is_animating = base_actor.set_animation(get_name())	#In theory we should use our node name...
+	#print (is_animating)
 	base_actor.is_attacking = true
-	base_actor.attack_presses -=1	#Detriment our attack presses (although this will be changed to an attack queue or something)
+	#base_actor.attack_presses -=1	#Detriment our attack presses (although this will be changed to an attack queue or something)
 	return true
 
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
@@ -47,15 +51,19 @@ func anim_finished(anim_name: String) -> void:
 		#This could be a good place to see if our player as kept the button depressed
 		#Need a little more logic with the next step after this command...
 		var next_attack_action = base_actor.get_next_attack_action()
-		
+		#base_actor.controller is PlayerController && 
 		if base_actor.attack_actions.size() > 0 && next_combo_state != "" && next_attack_action == next_combo_action: #We want to do a chain attack
 			base_actor.deque_attack_action()	#Make sure we take one off the top
 			base_actor.change_action_state(next_combo_state, false)
-		elif base_actor.controller is PlayerController && !base_actor.controller.button_released && next_combo_held_state != "": #The player has held the button
+		#This logic only works for the player
+		elif !base_actor.controller.button_released && next_combo_held_state != "": #The player has held the button
+			#print("Attack held")
 			base_actor.change_action_state(next_combo_held_state, false)
 		else:
 			#For whatever reason this combo has fallen through to the default.
 			#Assume that this is the combo ending action
+			if base_actor.attack_actions.size() > 0: #we need to continue our attack actions and send a trigger through
+				pass
 			base_actor.attack_presses = 0
 			base_actor.clear_action_stack()	#Clear our stack as we've just finished a combo or action set
 			base_actor.change_action_state("Actor_OnGround", false)

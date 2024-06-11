@@ -12,7 +12,7 @@ func dead():
 	queue_free() #For the moment lets just vanish whatever dies
 
 #Basic hurt function
-func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	current_knockback = knockback
 	health -= damageAmount
 	stuntime = 0.25	#Stun our enemy with the hit
@@ -20,7 +20,9 @@ func take_damage(damageAmount, knockback, attackstun, on_damage_function, instig
 	if health < 0:	#Don't call a hurt state if we should be dying. This'll create all sorts of horrible
 		dead()
 	else:
-		do_hurt()
+		match hurt_type:
+			"hurt" : do_hurt()	#Call our hurt function
+			"call" : pass		#Have the attached script call on the combat function handle the response from the actor
 	
 	if self.has_method(on_damage_function):
 		call(on_damage_function)
@@ -28,8 +30,8 @@ func take_damage(damageAmount, knockback, attackstun, on_damage_function, instig
 func do_hurt():
 	pass
 
+func do_float():
+	pass
+
 func do_stun(knockback : float, stunamount : float, instigator):
 	stuntime = stunamount
-
-func do_float_lift():
-	pass

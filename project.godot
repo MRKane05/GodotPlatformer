@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://Objects/Actors/Enemy/Actor_Enemy.gd"
 }, {
 "base": "ActorState",
+"class": "Actor_Float",
+"language": "GDScript",
+"path": "res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd"
+}, {
+"base": "ActorState",
 "class": "Actor_Hurt",
 "language": "GDScript",
 "path": "res://Scripts/Actor/ActorStates/ActorStates/Actor_Hurt.gd"
@@ -88,6 +93,11 @@ _global_script_classes=[ {
 "class": "Actor_Shoot",
 "language": "GDScript",
 "path": "res://Scripts/Actor/ActorStates/ActorStates/Actor_Shoot.gd"
+}, {
+"base": "ActorState",
+"class": "Attack_Lift",
+"language": "GDScript",
+"path": "res://Scripts/Actor/CombatActions/CombatStates/Attack_Lift.gd"
 }, {
 "base": "CombatState",
 "class": "Attack_Slam",
@@ -178,6 +188,7 @@ _global_script_class_icons={
 "ActorState": "",
 "Actor_Block": "",
 "Actor_Enemy": "",
+"Actor_Float": "",
 "Actor_Hurt": "",
 "Actor_Jump": "",
 "Actor_OnDash": "",
@@ -186,6 +197,7 @@ _global_script_class_icons={
 "Actor_Parried": "",
 "Actor_Player": "",
 "Actor_Shoot": "",
+"Attack_Lift": "",
 "Attack_Slam": "",
 "BasicDoor": "",
 "Basic_Lever": "",

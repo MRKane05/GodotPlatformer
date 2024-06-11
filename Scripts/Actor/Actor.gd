@@ -11,8 +11,13 @@ const MOVE_DECEL = 300		#Delta time affected also
 const GRAVITY = 500				#Gravity acceleration. Assume 60fps
 const MAX_FALL_SPEED = 180		#Maxiumum falling speed
 const JUMP_POWER = -200			#Jump velocity
+const LAUNCH_POWER = -200		#Float velocity. Used when the player is jumping up to meet a floated target, or when an enemy is "floated"
+
 const FLOOR = Vector2(0, -1)	#The normal direction of the floor (used with move_and_slide system to see where collisions should happen with the ground)
 const CROUCH_THRESHOLD = 0.8	#At what point in our analogue control do we stop moving and start crouching? This might need to be higher
+
+var is_launched = false	 	#Were we launched by an attack
+var is_lifting = false		#Are we lifting into an attack after launching something?
 
 var on_ground = false	#Are we grounded by touching or with raycasts?
 var on_wall = 0			#Wallbased raycasts to allow for wallgrabs
@@ -53,7 +58,7 @@ var fall_hold = 0	#Used when doing air combat, this value arrests gravity for a 
 var attack_actions = [] #A list of combat actions sent through from the controller. This may or may not be used by the AI
 
 #combat systems
-var combat_fall_hold = 0.6
+var combat_fall_hold = 1.0 #0.75
 var combo_counter = 0
 var attack_presses = 0
 var attack_refresh = 0
@@ -88,24 +93,31 @@ func _ready():
 		if child is CollisionShape2D:
 			combatstrikers.append(child)
 	
-	action_state.enter()
+	if action_state:
+		action_state.enter()
+	else: #We've a major problem here
+		pass
 
 #handle timing variables
 func handlecountdowns(delta):
 	fall_hold -= delta
+	#set_debug_header(String(fall_hold))
 
 
 #This promises to become more complicated
 func change_action_state(new_state_name: String, reset_if_same: bool):
-	#print(new_state_name)
+	print (new_state_name)
 	if (actor_states.has(new_state_name)):
 		if !reset_if_same && action_state.name.to_lower() == new_state_name.to_lower():
 			return	#don't change if we're calling through the same state again, and not doing a re-call
 		var new_actor_state = actor_states[new_state_name]
-		
+		print("evaluating exit")
 		if action_state.exit():
+			print("evaluating enter")
 			if new_actor_state.enter():
+				print("entering")
 				action_state = new_actor_state
+				set_debug_header(new_state_name)
 
 
 #This promises to become more complicated
@@ -117,16 +129,28 @@ func interrupt_change_action_state(new_state_name: String, reset_if_same: bool):
 		if action_state.exit():
 			if new_actor_state.enter():
 				action_state = new_actor_state
-				print(new_state_name)
+				#print(new_state_name)
 		elif action_state.interruptexit():	#The whole "I wasn't just asking" option
 			if new_actor_state.enter():
 				action_state = new_actor_state
-				print(new_state_name)
+				#print(new_state_name)
+
+func set_debug_header(debug_text):
+	if $DebugLabel:
+		$DebugLabel.text = debug_text
+
 
 func set_animation(anim_name: String):
-	#actor_animationtree.travel(anim_name)
 	if animation_player:
-		animation_player.current_animation = anim_name	#Dunno if we can do this?
+		if animation_player.has_animation(anim_name):
+			animation_player.current_animation = anim_name	#Dunno if we can do this?
+		else:
+			#set_debug_header("Anim not found")
+			pass
+	else:
+		#set_debug_header("No anim player")
+		pass
+
 
 func set_facing_scale(new_scale : float):
 	$FlipElements.scale.x = abs($FlipElements.scale.x) * new_scale
@@ -156,6 +180,8 @@ func _physics_process(delta):
 		handlemovementcontacts()
 		#set our globals. This position will be referenced by AI and probably other functions
 		#Global.playerpos = self.position
+	else:
+		set_debug_header("no_AS")
 
 #Check to see if we're against a wall
 func touchingwall():
@@ -178,7 +204,6 @@ func handlemovementcontacts():
 	#use raycasts to see if we're colliding with the ground to give us a little jump buffer
 	#This needs to be different for AI so that they know where the edge of something is
 	if ($DowncastLeft.is_colliding() || $DowncastRight.is_colliding() || is_on_floor()) && velocity.y  >= 0: #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
-		
 		on_ground = true
 		#jumps_left = 1 #reset our double jump counter
 		#dashes_left = 1 #reset our dash counter
@@ -274,20 +299,20 @@ func anim_finished(anim_name: String):
 	if action_state:
 		action_state.anim_finished(anim_name)
 
-func take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	if controller:
-		controller.on_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
+		controller.on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator)
 	else:
 		print("Controller not assigned")
 	
 	if action_state.has_method("handle_take_damage"):	#if this can be handled by the action state then do so
-		if action_state.handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+		if action_state.handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 			#Our function has handled this, and logically we'll not be taking damage
 			pass
 		else:
-			.take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
+			.take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator)
 	else:
-		.take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator)
+		.take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator)
 
 func do_hurt():
 	interrupt_change_action_state("Actor_Hurt", false)
@@ -304,8 +329,27 @@ func _on_AttackArea2D_body_entered(body):
 		if action_state is CombatState:
 			if action_state.combat_float:
 				fall_hold = combat_fall_hold
-			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, action_state.on_function_call, self)
+			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, action_state.on_function_call, action_state.hurt_type, self)
+			if body.has_method("strike_fall_hold"):
+				body.strike_fall_hold(combat_fall_hold)
+
+#Called for when we want to juggle something in the air
+func strike_fall_hold(fall_hold_delay):
+	if !on_ground:
+		fall_hold = fall_hold_delay
 
 #Boilerplate function used by the player
 func set_collision_crouched(is_crouched):
 	pass
+
+func do_float_lift():
+	is_launched = true
+	#velocity += Vector2(0, LAUNCH_POWER)
+	interrupt_change_action_state("Actor_Float", false)
+
+
+func do_float_launch():
+	print ("doing float launch")
+	is_lifting = true
+	velocity += Vector2(0, LAUNCH_POWER)
+

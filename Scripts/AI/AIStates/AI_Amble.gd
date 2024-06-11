@@ -14,6 +14,7 @@ func update(_delta: float) -> void:
 	base_AI.targetactor.set_move_dir(base_AI.move_dir, base_AI.facing_dir, 0)
 
 #Notify our AI of our player (if it is our player)
-func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, instigator):
+func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	if instigator is Actor_Player:
 		base_AI.change_action_state(base_AI.see_player_state, false)
+		#pass

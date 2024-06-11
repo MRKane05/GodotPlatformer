@@ -7,23 +7,27 @@ export(String) var idle_anim_name = "idle"
 export(String) var crouch_anim_name = "crouch"
 
 func enter(_msg := {}) -> bool:
-	
+	#base_actor.set_debug_header("On_Ground")
 	return true
 	
 # Virtual function. Corresponds to the `_process()` callback.
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
+	#base_actor.set_debug_header("PhysUpdate")
 	if !base_actor.on_ground:
 		base_actor.set_animation(fall_anim_name)
 	else:
 		#animation handling
 		if abs(_velocity.x) > 0:
+			#base_actor.set_debug_header("MOVING")
 			base_actor.set_animation(move_anim_name)
 		else:
 			if base_actor.vertical_move_dir > base_actor.CROUCH_THRESHOLD:
+				#base_actor.set_debug_header("CROUCHING")
 				base_actor.set_animation(crouch_anim_name)
 				base_actor.set_collision_crouched(true)
 			else:
 				#We need some way of knowing if we're holding down to crouch. It seems logical to handle that here
+				#base_actor.set_debug_header("IDLEG")
 				base_actor.set_animation(idle_anim_name)
 				base_actor.set_collision_crouched(false)
 		
