@@ -35,3 +35,7 @@ func do_float():
 
 func do_stun(knockback : float, stunamount : float, instigator):
 	stuntime = stunamount
+
+#Called for when we want to juggle something in the air
+func strike_fall_hold(fall_hold_delay):
+	pass

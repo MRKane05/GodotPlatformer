@@ -1340,10 +1340,12 @@ combat_float = true
 script = ExtResource( 13 )
 attack_chain_order = 1
 next_combo_state = "Attack03"
+combat_float = true
 
 [node name="Attack03" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
 attack_chain_order = 1
+combat_float = true
 
 [node name="Attack_Launch" type="Node" parent="CombatStates"]
 script = ExtResource( 13 )
@@ -1353,6 +1355,7 @@ next_combo_action = ""
 next_combo_held_state = "Attack_Lift"
 on_function_call = "do_float_lift"
 only_ground = true
+combat_float = true
 
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource( 10 )

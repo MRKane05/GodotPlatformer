@@ -101,23 +101,22 @@ func _ready():
 #handle timing variables
 func handlecountdowns(delta):
 	fall_hold -= delta
-	#set_debug_header(String(fall_hold))
+	
+	#if fall_hold > 0:
+#		set_debug_header("H")
+	#else:
+#		set_debug_header("_")
 
 
 #This promises to become more complicated
 func change_action_state(new_state_name: String, reset_if_same: bool):
-	print (new_state_name)
 	if (actor_states.has(new_state_name)):
 		if !reset_if_same && action_state.name.to_lower() == new_state_name.to_lower():
 			return	#don't change if we're calling through the same state again, and not doing a re-call
 		var new_actor_state = actor_states[new_state_name]
-		print("evaluating exit")
 		if action_state.exit():
-			print("evaluating enter")
 			if new_actor_state.enter():
-				print("entering")
 				action_state = new_actor_state
-				set_debug_header(new_state_name)
 
 
 #This promises to become more complicated
@@ -145,10 +144,8 @@ func set_animation(anim_name: String):
 		if animation_player.has_animation(anim_name):
 			animation_player.current_animation = anim_name	#Dunno if we can do this?
 		else:
-			#set_debug_header("Anim not found")
 			pass
 	else:
-		#set_debug_header("No anim player")
 		pass
 
 
@@ -181,7 +178,7 @@ func _physics_process(delta):
 		#set our globals. This position will be referenced by AI and probably other functions
 		#Global.playerpos = self.position
 	else:
-		set_debug_header("no_AS")
+		pass
 
 #Check to see if we're against a wall
 func touchingwall():
@@ -241,7 +238,7 @@ func clear_action_stack():
 #This will be called after an attack finishes
 func select_attack_action(new_attack_action):
 	attack_actions.append(new_attack_action)
-	print(new_attack_action)
+	#print(new_attack_action)
 	attack_presses += 1
 	attack_refresh = 0.8	#Essentially the time we've got until we can't press fire again to keep doing the combo
 	combo_counter += 1
@@ -327,16 +324,13 @@ func _on_AttackArea2D_body_entered(body):
 	if body.has_method("take_damage"):	#ducktyping to see if we're hitting something that's generically hittable
 		#Look to our current action state to see what damage we should be doing
 		if action_state is CombatState:
-			if action_state.combat_float:
-				fall_hold = combat_fall_hold
 			body.take_damage(action_state.attack_damage, action_state.knockback_force * sign(facing_dir), action_state.attack_stun, action_state.on_function_call, action_state.hurt_type, self)
-			if body.has_method("strike_fall_hold"):
-				body.strike_fall_hold(combat_fall_hold)
-
-#Called for when we want to juggle something in the air
-func strike_fall_hold(fall_hold_delay):
-	if !on_ground:
-		fall_hold = fall_hold_delay
+			if action_state.combat_float:
+				#call_deferred("strike_fall_hold", combat_fall_hold) #Do the float for ourselves
+				if body.has_method("strike_fall_hold"):
+					print("body has fall hold method")
+					#body.call_deferred("strike_fall_hold", combat_fall_hold)
+					body.strike_fall_hold(combat_fall_hold)
 
 #Boilerplate function used by the player
 func set_collision_crouched(is_crouched):
@@ -353,3 +347,8 @@ func do_float_launch():
 	is_lifting = true
 	velocity += Vector2(0, LAUNCH_POWER)
 
+#Called for when we want to juggle something in the air
+func strike_fall_hold(fall_hold_delay):
+	if !on_ground:
+		fall_hold = fall_hold_delay
+		print ("strike_fall_hold: " + String(fall_hold))

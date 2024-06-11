@@ -57,10 +57,13 @@ func handlecountdowns(delta):
 
 func handlemovementcontacts():
 	#Super simplified contacts return
-	if is_on_floor() || $FlipElements/EdgeCheck.is_colliding(): #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
+	# || $FlipElements/EdgeCheck.is_colliding()) 
+	if (is_on_floor() && velocity.y  >= 0): #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
 		on_ground = true
 	else:	#character is airbourne
 		on_ground = false
+	
+	set_debug_header(String(on_ground))
 
 func is_at_edge():
 	if is_on_wall():
