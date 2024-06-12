@@ -142,7 +142,8 @@ func set_drop_collision(is_dropping):
 
 func set_quick_respawn_location(new_position):
 	quick_respawn_location = new_position - Vector2(0, 10) #This may need configured for player height
-	
+
+
 func touched_killspikes():
 	if quick_respawn_location != Vector2(0,0): #we've got a quick respawn location set
 		#do the animation and then move after it

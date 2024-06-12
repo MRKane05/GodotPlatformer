@@ -7,8 +7,6 @@ class_name PlayerController
 #Input constants
 export var DEADZONE = 0.2			#What is our thumbstick deadzone?
 
-var button_released = true
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	processplaininputs(delta)	#Handle our directional movement

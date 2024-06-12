@@ -12,6 +12,9 @@ export(float) var facing_dir = 1
 # var a = 2
 # var b = "text"
 
+#Variables used by the player and ignored by the AI
+var button_released = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	yield(owner, "ready")
