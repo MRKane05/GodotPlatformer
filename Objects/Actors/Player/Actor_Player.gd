@@ -155,7 +155,14 @@ func touched_killspikes():
 func set_collision_crouched(is_crouched):
 	$CollisionShape2D.disabled = is_crouched
 	$CollisionShapeCrouched.disabled = !is_crouched
+	$CollisionShapeJump.disabled = is_crouched
 
+#Well technically: is airbourne...
+func set_collision_jumping(is_jumping):
+	$CollisionShape2D.disabled = is_jumping
+	$CollisionShapeCrouched.disabled = is_jumping
+	$CollisionShapeJump.disabled = !is_jumping
+	
 #Used with our pickups
 func get_health(amount):
 	health = clamp(health + amount, 0, 30)

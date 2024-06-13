@@ -7,6 +7,7 @@ func enter(_msg := {}) -> bool:
 		return false	#we can't fesiably enter this state
 	#Assume we're good and set our velocity
 	base_actor.velocity = dojumplogic(base_actor.velocity)
+	base_actor.set_collision_jumping(true)
 	return true
 
 func dojumplogic(velocity: Vector2) -> Vector2:
@@ -40,5 +41,6 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	
 	if base_actor.on_ground: #we need to transition back to our ground state. Check here for walls too
 		base_actor.change_action_state("Actor_OnGround", false)
+		base_actor.set_collision_jumping(false)
 	
 	return _velocity

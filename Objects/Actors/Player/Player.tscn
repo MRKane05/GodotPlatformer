@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
@@ -44,6 +44,9 @@ extents = Vector2( 6, 14 )
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 6, 14.75 )
+
+[sub_resource type="RectangleShape2D" id=169]
+extents = Vector2( 6, 8.5 )
 
 [sub_resource type="Animation" id=154]
 resource_name = "Attack01"
@@ -1376,6 +1379,14 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="CollisionShapeJump" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 169 )
+disabled = true
+__meta__ = {
+"_edit_group_": true
+}
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.75, 0.75 )
@@ -1498,10 +1509,9 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 37 )
+texture = ExtResource( 5 )
 hframes = 2
-vframes = 3
-frame = 5
+frame = 1
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0

@@ -1,7 +1,7 @@
 General:
 () Make a system to help targetting for shooting and latching
 () Add option of "do action if hit and hold"
-() Add collision shape for jumping as the standard one is too large
+(X) Add collision shape for jumping as the standard one is too large
 () Get wall jumps with tile positioned sprites working
 
 Circle Button:
@@ -20,6 +20,11 @@ Attacks:
 () Add percing stab attack after dash slide
 
 Enemies:
+() Expand the enemy AI a bit so that it's not so docile
+=> () Have an auto-attack/response if the player gets close or does some other action
+=> () Put in a ticker for the number of times the player might dash past an enemy, and have the enemy start blocking the player if they keep doing this
+=> () Include an attack that'll have the enemy "charge" at the player while swiping
+=> () Include some sort of ranged attack
 () Do something with the dog (Might just have it run around and damage when it hits the player)
 () Add another attack for the zombie which would be a "rush" attack with it flailing it's arms
 

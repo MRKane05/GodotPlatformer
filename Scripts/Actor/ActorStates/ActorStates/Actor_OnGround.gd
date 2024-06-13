@@ -15,6 +15,8 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	#base_actor.set_debug_header("PhysUpdate")
 	if !base_actor.on_ground:
 		base_actor.set_animation(fall_anim_name)
+		if base_actor.has_method("set_collision_jumping"):
+			base_actor.set_collision_jumping(true)	#For when we're simply falling
 	else:
 		#animation handling
 		if abs(_velocity.x) > 0:
