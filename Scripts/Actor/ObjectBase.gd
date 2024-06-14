@@ -39,3 +39,10 @@ func do_stun(knockback : float, stunamount : float, instigator):
 #Called for when we want to juggle something in the air
 func strike_fall_hold(fall_hold_delay):
 	pass
+
+func is_within_range(dist: float, target: Vector2, base: Vector2):
+	if abs(target.x-base.x) > dist:
+		return false
+	if abs(target.y-base.y) > dist:
+		return false
+	return true

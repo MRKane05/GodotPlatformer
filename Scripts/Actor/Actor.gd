@@ -101,7 +101,7 @@ func _ready():
 #handle timing variables
 func handlecountdowns(delta):
 	fall_hold -= delta
-	
+	next_block_time -= delta
 	#if fall_hold > 0:
 #		set_debug_header("H")
 	#else:

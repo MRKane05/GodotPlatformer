@@ -83,6 +83,7 @@ func processplaininputs(delta):
 		targetactor.change_action_state("Actor_Block", false)
 		
 	if Input.is_action_just_pressed("ui_select"):
+		print ("Doing Shoot")
 		targetactor.change_action_state("Actor_Shoot", false)
 	
 	if Input.is_action_just_pressed("ui_menu"): #Restart our level

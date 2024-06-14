@@ -1,4 +1,5 @@
 extends Node
+class_name Room_Setup_Handler
 
 func set_player_door(target_door):
 	#The player should be a child of the scene root

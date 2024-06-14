@@ -154,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/Controllers/PlayerController.gd"
 }, {
+"base": "Node",
+"class": "Room_Setup_Handler",
+"language": "GDScript",
+"path": "res://Scripts/Helpers/RoomSetupHandler.gd"
+}, {
 "base": "ObjectBase",
 "class": "breakable_prop",
 "language": "GDScript",
@@ -209,6 +214,7 @@ _global_script_class_icons={
 "LC_Door_Standard": "",
 "ObjectBase": "",
 "PlayerController": "",
+"Room_Setup_Handler": "",
 "breakable_prop": "",
 "collectable_ability": "",
 "moving_platform": "",

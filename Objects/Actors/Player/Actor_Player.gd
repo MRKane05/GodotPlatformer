@@ -61,7 +61,7 @@ var quick_respawn_location = Vector2(0,0) #Where will we zoom back to if we land
 func _ready():
 	._ready()
 	Global.Player = self
-	Global.PlayerCollider = $CollisionShape2D
+	#Global.PlayerCollider = $CollisionShape2D
 
 #Player countdowns
 func handlecountdowns(delta):
@@ -70,7 +70,7 @@ func handlecountdowns(delta):
 	walljump_time -= delta
 	dash_time -= delta
 	redash_time -= delta
-	next_block_time -= delta
+	#next_block_time -= delta
 	#stuntime -= delta
 	#parry_time -= delta
 	
@@ -176,3 +176,30 @@ func change_shots(amount):
 func update_hud():
 	$Camera2D/HUD._on_health_updated((health/30.0) * 100.0, 30)
 	$Camera2D/HUD._set_pistol_shots(pistol_shots)
+
+
+#Called from the player based off of an aim direction they're trying
+func find_best_target_position(aim_dir: Vector2, base_position: Vector2):
+	var aim_angle = aim_dir.normalized()
+	
+	var best_dot = 0.8 #This is whatever our "autoaim" lenency is
+	var bestEnemy = null
+	var best_vector
+
+	var base = self.get_parent()
+	for child in base.get_children():
+		if child is Actor_Enemy:
+			print ("Have actor Enemy")
+			if is_within_range(70, child.position, base_position): #See if this node is within range before we do the expensive math
+				var target_to = child.position - base_position
+				var target_angle = target_to.normalized()
+				var dot_diff = aim_angle.dot(target_angle) #Use the dot product to see how close we are to our intended aiming vector
+				#Of course I'd be wise to also consider things like proximity, but for the moment we'll do "closest to aim vector"
+				if dot_diff > best_dot:
+					best_dot = dot_diff
+					bestEnemy = child
+					best_vector = target_angle
+		
+	if bestEnemy:
+		return best_vector #return our found angle
+	return aim_dir #Nothing worthwhile, just use our standard angle

@@ -63,13 +63,19 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	return _velocity
 
 func do_shoot():
+	#This is where we'd want to find our best target and do a little auto-aiming for our player
+	
 	var b = Bullet.instance()
 	base_actor.owner.add_child(b)
 	#b.transform = $Muzzle.global_transform
 	b.transform = base_actor.transform #.position + target_vector #So in theory we'll be spawning this outside of the player?
+	
+	#func find_best_target_position(aim_dir: Vector2, base_position: Vector2):
+	var aimed_angle = base_actor.find_best_target_position(target_vector, base_actor.position)
+	
 	#func setup_projectile(new_direction: Vector2, new_instigator):
-	if target_vector.length() > 0.2: #This is a valid shot
-		b.setup_projectile(target_vector, base_actor)
+	if aimed_angle.length() > 0.2: #This is a valid shot
+		b.setup_projectile(aimed_angle, base_actor)
 	else:
 		b.setup_projectile(Vector2(base_actor.facing_dir, 0), base_actor)
 	

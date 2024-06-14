@@ -1,8 +1,9 @@
 General:
-() Make a system to help targetting for shooting and latching
-() Add option of "do action if hit and hold"
+(X) Make a system to help targetting for shooting and latching
+() Add option of "do action if hit and hold" for the uppercut slice, although I don't know how useful this'll be in practice
 (X) Add collision shape for jumping as the standard one is too large
-() Get wall jumps with tile positioned sprites working
+(X) Get wall jumps with tile positioned sprites working
+=> Seems pretty good now that a collision box for jumping has been added
 
 Circle Button:
 () Hook up circle button abilities
