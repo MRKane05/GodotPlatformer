@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BaseAreaTilset.tres" type="TileSet" id=2]
+[ext_resource path="res://Objects/Actors/Enemy/Enemy_Zombie.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Environmental/SpikesHandler.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=6]
@@ -10,7 +11,7 @@
 [ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Environmental/GameControl/GemHandler.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Environmental/Platforms/DropThroughPlatform.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/Actors/Enemy/Enemy.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Actors/Enemy/Enemy_Dog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Objects/Environmental/Switches/BasicLever.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Objects/Environmental/Doors/BasicDoor.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Environmental/DynamicProps/FallCage.tscn" type="PackedScene" id=15]
@@ -148,7 +149,7 @@ position = Vector2( 1264, 222 )
 position = Vector2( 1168, 165 )
 
 [node name="Player" parent="." instance=ExtResource( 17 )]
-position = Vector2( 389, 202 )
+position = Vector2( 761, 270 )
 can_wallgrab = true
 max_airdashes = 1
 max_airjumps = 1
@@ -194,8 +195,11 @@ target_switchable = NodePath("../MovingPlatform03")
 visible = false
 position = Vector2( 112, 305 )
 
-[node name="Enemy" parent="." instance=ExtResource( 12 )]
-position = Vector2( 440, 252 )
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 434, 254 )
+
+[node name="Enemy_Dog" parent="." instance=ExtResource( 12 )]
+position = Vector2( 558, 255 )
 
 [connection signal="body_entered" from="LevelSpikes" to="LevelSpikes" method="_on_LevelSpikes_body_entered"]
 [connection signal="body_entered" from="HurtSpikes_Left" to="HurtSpikes_Left" method="_on_LevelSpikes_body_entered"]

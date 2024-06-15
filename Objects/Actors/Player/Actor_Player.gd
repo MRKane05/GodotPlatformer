@@ -199,7 +199,7 @@ func find_best_target_position(aim_dir: Vector2, base_position: Vector2):
 					best_dot = dot_diff
 					bestEnemy = child
 					best_vector = target_angle
-		
+	
 	if bestEnemy:
 		return best_vector #return our found angle
 	return aim_dir #Nothing worthwhile, just use our standard angle
