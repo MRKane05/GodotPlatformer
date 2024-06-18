@@ -9,6 +9,7 @@ const MOVE_ACCEL = 300		#Movement acceleration, delta time affected
 const MOVE_DECEL = 300		#Delta time affected also
 
 const GRAVITY = 500				#Gravity acceleration. Assume 60fps
+const GRAVITYMULTIPLIER = 1.5	#The suggested value for marioesque gravity behavior
 const MAX_FALL_SPEED = 180		#Maxiumum falling speed
 const JUMP_POWER = -200			#Jump velocity
 const LAUNCH_POWER = -200		#Float velocity. Used when the player is jumping up to meet a floated target, or when an enemy is "floated"
@@ -54,6 +55,7 @@ var move_dir = 0	#sent through from our controller
 var vertical_move_dir = 0 #Another through controller value
 
 var fall_hold = 0	#Used when doing air combat, this value arrests gravity for a duration
+var walljump_time = 0 #Control lock time based off of when we jumped off a wall
 
 var attack_actions = [] #A list of combat actions sent through from the controller. This may or may not be used by the AI
 
@@ -314,9 +316,15 @@ func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_t
 func do_hurt():
 	interrupt_change_action_state("Actor_Hurt", false)
 
+#If our attack has been parried this is sent through
 func get_parried(knockback, parrystun, instigator):
 	current_knockback = knockback
 	interrupt_change_action_state("Actor_Parried", false)
+
+#if our attack is blocked this is returned
+func get_blocked(instigator):
+	if controller:
+		controller.on_get_blocked(instigator)	
 
 #Callback from one of our strike areas. I might have to think of a novel way to figure out what the damage will be...
 #this is called when we manage to hit something

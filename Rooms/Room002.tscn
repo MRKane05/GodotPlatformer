@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BaseAreaTilset.tres" type="TileSet" id=2]
-[ext_resource path="res://Objects/Actors/Enemy/Enemy_Zombie.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Environmental/SpikesHandler.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=6]
@@ -149,7 +148,7 @@ position = Vector2( 1264, 222 )
 position = Vector2( 1168, 165 )
 
 [node name="Player" parent="." instance=ExtResource( 17 )]
-position = Vector2( 761, 270 )
+position = Vector2( 487, 229 )
 can_wallgrab = true
 max_airdashes = 1
 max_airjumps = 1
@@ -194,9 +193,6 @@ target_switchable = NodePath("../MovingPlatform03")
 [node name="pickup_wallgrab" parent="." instance=ExtResource( 8 )]
 visible = false
 position = Vector2( 112, 305 )
-
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 434, 254 )
 
 [node name="Enemy_Dog" parent="." instance=ExtResource( 12 )]
 position = Vector2( 558, 255 )

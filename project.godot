@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/AI/AIStates/AI_Amble.gd"
 }, {
 "base": "AI_State",
+"class": "AI_PingPong",
+"language": "GDScript",
+"path": "res://Scripts/AI/AIStates/AI_PingPong.gd"
+}, {
+"base": "AI_State",
 "class": "AI_Spar",
 "language": "GDScript",
 "path": "res://Scripts/AI/AIStates/AI_Spar.gd"
@@ -186,6 +191,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AI_Amble": "",
+"AI_PingPong": "",
 "AI_Spar": "",
 "AI_State": "",
 "Actor": "",

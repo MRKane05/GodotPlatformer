@@ -12,7 +12,8 @@ var parry_time = 1.0	#How long should our parry last for?
 func enter(_msg := {}) -> bool:
 	if base_actor.next_block_time > 0:
 		return false #We can't enter our state until this has been ticked down to prevent spamming parry
-
+	
+	block_strength = 12
 	#Can we block in the air? If we go in the "air combat" direction then it'd make sense that we can
 	base_actor.set_animation("block")
 	return true
@@ -38,7 +39,9 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 func handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	block_strength -= damageAmount
 	if block_strength <= 0: #our block has been broken
+		base_actor.change_action_state("Actor_Hurt", false)	#That'll do for the moment
 		return false
+	
 	#of course if we're being attacked from behind we should take damage. That'll be something to get in
 	if sign(knockback) + sign(base_actor.facing_dir) != 0: #See if the damage is coming from the direction we're not facing
 		#We need to call the super from the function that called this...
@@ -49,5 +52,6 @@ func handle_take_damage(damageAmount, knockback, attackstun, on_damage_function,
 		print("Did Parry")
 		return true
 	
+	instigator.get_blocked(base_actor)
 	return true
 	#Don't take damage while blocking, but instead erode our block state

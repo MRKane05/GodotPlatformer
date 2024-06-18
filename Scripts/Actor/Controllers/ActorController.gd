@@ -28,6 +28,9 @@ func _ready():
 func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	pass
 
+func on_get_blocked(instigator):
+	pass
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

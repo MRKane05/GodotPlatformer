@@ -55,3 +55,6 @@ func interrupt_change_action_state(new_state_name: String, reset_if_same: bool):
 #For when we've just been hit by something - most likely our player
 func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	action_state.on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator)
+
+func on_get_blocked(instigator):
+	action_state.on_get_blocked(instigator)

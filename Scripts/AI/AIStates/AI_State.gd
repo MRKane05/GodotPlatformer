@@ -30,5 +30,9 @@ func anim_finished(anim_name: String) -> void:
 func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	pass
 
+#We've been blocked by something (probably the player) so this call is passed through least there's a reaction
+func get_blocked(instigator):
+	pass
+
 #Tickers to help our AI
 

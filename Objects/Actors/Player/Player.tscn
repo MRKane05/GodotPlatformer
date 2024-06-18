@@ -1284,7 +1284,6 @@ extents = Vector2( 11.5, 14.5 )
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
-collision_layer = 7
 collision_mask = 5
 script = ExtResource( 2 )
 __meta__ = {
@@ -1509,9 +1508,8 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 5 )
+texture = ExtResource( 20 )
 hframes = 2
-frame = 1
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0

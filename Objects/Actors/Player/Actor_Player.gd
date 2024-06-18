@@ -9,7 +9,7 @@ const WALLJUMP_HSP = 75			#Horizontal speed we jump off walls
 #const MOVE_ACCEL = 300		#Movement acceleration, delta time affected
 #const MOVE_DECEL = 300		#Delta time affected also
 #const GRAVITY = 500				#Gravity acceleration. Assume 60fps
-const GRAVITYMULTIPLIER = 1.5	#The suggested value for marioesque gravity behavior
+#const GRAVITYMULTIPLIER = 1.5	#The suggested value for marioesque gravity behavior
 const WALL_SLIDE_SPEED = 50	#if we're not holding against the wall how quickly do we slide down?
 #const MAX_FALL_SPEED = 180		#Maxiumum falling speed
 #const JUMP_POWER = -200			#Jump velocity
@@ -48,7 +48,7 @@ func set_ability(ability_name, state):
 #var is_attacking = false
 
 var cyote_time = 0	#Time that we'll be able to jump after leaving a platform
-var walljump_time = 0 #Control lock time based off of when we jumped off a wall
+#var walljump_time = 0 #Control lock time based off of when we jumped off a wall
 var dash_time = 0 #Time remaining on our dash (might be handled elsewhere)
 var dash_hold = false
 var redash_time = 0 #Time until we can dash again
@@ -188,7 +188,8 @@ func find_best_target_position(aim_dir: Vector2, base_position: Vector2):
 
 	var base = self.get_parent()
 	for child in base.get_children():
-		if child is Actor_Enemy:
+		#if child is Actor_Enemy: #This is causing a sea of problems
+		if child is Actor && child != self:
 			print ("Have actor Enemy")
 			if is_within_range(70, child.position, base_position): #See if this node is within range before we do the expensive math
 				var target_to = child.position - base_position
