@@ -10,6 +10,8 @@ var gemhandler: Node
 #Details for scene loading and handling
 var current_loaded_scene: Node
 
+var debug_state = 0 #1=ActorStates, 2 = AI states, 0 = off
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

@@ -1,29 +1,189 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=37 format=2]
 
-[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=2]
-[ext_resource path="res://Objects/Actors/Enemy/Actor_Enemy.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnGround.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/AI/EnemyAI.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/AI/AIStates/AI_Amble.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/AI/AIStates/AI_Spar.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Hurt.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Parried.gd" type="Script" id=10]
-[ext_resource path="res://sprites/Enemy/Zombie/Zombie_Move.png" type="Texture" id=11]
-[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Run.png" type="Texture" id=12]
-[ext_resource path="res://sprites/Enemy/Zombie/Zombie_Hurt.png" type="Texture" id=13]
-[ext_resource path="res://sprites/Enemy/Zombie/Zombie_Floated.png" type="Texture" id=14]
-[ext_resource path="res://sprites/Enemy/Zombie/Zombie_Attack.png" type="Texture" id=15]
-[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Slide.png" type="Texture" id=16]
-[ext_resource path="res://Audio/Sounds/Character/Zombie/bone-crack-121580.wav" type="AudioStream" id=17]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Actors/Enemy/Actor_Enemy.gd" type="Script" id=2]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Idle.png" type="Texture" id=3]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Run.png" type="Texture" id=4]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Jump.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnWall.gd" type="Script" id=6]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/WallGrab.png" type="Texture" id=7]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Slide.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnDash.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/AI/EnemyAI.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_OnGround.gd" type="Script" id=11]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Attacks.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd" type="Script" id=14]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/attack_from_air.png" type="Texture" id=15]
+[ext_resource path="res://Scripts/AI/AIStates/AI_Amble.gd" type="Script" id=16]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Hurt.png" type="Texture" id=17]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Hurt.gd" type="Script" id=18]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Block.gd" type="Script" id=19]
+[ext_resource path="res://sprites/2D_SL_Knight_v1.0/Block.png" type="Texture" id=20]
+[ext_resource path="res://Scripts/AI/AIStates/AI_Spar.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 7.5, 14 )
+extents = Vector2( 7, 17.5 )
 
 [sub_resource type="Animation" id=154]
 resource_name = "Attack01"
-length = 0.8
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 6 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=158]
+resource_name = "Attack02"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6, 9 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=160]
+resource_name = "Attack_Slam_Land"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("FlipElements/Sprite:texture")
 tracks/0/interp = 1
@@ -58,7 +218,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ 4 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -67,36 +227,76 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [ 2, 6 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, false, true ]
-}
-tracks/5/type = "method"
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0.6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
+}
+
+[sub_resource type="Animation" id=159]
+resource_name = "Attack_Slam_Start"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 2 ]
 }
 
 [sub_resource type="Animation" id=123]
@@ -147,7 +347,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 12 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
@@ -160,6 +360,57 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
+}
+
+[sub_resource type="Animation" id=162]
+resource_name = "block"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 20 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
 }
 
 [sub_resource type="Animation" id=130]
@@ -176,7 +427,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ) ]
+"values": [ ExtResource( 5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("FlipElements/Sprite:hframes")
@@ -200,7 +451,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ 4 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -209,67 +460,15 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 3, 4 ]
 }
 
-[sub_resource type="Animation" id=157]
-resource_name = "float"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("FlipElements/Sprite:vframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("FlipElements/Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("FlipElements/Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("FlipElements/Sprite:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 14 ) ]
-}
-
-[sub_resource type="Animation" id=155]
+[sub_resource type="Animation" id=161]
 resource_name = "hurt"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("FlipElements/Sprite:texture")
 tracks/0/interp = 1
@@ -280,7 +479,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 17 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("FlipElements/Sprite:hframes")
@@ -313,10 +512,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [ 0, 2 ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath(".")
@@ -325,26 +524,12 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.9 ),
+"times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
-}
-tracks/5/type = "audio"
-tracks/5/path = NodePath("AudioStreamPlayer2D")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 17 )
-} ],
-"times": PoolRealArray( 0.1 )
 }
 
 [sub_resource type="Animation" id=124]
@@ -372,7 +557,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ 4 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("FlipElements/Sprite:texture")
@@ -384,7 +569,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -393,67 +578,14 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=125]
-resource_name = "move"
-length = 1.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("FlipElements/Sprite:hframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("FlipElements/Sprite:vframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("FlipElements/Sprite:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 11 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("FlipElements/Sprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 3, 3 ]
+"values": [ 0, 7 ]
 }
 
-[sub_resource type="Animation" id=156]
-resource_name = "parried"
+[sub_resource type="Animation" id=131]
+resource_name = "jump"
 tracks/0/type = "value"
 tracks/0/path = NodePath("FlipElements/Sprite:texture")
 tracks/0/interp = 1
@@ -464,7 +596,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("FlipElements/Sprite:hframes")
@@ -488,7 +620,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ 4 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -500,21 +632,60 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [ 0, 7 ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.9 ),
+
+[sub_resource type="Animation" id=125]
+resource_name = "move"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
-} ]
+"update": 1,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 7 ]
 }
 
 [sub_resource type="Animation" id=148]
@@ -530,7 +701,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 16 ) ]
+"values": [ ExtResource( 8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("FlipElements/Sprite:hframes")
@@ -583,67 +754,127 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=112]
-extents = Vector2( 6.5, 13.5 )
+[sub_resource type="Animation" id=141]
+resource_name = "wallslide"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
 
-[node name="Enemy_Zombie" type="KinematicBody2D" groups=["Enemy"]]
-physics_interpolation_mode = 2
+[sub_resource type="RectangleShape2D" id=112]
+extents = Vector2( 6.5, 8 )
+
+[node name="Enemy_Knight" type="KinematicBody2D"]
 z_index = 1
-collision_layer = 2
-collision_mask = 12
-script = ExtResource( 3 )
+collision_layer = 3
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-MAX_SPEED_RUN = 10.0
-strike_plain = "Attack01"
 initial_state = NodePath("ActorStates/Actor_OnGround")
 _animation_player = NodePath("AnimationPlayer")
-viewlimit = Vector2( 150, 50 )
 
 [node name="ActorStates" type="Node" parent="."]
 
 [node name="Actor_OnGround" type="Node" parent="ActorStates"]
-script = ExtResource( 4 )
+script = ExtResource( 11 )
 move_anim_name = "move"
 
-[node name="Actor_Hurt" type="Node" parent="ActorStates"]
-script = ExtResource( 9 )
-
-[node name="Actor_Parried" type="Node" parent="ActorStates"]
-script = ExtResource( 10 )
-
-[node name="Actor_Float" type="Node" parent="ActorStates"]
+[node name="Actor_Jump" type="Node" parent="ActorStates"]
 script = ExtResource( 1 )
 
+[node name="Actor_OnWall" type="Node" parent="ActorStates"]
+script = ExtResource( 6 )
+
+[node name="Actor_OnDash" type="Node" parent="ActorStates"]
+script = ExtResource( 9 )
+
+[node name="Actor_Hurt" type="Node" parent="ActorStates"]
+script = ExtResource( 18 )
+
+[node name="Actor_Block" type="Node" parent="ActorStates"]
+script = ExtResource( 19 )
+
 [node name="CombatStates" type="Node" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 14 )
+
+[node name="Attack_Slam_Start" type="Node" parent="CombatStates"]
+script = ExtResource( 14 )
+next_combo_state = "Attack_Slam_Land"
+only_air = true
+
+[node name="Attack_Slam_Land" type="Node" parent="CombatStates"]
+script = ExtResource( 14 )
+attack_chain_order = 1
 
 [node name="Attack01" type="Node" parent="CombatStates"]
-script = ExtResource( 2 )
+script = ExtResource( 13 )
 next_combo_state = "Attack02"
 only_ground = true
 
+[node name="Attack02" type="Node" parent="CombatStates"]
+script = ExtResource( 13 )
+attack_chain_order = 1
+only_ground = true
+
 [node name="EnemyAI" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 10 )
 ActorTarget = NodePath("..")
 move_dir = 1.0
 initial_state = NodePath("AI_Amble")
 
 [node name="AI_Amble" type="Node" parent="EnemyAI"]
-script = ExtResource( 6 )
+script = ExtResource( 16 )
 
 [node name="AI_Spar" type="Node" parent="EnemyAI"]
-script = ExtResource( 7 )
-
-[node name="PlayerRayCheck" type="RayCast2D" parent="."]
-__meta__ = {
-"_edit_group_": true
-}
+script = ExtResource( 21 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-physics_interpolation_mode = 2
-position = Vector2( 0, 2 )
 shape = SubResource( 25 )
 __meta__ = {
 "_edit_group_": true
@@ -652,38 +883,31 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/Attack01 = SubResource( 154 )
+anims/Attack02 = SubResource( 158 )
+anims/Attack_Slam_Land = SubResource( 160 )
+anims/Attack_Slam_Start = SubResource( 159 )
 anims/RESET = SubResource( 123 )
+anims/block = SubResource( 162 )
 anims/fall = SubResource( 130 )
-anims/float = SubResource( 157 )
-anims/hurt = SubResource( 155 )
+anims/hurt = SubResource( 161 )
 anims/idle = SubResource( 124 )
+anims/jump = SubResource( 131 )
 anims/move = SubResource( 125 )
-anims/parried = SubResource( 156 )
 anims/slide = SubResource( 148 )
+anims/wallslide = SubResource( 141 )
+
+[node name="PlayerRayCheck" type="RayCast2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="FlipElements" type="Position2D" parent="."]
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="FlipElements"]
-position = Vector2( 0, -6 )
-scale = Vector2( 0.675, 0.675 )
-texture = ExtResource( 11 )
-hframes = 2
-vframes = 2
-
-[node name="AttackArea2D" type="Area2D" parent="FlipElements"]
-collision_layer = 0
-collision_mask = 3
-
-[node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
-position = Vector2( 16, 2.5 )
-shape = SubResource( 112 )
-disabled = true
-
 [node name="EdgeCheck" type="RayCast2D" parent="FlipElements"]
-position = Vector2( 8, 13 )
+position = Vector2( 8, 16 )
 enabled = true
 cast_to = Vector2( 0, 7 )
 collision_mask = 14
@@ -692,13 +916,29 @@ __meta__ = {
 }
 
 [node name="EdgeCheck_Back" type="RayCast2D" parent="FlipElements"]
-position = Vector2( -8, 13 )
+position = Vector2( -8, 16 )
 enabled = true
 cast_to = Vector2( 0, 7 )
 collision_mask = 14
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Sprite" type="Sprite" parent="FlipElements"]
+position = Vector2( 0, -8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 3 )
+hframes = 2
+vframes = 4
+
+[node name="AttackArea2D" type="Area2D" parent="FlipElements"]
+collision_layer = 0
+collision_mask = 3
+
+[node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
+position = Vector2( 12.585, -1.489 )
+shape = SubResource( 112 )
+disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 __meta__ = {

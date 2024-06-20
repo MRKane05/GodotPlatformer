@@ -39,7 +39,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 func handle_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	block_strength -= damageAmount
 	if block_strength <= 0: #our block has been broken
-		base_actor.change_action_state("Actor_Hurt", false)	#That'll do for the moment
+		base_actor.change_action_state("Actor_Hurt", false)	#That'll do for the moment, but we could really do with a block state fail
 		return false
 	
 	#of course if we're being attacked from behind we should take damage. That'll be something to get in

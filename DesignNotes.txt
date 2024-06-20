@@ -4,5 +4,6 @@ Layers:
 3: Drop through platforms
 4: Switches & quick respawn locations
 5: Player collectable pickups
+9: Always ground
 
 So enemies need to collide with layers 2 & 3 crucially

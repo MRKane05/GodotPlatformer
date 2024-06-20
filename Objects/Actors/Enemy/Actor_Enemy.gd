@@ -27,8 +27,9 @@ func handlemovementcontacts():
 
 func is_at_edge():
 	if is_on_wall():
-		print ("hit wall")
+		#print ("hit wall")
 		return true
+	
 	return !$FlipElements/EdgeCheck.is_colliding()	#Flip this so we get a positive return if we're at an edge while walking
 
 func backed_to_edge():
