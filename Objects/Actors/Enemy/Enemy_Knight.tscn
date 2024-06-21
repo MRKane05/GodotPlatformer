@@ -873,6 +873,9 @@ script = ExtResource( 16 )
 
 [node name="AI_Spar" type="Node" parent="EnemyAI"]
 script = ExtResource( 21 )
+pause_duration = Vector2( 0.75, 1 )
+advance_duration = Vector2( 1, 2 )
+backup_duration = Vector2( 0.5, 0.75 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 25 )

@@ -590,7 +590,7 @@ extents = Vector2( 6.5, 13.5 )
 physics_interpolation_mode = 2
 z_index = 1
 collision_layer = 2
-collision_mask = 12
+collision_mask = 268
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true

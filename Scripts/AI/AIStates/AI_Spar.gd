@@ -6,6 +6,13 @@ var advance_on = true
 var ai_pause = false
 var next_strike_time = 0
 
+#So tightening these vallues will make the AI more aggressive in it's behaviour
+export(float) var pause_chance = 0.25
+export(float) var advance_chance = 0.75
+export(Vector2) var pause_duration = Vector2(1,2) 
+export(Vector2) var advance_duration = Vector2(1,3)
+export(Vector2) var backup_duration = Vector2(1,3)
+
 func update(_delta: float) -> void:
 	next_strike_time -= _delta
 	next_shift -= _delta #Tick down our counter
@@ -13,16 +20,19 @@ func update(_delta: float) -> void:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		var random = rng.randf()
-		if rng.randf() < 0.25:
+		if rng.randf() < pause_chance:
 			ai_pause = true
+			next_shift = rng.randf_range(pause_duration.x, pause_duration.y) #Reset our ticker to something
 		else:
 			ai_pause = false
 		
-		if rng.randf() < 0.25:
-			advance_on = false
-		else:
+		if rng.randf() < advance_chance:
 			advance_on = true
-		next_shift = rng.randf_range(1, 3) #Reset our ticker to something
+			next_shift = rng.randf_range(advance_duration.x, advance_duration.y) #Reset our ticker to something
+		else:
+			advance_on = false
+			next_shift = rng.randf_range(backup_duration.x, backup_duration.y) #Reset our ticker to something
+		#next_shift = rng.randf_range(1, 3) #Reset our ticker to something
 	
 	#Figure out what the facing direction for the player is
 	var player_sign = sign(base_AI.Global.playerpos.x - base_AI.targetactor.position.x)
