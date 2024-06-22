@@ -38,6 +38,13 @@ func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) i
 func anim_finished(anim_name: String) -> void:
 	pass
 
+func calculatestophorizontalmovement(delta: float, velocity: Vector2, move_dir: float) -> Vector2:
+		if (velocity.x > 0):
+			velocity.x = min(velocity.x - base_actor.MOVE_DECEL*delta, 0)
+		if (velocity.x < 0):
+			velocity.x = max(velocity.x + base_actor.MOVE_DECEL*delta, 0)
+		return velocity
+
 #Assorted helper functions for handling our movement#The logic for calculating the movement values for our object
 func calculatehorizontalmovement(delta: float, velocity: Vector2, move_dir: float) -> Vector2:
 	#And a checker to see if we need to wait until we've finished our animation

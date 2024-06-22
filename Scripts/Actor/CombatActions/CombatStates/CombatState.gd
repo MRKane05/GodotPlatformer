@@ -41,6 +41,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 		#Need to check and see if we're hitting something, and if so do the float...
 		#if combat_float: #this begs to have yet more expansion done
 		#_velocity = Vector2(0,0)
+		_velocity = calculatestophorizontalmovement(_delta, _velocity, base_actor.move_dir)
 		_velocity = handlefallfunctions(_delta, _velocity)	#Apply our gravity
 	return _velocity
 
