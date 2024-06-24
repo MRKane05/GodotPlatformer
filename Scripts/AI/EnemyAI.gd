@@ -58,3 +58,14 @@ func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hur
 
 func on_get_blocked(instigator):
 	action_state.on_get_blocked(instigator)
+
+#This function is called up from each of the combat states that have the player enter a strike check area
+func do_trigger_strike_callback(body, strike_action: String):
+	print("Got trigger callback " + strike_action)
+	#So we could be getting a few of these coming through over a set period of time before making a stike...
+	action_state.do_trigger_strike_callback(body, strike_action)
+
+#This will be called from our AI state, and passed through to our base actor
+func set_strike_triggers(state: bool):
+	#callback_attacks.clear()
+	targetactor.set_strike_triggers(state)

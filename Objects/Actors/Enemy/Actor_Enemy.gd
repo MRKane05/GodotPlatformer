@@ -63,3 +63,9 @@ func body_entered_damage_area(body):
 #if our attack is blocked this is returned
 #func get_blocked(instigator):
 #	pass
+
+#This function enables the strike triggers which will then report back to the AI so we can play the strike that suits (guided by art)
+func set_strike_triggers(state: bool):
+	for action in combat_states:
+		if actor_states[action].has_method("set_strike_trigger"):
+			actor_states[action].set_strike_trigger(state)
