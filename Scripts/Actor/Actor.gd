@@ -297,6 +297,8 @@ func attack_animation_finished():
 func anim_finished(anim_name: String):
 	if action_state:
 		action_state.anim_finished(anim_name)
+	if controller:
+		controller.anim_finished(anim_name)
 
 func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	if controller:

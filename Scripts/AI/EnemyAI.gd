@@ -69,3 +69,7 @@ func do_trigger_strike_callback(body, strike_action: String):
 func set_strike_triggers(state: bool):
 	#callback_attacks.clear()
 	targetactor.set_strike_triggers(state)
+
+func anim_finished(anim_name: String):
+	if action_state.has_method("anim_finished"):
+		action_state.anim_finished(anim_name)

@@ -5,11 +5,31 @@ export(Vector2) var viewlimit = Vector2(50,100)
 export(float) var player_contact_hurt = -1 #if this is above zero we'll hurt the player when we contact
 export(float) var player_contact_knockback = 20
 
+var strike_check_areas = []	# All or our strike check areas that'll be collated at start
+
+
+# Recursive function to get all descendants with the "StrikeCheckArea" script
+func get_strike_check_areas_recursive(node: Node) -> Array:
+	var _strike_check_areas = []
+	for child in node.get_children():
+		if child is StrikeCheckArea: #.get_script() == preload("res://path/to/StrikeCheckArea.gd"):
+			_strike_check_areas.append(child)
+		_strike_check_areas += get_strike_check_areas_recursive(child)
+	return _strike_check_areas
+
+func _ready():
+	yield(owner, "ready")
+	._ready() #Do our super
+	#Get all the objects that are using a StrikeCheckArea
+	strike_check_areas = get_strike_check_areas_recursive(self)
+
+
 func dead():
 	#Mostly for testing
 	#if Global.gemhandler:
 	Global.gemhandler.call_deferred("spawn_collectables", self.position, 5)		
 	.dead()
+
 
 #Player countdowns
 func handlecountdowns(delta):
@@ -66,6 +86,5 @@ func body_entered_damage_area(body):
 
 #This function enables the strike triggers which will then report back to the AI so we can play the strike that suits (guided by art)
 func set_strike_triggers(state: bool):
-	for action in combat_states:
-		if actor_states[action].has_method("set_strike_trigger"):
-			actor_states[action].set_strike_trigger(state)
+	for trigger in strike_check_areas:
+		trigger.set_collision_enabled(state)

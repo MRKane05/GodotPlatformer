@@ -14,17 +14,19 @@ export(Vector2) var advance_duration = Vector2(1,3)
 export(Vector2) var backup_duration = Vector2(1,3)
 
 var waiting_open_strike = false #if true Are we waiting for one of our attacks to return that we can attack
-var collecting_attacks = false #Are we waiting to see what attacks will be avaliable
+var doing_strike = false
 export(Vector2) var attack_found_cooldown_range = Vector2(0.25, 0.5)
 var attack_found_cooldown = 1
-var callback_attacks = [] #If we've done a tick to see what attacks we can make they'll be listed here
+var triggered_attack = ""
 
 func enter(_msg := {}) -> bool:
-	waiting_open_strike = true
+	waiting_open_strike = true	
 	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
 	return true
 
 func update(_delta: float) -> void:
+	#Essentially we've got a couple of substates in this one, which is bad processing, but it's not too terrible at this stage
+	
 	next_strike_time -= _delta
 	next_shift -= _delta #Tick down our counter
 	if next_shift <= 0:	#reset our ticker and make another seed
@@ -65,29 +67,17 @@ func update(_delta: float) -> void:
 	
 	#So for our attacks we kind of need an "attack on" for seeing if we can make attacks and then
 	#Something to carry out the attacks selected from the ones that were found
-	if collecting_attacks:
+	if doing_strike:
 		attack_found_cooldown -= _delta
 	
-	if collecting_attacks && attack_found_cooldown <=0: #We're free to do an attack
-		if callback_attacks.size() > 0: #We do have attacks!
-			var rng = RandomNumberGenerator.new()
-			rng.randomize()
-			var n = rng.randi_range(0,callback_attacks.size()-1)
-			var selected_attack = callback_attacks[n]
-			#Turn our systems off before changing state
-			collecting_attacks = false
-			waiting_open_strike = false
-			#base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
-			#And after all of that set our state so that we can do an attack!
-			print("Setting attack state")
-			base_AI.targetactor.change_action_state(selected_attack, false)
-	#if our player gets close enough lets take a swing at them. We should include a little more logic here for finesse
-	#if next_strike_time <= 0 && abs(Global.playerpos.x - base_AI.targetactor.position.x) < 15 && abs(Global.playerpos.y - base_AI.targetactor.position.y) < 7 && !base_AI.targetactor.is_attacking: #This will need expanded
-	#	base_AI.targetactor.change_action_state(base_AI.targetactor.strike_plain, false)
-	#	var rng = RandomNumberGenerator.new()
-	#	rng.randomize()
-	#	next_strike_time = rng.randf_range(1,3)
-	#send driving command to move
+	if attack_found_cooldown <=0 && doing_strike: #We're free to do an attack
+		#Turn our systems off before changing state
+		doing_strike = false
+		waiting_open_strike = false
+		base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
+		#Do the strike we've had assigned
+		base_AI.targetactor.change_action_state(triggered_attack, false)
+
 	if !base_AI.targetactor.is_attacking:
 		base_AI.targetactor.set_move_dir(player_sign, facing_dir, 0)
 	else:
@@ -95,12 +85,33 @@ func update(_delta: float) -> void:
 
 #We've had a callback from one of our attack states
 func do_trigger_strike_callback(body, strike_action: String):
-	print("AI_Spar got attack callback: " + strike_action)
-	if !collecting_attacks:
-		var rng = RandomNumberGenerator.new()
-		rng.randomize()
-		attack_found_cooldown = rng.randf_range(1,3)
-		collecting_attacks = true
+	#We should enact this attack (maybe with a delay)
+	if !doing_strike:
+		triggered_attack = strike_action
+		doing_strike = true
 		
-	if !callback_attacks.has(strike_action):
-		callback_attacks.append(strike_action)
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()	
+		attack_found_cooldown = rng.randf_range(attack_found_cooldown_range.x, attack_found_cooldown_range.y) #Reset our ticker to something
+
+
+func anim_finished(anim_name: String) -> void:
+	triggered_attack = ""
+	doing_strike = false
+	#So at this point we want to either reset our system or see if we want to extend the attack into a listed combo
+	#Open up our strike states to see about attacking again
+	waiting_open_strike = true	
+	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
+
+func exit() -> bool: #There's a possibility that we won't be able to let the player do what they want to do
+	doing_strike = false
+	waiting_open_strike = false
+	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
+	return true
+
+
+func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) is this action ok with handing over (as exit may have failed)
+	doing_strike = false
+	waiting_open_strike = false
+	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
+	return true

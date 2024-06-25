@@ -34,6 +34,8 @@ func on_get_blocked(instigator):
 func do_trigger_strike_callback(body, strike_action: String):
 	pass
 
+func anim_finished(anim_name: String):
+	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
