@@ -94,11 +94,11 @@ func do_trigger_strike_callback(body, strike_action: String):
 		rng.randomize()	
 		attack_found_cooldown = rng.randf_range(attack_found_cooldown_range.x, attack_found_cooldown_range.y) #Reset our ticker to something
 
-
+#Ideally this is called when we've finished our attack animation
 func anim_finished(anim_name: String) -> void:
+	#Here's a good point to see if there's another combo position in our current attack, and we need to decide if we should run it, or setup for it
 	triggered_attack = ""
 	doing_strike = false
-	#So at this point we want to either reset our system or see if we want to extend the attack into a listed combo
 	#Open up our strike states to see about attacking again
 	waiting_open_strike = true	
 	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit

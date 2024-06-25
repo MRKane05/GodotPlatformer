@@ -27,7 +27,6 @@ func _process(delta):
 
 #This promises to become more complicated
 func change_action_state(new_state_name: String, reset_if_same: bool):
-	print(new_state_name)
 	if (ai_states.has(new_state_name)):
 		if !reset_if_same && action_state.name.to_lower() == new_state_name.to_lower():
 			return	#don't change if we're calling through the same state again, and not doing a re-call
@@ -36,7 +35,6 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		if action_state.exit():
 			if new_actor_state.enter():
 				action_state = new_actor_state
-				print(new_state_name) #Quick debug on our AI
 
 
 #This promises to become more complicated
@@ -61,7 +59,7 @@ func on_get_blocked(instigator):
 
 #This function is called up from each of the combat states that have the player enter a strike check area
 func do_trigger_strike_callback(body, strike_action: String):
-	print("Got trigger callback " + strike_action)
+	#print("Got trigger callback " + strike_action)
 	#So we could be getting a few of these coming through over a set period of time before making a stike...
 	action_state.do_trigger_strike_callback(body, strike_action)
 

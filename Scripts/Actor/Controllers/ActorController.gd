@@ -21,9 +21,6 @@ func _ready():
 	#Find our TargetActor as we can't export it
 	targetactor = get_parent()# as Actor
 	targetactor.controller = self
-	print("Target Actor")
-	print(targetactor)
-	
 
 func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
 	pass
