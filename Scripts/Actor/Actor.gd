@@ -362,3 +362,11 @@ func strike_fall_hold(fall_hold_delay):
 	if !on_ground:
 		fall_hold = fall_hold_delay
 		print ("strike_fall_hold: " + String(fall_hold))
+
+func state_combo_next(target_action: String):
+	if (actor_states.has(target_action)):
+		var target_state = actor_states[target_action]
+		if target_state is CombatState:
+			if target_state.next_combo_state != "":
+				return target_state.next_combo_state
+	return ""
