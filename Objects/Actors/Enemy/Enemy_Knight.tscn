@@ -1019,10 +1019,9 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -8 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 12 )
-hframes = 8
-vframes = 5
-frame = 13
+texture = ExtResource( 4 )
+hframes = 2
+vframes = 4
 
 [node name="StrikeCheckAreas" type="Node2D" parent="FlipElements"]
 
