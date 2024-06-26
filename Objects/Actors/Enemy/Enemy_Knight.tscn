@@ -1022,7 +1022,7 @@ scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 12 )
 hframes = 8
 vframes = 5
-frame = 12
+frame = 13
 
 [node name="StrikeCheckAreas" type="Node2D" parent="FlipElements"]
 
