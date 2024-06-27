@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Enemy/Actor_Enemy.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Block.png" type="Texture" id=20]
 [ext_resource path="res://Scripts/AI/AIStates/AI_Spar.gd" type="Script" id=21]
 [ext_resource path="res://Scripts/AI/StrikeCheckArea.gd" type="Script" id=22]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 7, 17.5 )
@@ -63,7 +64,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5 ]
+"values": [ 3 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -141,7 +142,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5 ]
+"values": [ 3 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -218,7 +219,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5 ]
+"values": [ 3 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("FlipElements/Sprite:frame")
@@ -230,7 +231,84 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 9, 13 ]
+"values": [ 14, 19 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=165]
+resource_name = "Attack04"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1, 13 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
@@ -921,6 +999,9 @@ script = ExtResource( 18 )
 [node name="Actor_Block" type="Node" parent="ActorStates"]
 script = ExtResource( 19 )
 
+[node name="Actor_Float" type="Node" parent="ActorStates"]
+script = ExtResource( 23 )
+
 [node name="CombatStates" type="Node" parent="."]
 script = ExtResource( 14 )
 
@@ -976,6 +1057,7 @@ reset_on_save = false
 anims/Attack01 = SubResource( 154 )
 anims/Attack02 = SubResource( 158 )
 anims/Attack03 = SubResource( 164 )
+anims/Attack04 = SubResource( 165 )
 anims/Attack_Slam_Land = SubResource( 160 )
 anims/Attack_Slam_Start = SubResource( 159 )
 anims/RESET = SubResource( 123 )
@@ -1019,9 +1101,10 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -8 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 hframes = 2
 vframes = 4
+frame = 3
 
 [node name="StrikeCheckAreas" type="Node2D" parent="FlipElements"]
 
