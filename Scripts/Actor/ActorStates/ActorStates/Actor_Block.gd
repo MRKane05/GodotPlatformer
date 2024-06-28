@@ -21,9 +21,11 @@ func enter(_msg := {}) -> bool:
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
 	base_actor.next_block_time = reblock_time
 	parry_time -= _delta
-	#Check to see if we're stopping our block (this can also be handled elsewhere)
-	if !Input.is_action_pressed("ui_shift_right"): #We're not holding down block anymore to transition back to our standard state
-		base_actor.change_action_state("Actor_OnGround", false)
+	
+	#Check to see if we're stopping our block (this can also be handled elsewhere). This is player only code
+	if base_actor is Actor_Player:
+		if !Input.is_action_pressed("ui_shift_right"): #We're not holding down block anymore to transition back to our standard state
+			base_actor.change_action_state("Actor_OnGround", false)
 	
 	if move_while_blocking || !base_actor.on_ground:
 		#While we're on the ground we really only need to worry about movement and falling
