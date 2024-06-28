@@ -100,7 +100,6 @@ func update(_delta: float) -> void:
 			#We need to see if we're in a state that we can block from
 			if base_AI.targetactor.action_state.name == "Actor_OnGround":
 				if Global.Player.is_attacking:	#So in theory there's a tiny window before we're hit...
-					print("AI Block window")
 					#Have some random that becomes higher the more we get hurt as a thing of self-preservation
 					if base_AI.targetactor.actor_states.has("Actor_Block"):
 						AI_Substate = "BLOCK"

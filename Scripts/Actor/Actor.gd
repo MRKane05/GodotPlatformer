@@ -338,7 +338,6 @@ func _on_AttackArea2D_body_entered(body):
 			if action_state.combat_float:
 				#call_deferred("strike_fall_hold", combat_fall_hold) #Do the float for ourselves
 				if body.has_method("strike_fall_hold"):
-					print("body has fall hold method")
 					#body.call_deferred("strike_fall_hold", combat_fall_hold)
 					body.strike_fall_hold(combat_fall_hold)
 
