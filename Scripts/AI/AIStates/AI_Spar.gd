@@ -21,7 +21,9 @@ export(Vector2) var backup_duration = Vector2(1,3)
 export(float) var combo_likelihood = 0.8 #How likely are we to do each consecutive attack in a combo. This will tie into difficulty
 export(Vector2) var blockhold_duration = Vector2(0.75,2)
 export(Vector2) var health_blocking_odds = Vector2(0.4, 0.1) #What are the odds of us blocking, based off of our health and how close we are to dying?
+export(Vector2) var parry_followup_cooldown = Vector2(0.1, 0.3) #What are the odds of us blocking, based off of our health and how close we are to dying?
 var blockhold = 1
+var parry_cooldown = 0.3
 
 var waiting_open_strike = false #if true Are we waiting for one of our attacks to return that we can attack
 var doing_strike = false
@@ -53,6 +55,8 @@ func update(_delta: float) -> void:
 	next_shift -= _delta #Tick down our counter
 	blockhold -= _delta
 	reblock_cooldown -= _delta
+	parry_cooldown -= _delta
+	
 	#Little sub-state to handle how much this character moves back/forward. This is just a random system
 	if next_shift <= 0:	#reset our ticker and make another seed
 		var rng = RandomNumberGenerator.new()
@@ -119,11 +123,19 @@ func update(_delta: float) -> void:
 						
 						AI_Substate = "BLOCK"
 						base_AI.targetactor.change_action_state("Actor_Block", false)
+						parry_cooldown = rng.randf_range(parry_followup_cooldown.x, parry_followup_cooldown.y)
 						#var rng = RandomNumberGenerator.new()
 						rng.randomize()	
 						blockhold = rng.randf_range(blockhold_duration.x, blockhold_duration.y) #Random block hold duration
 	
 	if AI_Substate == "BLOCK":
+		#Check and see if we might have just parried the player
+		if Global.Player.action_state.name == "Actor_Parried" && parry_cooldown <=0:
+			#Should have something in here to decide if we're vindictive...
+			#For the moment
+			base_AI.targetactor.change_action_state(base_AI.targetactor.strike_plain, false) #Do an attack after we got a parry
+			AI_Substate = "NONE"
+			
 		if blockhold <= 0 || abs(Global.playerpos.x-base_AI.targetactor.position.x) > 30:
 			base_AI.targetactor.change_action_state("Actor_OnGround", false)
 			AI_Substate = "NONE"

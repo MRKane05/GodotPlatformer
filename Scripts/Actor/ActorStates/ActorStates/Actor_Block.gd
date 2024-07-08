@@ -68,7 +68,7 @@ func handle_take_damage(damageAmount, knockback, attackstun, on_damage_function,
 	rng.randomize()	
 	if parry_left > 0 && parry_chance > rng.randf(): #While not all attacks will be parryable (is that a word?) lets just roll with the basics for now
 		instigator.get_parried(parry_knockback*base_actor.facing_dir, parry_stun, base_actor)
-		print("Did Parry")
+		#print("Did Parry")
 		do_parry_effect()
 		return true
 	
