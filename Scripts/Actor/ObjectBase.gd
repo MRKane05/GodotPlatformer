@@ -5,7 +5,11 @@ class_name ObjectBase
 export(float) var current_knockback = 0
 var stuntime = 0
 export(float) var health = 30
+var base_health = 30
 var is_dead = false
+
+func _ready():
+	base_health = health	#So that we're starting on the right foot for our displays and systems
 
 func dead():
 	is_dead = true

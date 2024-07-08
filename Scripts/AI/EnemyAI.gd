@@ -61,7 +61,8 @@ func on_get_blocked(instigator):
 func do_trigger_strike_callback(body, strike_action: String):
 	#print("Got trigger callback " + strike_action)
 	#So we could be getting a few of these coming through over a set period of time before making a stike...
-	action_state.do_trigger_strike_callback(body, strike_action)
+	if action_state.has_meta("do_trigger_strike_callback"):
+		action_state.do_trigger_strike_callback(body, strike_action)
 
 #This will be called from our AI state, and passed through to our base actor
 func set_strike_triggers(state: bool):

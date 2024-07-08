@@ -77,6 +77,7 @@ var combatstrikers = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	yield(owner, "ready")
+	._ready()
 	#actor_animationtree = $AnimationTree.get("parameters/playback")
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in $ActorStates.get_children():
@@ -118,6 +119,7 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		var new_actor_state = actor_states[new_state_name]
 		if action_state.exit():
 			if new_actor_state.enter():
+				set_debug_header(new_state_name)
 				action_state = new_actor_state
 
 
@@ -321,6 +323,7 @@ func do_hurt():
 #If our attack has been parried this is sent through
 func get_parried(knockback, parrystun, instigator):
 	current_knockback = knockback
+	stuntime = parrystun
 	interrupt_change_action_state("Actor_Parried", false)
 
 #if our attack is blocked this is returned

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Enemy/Actor_Enemy.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scripts/AI/AIStates/AI_Spar.gd" type="Script" id=21]
 [ext_resource path="res://Scripts/AI/StrikeCheckArea.gd" type="Script" id=22]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=23]
+[ext_resource path="res://Objects/Actors/Projectiles/ParryEffect.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 7, 17.5 )
@@ -683,8 +684,8 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
+"args": [ "hurt" ],
+"method": "anim_finished"
 } ]
 }
 
@@ -998,6 +999,9 @@ script = ExtResource( 18 )
 
 [node name="Actor_Block" type="Node" parent="ActorStates"]
 script = ExtResource( 19 )
+parry_knockback = 60.0
+parry_effect = ExtResource( 24 )
+_parry_point = NodePath("../../FlipElements/ParryEffectPoint")
 
 [node name="Actor_Float" type="Node" parent="ActorStates"]
 script = ExtResource( 23 )
@@ -1101,10 +1105,10 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -8 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 3 )
+texture = ExtResource( 17 )
 hframes = 2
-vframes = 4
-frame = 3
+vframes = 2
+frame = 2
 
 [node name="StrikeCheckAreas" type="Node2D" parent="FlipElements"]
 
@@ -1124,6 +1128,12 @@ collision_mask = 3
 position = Vector2( 17.5, -1.5 )
 shape = SubResource( 112 )
 disabled = true
+
+[node name="ParryEffectPoint" type="Node2D" parent="FlipElements"]
+position = Vector2( 7, -7 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 __meta__ = {

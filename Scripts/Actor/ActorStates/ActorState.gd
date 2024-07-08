@@ -56,9 +56,9 @@ func calculatehorizontalmovement(delta: float, velocity: Vector2, move_dir: floa
 			velocity.x = clamp(velocity.x, -maxspeed, maxspeed)
 	elif base_actor.walljump_time <=0 || base_actor.on_ground:	#Handle our stopping, but only if we're not walljumping
 		if (velocity.x > 0):
-			velocity.x = min(velocity.x - base_actor.MOVE_DECEL*delta, 0)
+			velocity.x = max(velocity.x - base_actor.MOVE_DECEL*delta, 0)
 		if (velocity.x < 0):
-			velocity.x = max(velocity.x + base_actor.MOVE_DECEL*delta, 0)
+			velocity.x = min(velocity.x + base_actor.MOVE_DECEL*delta, 0)
 	return velocity
 
 func handlefallfunctions(delta, velocity) -> Vector2:

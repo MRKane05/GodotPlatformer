@@ -23,8 +23,8 @@ export(bool) var move_while_attacking = false
 export(bool) var combat_float = false
 
 #Settings for use with the AI:
-export var strike_trigger_area := NodePath()
-onready var strike_trigger: CollisionShape2D = get_node(strike_trigger_area)
+#export var strike_trigger_area := NodePath()
+#onready var strike_trigger: CollisionShape2D = get_node(strike_trigger_area)
 #We'll have to figure out something for direction holding
 var animation_cleared = false
 
@@ -82,7 +82,7 @@ func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) i
 	base_actor.clear_all_combat_strikers();
 	return true
 
-func set_strike_trigger(state: bool):
-	if strike_trigger:
-		strike_trigger.disabled = !state
+#func set_strike_trigger(state: bool):
+#	if strike_trigger:
+#		strike_trigger.disabled = !state
 

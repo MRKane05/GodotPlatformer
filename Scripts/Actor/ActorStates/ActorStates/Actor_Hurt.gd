@@ -29,7 +29,7 @@ func exit() -> bool: #There's a possibility that we won't be able to let the pla
 	return animation_cleared
 	
 func anim_finished(anim_name: String) -> void:
-	if (anim_name == "attack"):
+	if (anim_name == "hurt"):
 		animation_cleared = true
 		#print("Animation cleared")
 		base_actor.change_action_state("Actor_OnGround", false)

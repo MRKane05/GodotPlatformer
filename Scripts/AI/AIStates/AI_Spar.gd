@@ -20,6 +20,7 @@ export(Vector2) var advance_duration = Vector2(1,3)
 export(Vector2) var backup_duration = Vector2(1,3)
 export(float) var combo_likelihood = 0.8 #How likely are we to do each consecutive attack in a combo. This will tie into difficulty
 export(Vector2) var blockhold_duration = Vector2(0.75,2)
+export(Vector2) var health_blocking_odds = Vector2(0.4, 0.1) #What are the odds of us blocking, based off of our health and how close we are to dying?
 var blockhold = 1
 
 var waiting_open_strike = false #if true Are we waiting for one of our attacks to return that we can attack
@@ -100,11 +101,15 @@ func update(_delta: float) -> void:
 			#We need to see if we're in a state that we can block from
 			if base_AI.targetactor.action_state.name == "Actor_OnGround":
 				if Global.Player.is_attacking:	#So in theory there's a tiny window before we're hit...
+					#Calculate the odds that we'll actually block
+					var block_chance = lerp(health_blocking_odds.x, health_blocking_odds.y, base_AI.targetactor.health/base_AI.targetactor.base_health)
+					var rng = RandomNumberGenerator.new()
+					rng.randomize()	
 					#Have some random that becomes higher the more we get hurt as a thing of self-preservation
-					if base_AI.targetactor.actor_states.has("Actor_Block"):
+					if base_AI.targetactor.actor_states.has("Actor_Block") && rng.randf() < block_chance:
 						AI_Substate = "BLOCK"
 						base_AI.targetactor.change_action_state("Actor_Block", false)
-						var rng = RandomNumberGenerator.new()
+						#var rng = RandomNumberGenerator.new()
 						rng.randomize()	
 						blockhold = rng.randf_range(blockhold_duration.x, blockhold_duration.y) #Random block hold duration
 	
