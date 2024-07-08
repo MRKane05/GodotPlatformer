@@ -34,6 +34,7 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		
 		if action_state.exit():
 			if new_actor_state.enter():
+				targetactor.set_debug_header(new_state_name)
 				action_state = new_actor_state
 
 
@@ -61,8 +62,10 @@ func on_get_blocked(instigator):
 func do_trigger_strike_callback(body, strike_action: String):
 	#print("Got trigger callback " + strike_action)
 	#So we could be getting a few of these coming through over a set period of time before making a stike...
-	if action_state.has_meta("do_trigger_strike_callback"):
+	if action_state.has_method("do_trigger_strike_callback"):
 		action_state.do_trigger_strike_callback(body, strike_action)
+	else:
+		print("Got trigger strike callback but no method to pass it to in AI")
 
 #This will be called from our AI state, and passed through to our base actor
 func set_strike_triggers(state: bool):

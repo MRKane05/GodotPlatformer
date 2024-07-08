@@ -26,7 +26,9 @@ var blockhold = 1
 var waiting_open_strike = false #if true Are we waiting for one of our attacks to return that we can attack
 var doing_strike = false
 export(Vector2) var attack_found_cooldown_range = Vector2(0.25, 0.5)
+export(Vector2) var reblock_cooldown_range = Vector2(0.25, 0.5)	#After we've blocked how long until we try to block again? Setting this above the attack found can make our AI more aggressive
 var attack_found_cooldown = 1
+var reblock_cooldown = 1
 var triggered_attack = ""
 
 var lerp_playerpos = Vector2(0,0) #So what I want to do is have something that'll simulate "reflexes", and doing a lerp on the player position should do that
@@ -38,6 +40,10 @@ func enter(_msg := {}) -> bool:
 	waiting_open_strike = true	
 	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
 	lerp_playerpos = base_AI.Global.playerpos	#Set our position entering this state
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()	
+	attack_found_cooldown = rng.randf_range(attack_found_cooldown_range.x, attack_found_cooldown_range.y) #Reset our ticker to something
+	reblock_cooldown = rng.randf_range(reblock_cooldown_range.x, reblock_cooldown_range.y) #Reset our ticker to something
 	return true
 
 func update(_delta: float) -> void:
@@ -46,7 +52,7 @@ func update(_delta: float) -> void:
 	next_strike_time -= _delta
 	next_shift -= _delta #Tick down our counter
 	blockhold -= _delta
-	
+	reblock_cooldown -= _delta
 	#Little sub-state to handle how much this character moves back/forward. This is just a random system
 	if next_shift <= 0:	#reset our ticker and make another seed
 		var rng = RandomNumberGenerator.new()
@@ -96,7 +102,7 @@ func update(_delta: float) -> void:
 	#Quick blocking handler================================================================================
 	#So I'm not sure what our blocking details would look like, because we've got to anticipate the player
 	#attacking us, somehow...
-	if !base_AI.targetactor.is_attacking && AI_Substate == "NONE":
+	if !base_AI.targetactor.is_attacking && AI_Substate == "NONE" && reblock_cooldown < 0:
 		if abs(Global.playerpos.x-base_AI.targetactor.position.x) < 30: #Don't worry if we're not close enough
 			#We need to see if we're in a state that we can block from
 			if base_AI.targetactor.action_state.name == "Actor_OnGround":
@@ -107,6 +113,10 @@ func update(_delta: float) -> void:
 					rng.randomize()	
 					#Have some random that becomes higher the more we get hurt as a thing of self-preservation
 					if base_AI.targetactor.actor_states.has("Actor_Block") && rng.randf() < block_chance:
+						
+						rng.randomize()							
+						reblock_cooldown = rng.randf_range(reblock_cooldown_range.x, reblock_cooldown_range.y) #Reset our ticker to something
+						
 						AI_Substate = "BLOCK"
 						base_AI.targetactor.change_action_state("Actor_Block", false)
 						#var rng = RandomNumberGenerator.new()

@@ -34,5 +34,8 @@ func on_take_damage(damageAmount, knockback, attackstun, on_damage_function, hur
 func on_get_blocked(instigator):
 	pass
 
+func do_trigger_strike_callback(body, strike_action: String):
+	pass
+
 #Tickers to help our AI
 

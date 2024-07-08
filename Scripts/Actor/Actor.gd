@@ -119,7 +119,7 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		var new_actor_state = actor_states[new_state_name]
 		if action_state.exit():
 			if new_actor_state.enter():
-				set_debug_header(new_state_name)
+				#set_debug_header(new_state_name)
 				action_state = new_actor_state
 
 

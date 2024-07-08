@@ -42,8 +42,6 @@ func handlemovementcontacts():
 		on_ground = true
 	else:	#character is airbourne
 		on_ground = false
-	
-	set_debug_header(String(on_ground))
 
 func is_at_edge():
 	if is_on_wall():
