@@ -117,7 +117,7 @@ func handlemovementcontacts():
 		on_ground = false
 
 func setdashcollisions(is_dashing):
-	set_collision_layer_bit(DASH_LAYER, !is_dashing)
+	#set_collision_layer_bit(DASH_LAYER, !is_dashing)
 	set_collision_mask_bit(DASH_LAYER, !is_dashing)
 
 func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_type, instigator):
@@ -137,7 +137,7 @@ func check_drop_function():
 	return false
 
 func set_drop_collision(is_dropping):
-	set_collision_layer_bit(DROP_LAYER, !is_dropping)
+	#set_collision_layer_bit(DROP_LAYER, !is_dropping)
 	set_collision_mask_bit(DROP_LAYER, !is_dropping)
 
 func set_quick_respawn_location(new_position):
