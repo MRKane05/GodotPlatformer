@@ -25,4 +25,13 @@ collision_layer = 0
 scale = Vector2( 0.3, 0.3 )
 shape = SubResource( 1 )
 
+[node name="UnlockLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = -25.0
+margin_top = -24.0
+margin_right = 40.0
+margin_bottom = -7.0
+custom_colors/default_color = Color( 0.968627, 1, 0, 1 )
+text = "wallgrab"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

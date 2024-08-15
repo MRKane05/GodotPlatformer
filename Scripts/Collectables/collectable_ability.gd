@@ -7,6 +7,8 @@ export(float) var state = 1.0	#This will be cased accordingly by the function
 var time = 0
 var oscel_range = 5
 var oscel_speed = 0.5
+var pickedup = false
+var label_display_time = 1.5
 
 var start_pos = Vector2.ZERO
 
@@ -18,7 +20,16 @@ func do_collect():
 	#and we need to play some sort of effect
 	#plus we should destroy this object
 	Global.Player.set_ability(ability, state)
-	queue_free()
+	pickedup = true
+	$Sprite.visible = false; #hide our sprite
+
+func _process(delta):
+	if pickedup:
+		label_display_time -= delta
+		$UnlockLabel.visible = label_display_time > 0
+		if label_display_time < 0:
+			queue_free()
+
 
 func _physics_process(delta):
 	time += delta
