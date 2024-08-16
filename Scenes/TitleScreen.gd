@@ -9,13 +9,13 @@ func _physics_process(delta):
 	if $MarginContainer/VBoxContainer/VBoxContainer/StartButton.is_hovered():
 		$MarginContainer/VBoxContainer/VBoxContainer/StartButton.grab_focus()
 		
-	if $MarginContainer/VBoxContainer/VBoxContainer/QuitButton.is_hovered():
-		$MarginContainer/VBoxContainer/VBoxContainer/QuitButton.grab_focus()
+	#if $MarginContainer/VBoxContainer/VBoxContainer/QuitButton.is_hovered():
+	#	$MarginContainer/VBoxContainer/VBoxContainer/QuitButton.grab_focus()
 
 
 func _on_StartButton_pressed():
 	#get_tree().change_scene("res://Scenes/Stage01.tscn") #load our first scene!
-	LoadingScreen.change_scene("res://Rooms/Room001.tscn", self, "Door_Standard") #load our first scene!
+	LoadingScreen.change_scene("res://Rooms/Room001.tscn", self, "")#"Door_Standard") #load our first scene!
 	#SceneChanger.goto_scene("res://Scenes/LoadingScreen.tscn", self)
 
 func _on_QuitButton_pressed():
