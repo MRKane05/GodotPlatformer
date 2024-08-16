@@ -63,11 +63,8 @@ scale = Vector2( 0.5, 1 )
 [node name="DropThroughPlatform2" parent="." instance=ExtResource( 11 )]
 position = Vector2( 79, 320 )
 
-[node name="DropThroughPlatform3" parent="." instance=ExtResource( 11 )]
-position = Vector2( -94, 331 )
-
 [node name="Player" parent="." instance=ExtResource( 10 )]
-position = Vector2( 200, 293 )
+position = Vector2( 47, 372 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2( -191, -258 )
@@ -110,5 +107,11 @@ position = Vector2( 112, 305 )
 
 [node name="Enemy_Zombie" parent="." instance=ExtResource( 5 )]
 position = Vector2( 70, 299 )
+
+[node name="DropThroughPlatform3" parent="." instance=ExtResource( 11 )]
+position = Vector2( -90, 339 )
+
+[node name="DropThroughPlatform4" parent="." instance=ExtResource( 11 )]
+position = Vector2( -21, 381 )
 
 [connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]

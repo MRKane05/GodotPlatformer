@@ -12,6 +12,7 @@ func player_fall_through(this_player):
 
 
 func _on_Area2D_body_exited(body):
+	print("Body exited area")
 	area.set_deferred("monitoring", false)
 	if body.has_method("set_drop_collision"):
 		notification_player.set_drop_collision(false)

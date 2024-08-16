@@ -108,7 +108,7 @@ func handlemovementcontacts():
 	else:
 		jump_free = false
 	
-	if (is_on_floor()) && velocity.y  >= 0: #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
+	if (is_on_floor() || $DowncastGround.is_colliding()) && velocity.y  >= 0: #Only land on the ground when falling:	#check if we're standing on the ground is_on_floor() || 
 		on_ground = true
 		jumps_left = max_airjumps #reset our double jump counter
 		dashes_left = max_airdashes #reset our dash counter
@@ -137,7 +137,8 @@ func check_drop_function():
 	return false
 
 func set_drop_collision(is_dropping):
-	#set_collision_layer_bit(DROP_LAYER, !is_dropping)
+	print ("Doing collision drop")
+	set_collision_layer_bit(DROP_LAYER, !is_dropping)
 	set_collision_mask_bit(DROP_LAYER, !is_dropping)
 
 func set_quick_respawn_location(new_position):
@@ -153,15 +154,21 @@ func touched_killspikes():
 		self.position = quick_respawn_location
 
 func set_collision_crouched(is_crouched):
-	$CollisionShape2D.disabled = is_crouched
-	$CollisionShapeCrouched.disabled = !is_crouched
-	$CollisionShapeJump.disabled = is_crouched
+	$CollisionShape2D.set_deferred("disabled", is_crouched)
+	#$CollisionShape2D.disabled = is_crouched
+	$CollisionShapeCrouched.set_deferred("disabled", !is_crouched)
+	#$CollisionShapeCrouched.disabled = !is_crouched
+	$CollisionShapeJump.set_deferred("disabled", !is_crouched)
+	#$CollisionShapeJump.disabled = is_crouched
 
 #Well technically: is airbourne...
 func set_collision_jumping(is_jumping):
-	$CollisionShape2D.disabled = is_jumping
-	$CollisionShapeCrouched.disabled = is_jumping
-	$CollisionShapeJump.disabled = !is_jumping
+	$CollisionShape2D.set_deferred("disabled", is_jumping)
+	#$CollisionShape2D.disabled = is_jumping
+	$CollisionShapeCrouched.set_deferred("disabled", is_jumping)
+	#$CollisionShapeCrouched.disabled = is_jumping
+	$CollisionShapeJump.set_deferred("disabled", !is_jumping)
+	#$CollisionShapeJump.disabled = !is_jumping
 	
 #Used with our pickups
 func get_health(amount):

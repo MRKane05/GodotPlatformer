@@ -6,6 +6,8 @@ export(String) var move_anim_name = "run"
 export(String) var idle_anim_name = "idle"
 export(String) var crouch_anim_name = "crouch"
 
+var fall_frame_pause = 0.25
+
 func enter(_msg := {}) -> bool:
 	#base_actor.set_debug_header("On_Ground")
 	return true
@@ -14,10 +16,12 @@ func enter(_msg := {}) -> bool:
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
 	#base_actor.set_debug_header("PhysUpdate")
 	if !base_actor.on_ground:
+		fall_frame_pause -= _delta
 		base_actor.set_animation(fall_anim_name)
-		if base_actor.has_method("set_collision_jumping"):
+		if base_actor.has_method("set_collision_jumping") && fall_frame_pause < 0:
 			base_actor.set_collision_jumping(true)	#For when we're simply falling
 	else:
+		fall_frame_pause = 0.25
 		#animation handling
 		if abs(_velocity.x) > 0:
 			#base_actor.set_debug_header("MOVING")

@@ -47,10 +47,10 @@
 extents = Vector2( 6, 14 )
 
 [sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 6, 14.75 )
+extents = Vector2( 6, 15 )
 
 [sub_resource type="RectangleShape2D" id=169]
-extents = Vector2( 6, 8.5 )
+extents = Vector2( 6, 8.25 )
 
 [sub_resource type="Animation" id=154]
 resource_name = "Attack01"
@@ -1354,6 +1354,7 @@ extents = Vector2( 11.5, 14.5 )
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
+collision_layer = 5
 collision_mask = 7
 script = ExtResource( 2 )
 __meta__ = {
@@ -1461,7 +1462,7 @@ __meta__ = {
 }
 
 [node name="CollisionShapeCrouched" type="CollisionShape2D" parent="." groups=["Player"]]
-position = Vector2( 0, 5.375 )
+position = Vector2( 0, 5.5 )
 scale = Vector2( 1, 0.5 )
 shape = SubResource( 25 )
 disabled = true
@@ -1470,7 +1471,7 @@ __meta__ = {
 }
 
 [node name="CollisionShapeJump" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 0.5 )
+position = Vector2( 0, 4.75 )
 shape = SubResource( 169 )
 disabled = true
 __meta__ = {
@@ -1562,7 +1563,7 @@ __meta__ = {
 [node name="DowncastGround" type="RayCast2D" parent="."]
 position = Vector2( 0, 5 )
 enabled = true
-cast_to = Vector2( 0, 10 )
+cast_to = Vector2( 0, 12 )
 collision_mask = 4
 __meta__ = {
 "_edit_group_": true
