@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://sprites/Enemy/Zombie/Zombie_Attack.png" type="Texture" id=15]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Slide.png" type="Texture" id=16]
 [ext_resource path="res://Audio/Sounds/Character/Zombie/bone-crack-121580.wav" type="AudioStream" id=17]
+[ext_resource path="res://Scripts/AI/StrikeCheckArea.gd" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 7.5, 14 )
@@ -586,11 +587,14 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=112]
 extents = Vector2( 6.5, 13.5 )
 
+[sub_resource type="RectangleShape2D" id=158]
+extents = Vector2( 8, 14.5 )
+
 [node name="Enemy_Zombie" type="KinematicBody2D" groups=["Enemy"]]
 physics_interpolation_mode = 2
 z_index = 1
 collision_layer = 2
-collision_mask = 268
+collision_mask = 2
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -670,7 +674,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -6 )
 scale = Vector2( 0.675, 0.675 )
-texture = ExtResource( 11 )
+texture = ExtResource( 15 )
 hframes = 2
 vframes = 2
 
@@ -701,6 +705,16 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="StrikeCheckAreas" type="Node2D" parent="FlipElements"]
+
+[node name="Attack01" type="Area2D" parent="FlipElements/StrikeCheckAreas"]
+collision_layer = 0
+script = ExtResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipElements/StrikeCheckAreas/Attack01"]
+position = Vector2( 18, -1.5 )
+shape = SubResource( 158 )
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 __meta__ = {
 "_edit_group_": true
@@ -715,3 +729,4 @@ text = "DEBUG"
 align = 1
 
 [connection signal="body_entered" from="FlipElements/AttackArea2D" to="." method="_on_AttackArea2D_body_entered"]
+[connection signal="body_entered" from="FlipElements/StrikeCheckAreas/Attack01" to="EnemyAI" method="do_trigger_strike_callback" binds= [ "Attack01" ]]

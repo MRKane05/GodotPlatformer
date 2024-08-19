@@ -143,6 +143,7 @@ func update(_delta: float) -> void:
 	#So for our attacks we kind of need an "attack on" for seeing if we can make attacks and then
 	#Something to carry out the attacks selected from the ones that were found
 	if !base_AI.targetactor.is_attacking && AI_Substate == "NONE":
+		base_AI.targetactor.set_debug_header("ATTACK")
 		if doing_strike:
 			attack_found_cooldown -= _delta
 		
