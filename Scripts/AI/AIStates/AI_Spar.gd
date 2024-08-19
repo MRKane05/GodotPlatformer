@@ -39,6 +39,7 @@ export(float) var playerpos_lerp_rate = 0.5 #How quickly our player pos will be 
 var AI_Substate = "NONE"	#Things have got complicated. We need a substate machine...
 
 func enter(_msg := {}) -> bool:
+	base_AI.targetactor.set_debug_header("NONE")
 	waiting_open_strike = true	
 	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
 	lerp_playerpos = base_AI.Global.playerpos	#Set our position entering this state
@@ -129,16 +130,18 @@ func update(_delta: float) -> void:
 						blockhold = rng.randf_range(blockhold_duration.x, blockhold_duration.y) #Random block hold duration
 	
 	if AI_Substate == "BLOCK":
+		base_AI.targetactor.set_debug_header("BLOCK")
 		#Check and see if we might have just parried the player
 		if Global.Player.action_state.name == "Actor_Parried" && parry_cooldown <=0:
 			#Should have something in here to decide if we're vindictive...
 			#For the moment
 			base_AI.targetactor.change_action_state(base_AI.targetactor.strike_plain, false) #Do an attack after we got a parry
 			AI_Substate = "NONE"
-			
+			base_AI.targetactor.set_debug_header("NONE")
 		if blockhold <= 0 || abs(Global.playerpos.x-base_AI.targetactor.position.x) > 30:
 			base_AI.targetactor.change_action_state("Actor_OnGround", false)
 			AI_Substate = "NONE"
+			base_AI.targetactor.set_debug_header("NONE")
 	#Strike codeblock==========================================================================================
 	#So for our attacks we kind of need an "attack on" for seeing if we can make attacks and then
 	#Something to carry out the attacks selected from the ones that were found
@@ -180,7 +183,7 @@ func anim_finished(anim_name: String) -> void:
 	
 	var random = rng.randf()
 	
-	if combo_string != "" && random < combo_likelihood && temp_sign == facing_dir:	#We'll do more checks for this, but for now lets combo!
+	if combo_string != "" && combo_string != null && random < combo_likelihood && temp_sign == facing_dir:	#We'll do more checks for this, but for now lets combo!
 		triggered_attack = combo_string
 		base_AI.targetactor.change_action_state(triggered_attack, false)
 	else:

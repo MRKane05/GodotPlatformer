@@ -24,7 +24,6 @@ extents = Vector2( 7.5, 14 )
 
 [sub_resource type="Animation" id=154]
 resource_name = "Attack01"
-length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("FlipElements/Sprite:texture")
 tracks/0/interp = 1
@@ -92,7 +91,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -588,7 +587,7 @@ tracks/4/keys = {
 extents = Vector2( 6.5, 13.5 )
 
 [sub_resource type="RectangleShape2D" id=158]
-extents = Vector2( 8, 14.5 )
+extents = Vector2( 6, 11.5 )
 
 [node name="Enemy_Zombie" type="KinematicBody2D" groups=["Enemy"]]
 physics_interpolation_mode = 2
@@ -625,7 +624,6 @@ script = ExtResource( 8 )
 
 [node name="Attack01" type="Node" parent="CombatStates"]
 script = ExtResource( 2 )
-next_combo_state = "Attack02"
 only_ground = true
 
 [node name="EnemyAI" type="Node" parent="."]
@@ -639,6 +637,7 @@ script = ExtResource( 6 )
 
 [node name="AI_Spar" type="Node" parent="EnemyAI"]
 script = ExtResource( 7 )
+backup_duration = Vector2( 0, 0 )
 
 [node name="PlayerRayCheck" type="RayCast2D" parent="."]
 __meta__ = {
@@ -677,6 +676,7 @@ scale = Vector2( 0.675, 0.675 )
 texture = ExtResource( 15 )
 hframes = 2
 vframes = 2
+frame = 3
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
@@ -712,7 +712,7 @@ collision_layer = 0
 script = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipElements/StrikeCheckAreas/Attack01"]
-position = Vector2( 18, -1.5 )
+position = Vector2( 16, 1.5 )
 shape = SubResource( 158 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
