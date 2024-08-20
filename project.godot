@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/ActorStates/ActorStates/Actor_Shoot.gd"
 }, {
+"base": "CombatState",
+"class": "Attack_Charge",
+"language": "GDScript",
+"path": "res://Scripts/Actor/CombatActions/CombatStates/Attack_Charge.gd"
+}, {
 "base": "ActorState",
 "class": "Attack_Lift",
 "language": "GDScript",
@@ -213,6 +218,7 @@ _global_script_class_icons={
 "Actor_Parried": "",
 "Actor_Player": "",
 "Actor_Shoot": "",
+"Attack_Charge": "",
 "Attack_Lift": "",
 "Attack_Slam": "",
 "BasicDoor": "",
