@@ -86,3 +86,18 @@ func interruptexit() -> bool: #If an interrupt happens (take damage, hit wall) i
 #	if strike_trigger:
 #		strike_trigger.disabled = !state
 
+#Assorted helper functions for handling our movement#The logic for calculating the movement values for our object
+func calculatedashhorizontalmovement(delta: float, velocity: Vector2, max_speed: float, move_dir: float) -> Vector2:
+	#And a checker to see if we need to wait until we've finished our animation
+	#print(dash_hold)
+	if move_dir != 0: #Handle our standard movement
+		velocity.x += base_actor.MOVE_ACCEL * delta * move_dir	#directional acceleration
+		var maxspeed = max_speed			
+		velocity.x = clamp(velocity.x, -maxspeed, maxspeed)
+	
+	#We need a check to see if we're at the edge of a platform or something so that we don't dash off
+	if base_actor.is_at_edge():
+		velocity.x = 0	#Stop our movement so that we don't run off the edge
+	
+	return velocity
+

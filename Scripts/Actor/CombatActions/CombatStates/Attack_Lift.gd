@@ -4,6 +4,7 @@ class_name Attack_Lift
 var cooldown = 0.5
 var has_applied_fall_hold = false
 
+
 #Special attack state that causes the player to jump up after something that should have been launched into the air
 func enter(_msg := {}) -> bool:
 	#base_actor.set_animation(get_name())	#In theory we should use our node name...

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Slide.png" type="Texture" id=16]
 [ext_resource path="res://Audio/Sounds/Character/Zombie/bone-crack-121580.wav" type="AudioStream" id=17]
 [ext_resource path="res://Scripts/AI/StrikeCheckArea.gd" type="Script" id=18]
+[ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Charge.gd" type="Script" id=19]
+[ext_resource path="res://sprites/Enemy/Zombie/Zombie_Charge.png" type="Texture" id=20]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 7.5, 14 )
@@ -97,6 +99,82 @@ tracks/5/keys = {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
+}
+
+[sub_resource type="Animation" id=160]
+resource_name = "Attack_Charge"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 20 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 2, 2 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FlipElements/AttackArea2D/StandardStriker:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, true ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=123]
@@ -589,6 +667,9 @@ extents = Vector2( 6.5, 13.5 )
 [sub_resource type="RectangleShape2D" id=158]
 extents = Vector2( 6, 11.5 )
 
+[sub_resource type="RectangleShape2D" id=159]
+extents = Vector2( 12.5, 14 )
+
 [node name="Enemy_Zombie" type="KinematicBody2D" groups=["Enemy"]]
 physics_interpolation_mode = 2
 z_index = 1
@@ -626,6 +707,12 @@ script = ExtResource( 8 )
 script = ExtResource( 2 )
 only_ground = true
 
+[node name="Attack_Charge" type="Node" parent="CombatStates"]
+script = ExtResource( 19 )
+attack_damage = 8.0
+only_ground = true
+charge_speed = 30.0
+
 [node name="EnemyAI" type="Node" parent="."]
 script = ExtResource( 5 )
 ActorTarget = NodePath("..")
@@ -656,6 +743,7 @@ __meta__ = {
 autoplay = "idle"
 reset_on_save = false
 anims/Attack01 = SubResource( 154 )
+anims/Attack_Charge = SubResource( 160 )
 anims/RESET = SubResource( 123 )
 anims/fall = SubResource( 130 )
 anims/float = SubResource( 157 )
@@ -673,10 +761,10 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -6 )
 scale = Vector2( 0.675, 0.675 )
-texture = ExtResource( 15 )
+texture = ExtResource( 20 )
 hframes = 2
 vframes = 2
-frame = 3
+frame = 2
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
@@ -685,7 +773,6 @@ collision_mask = 3
 [node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
 position = Vector2( 16, 2.5 )
 shape = SubResource( 112 )
-disabled = true
 
 [node name="EdgeCheck" type="RayCast2D" parent="FlipElements"]
 position = Vector2( 8, 13 )
@@ -717,6 +804,16 @@ position = Vector2( 16, 1.5 )
 shape = SubResource( 158 )
 disabled = true
 
+[node name="Attack_Charge" type="Area2D" parent="FlipElements/StrikeCheckAreas"]
+collision_layer = 0
+script = ExtResource( 18 )
+strike_delay_duration = Vector2( 0.5, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipElements/StrikeCheckAreas/Attack_Charge"]
+position = Vector2( 48.5, 2 )
+shape = SubResource( 159 )
+disabled = true
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 __meta__ = {
 "_edit_group_": true
@@ -732,3 +829,4 @@ align = 1
 
 [connection signal="body_entered" from="FlipElements/AttackArea2D" to="." method="_on_AttackArea2D_body_entered"]
 [connection signal="body_entered" from="FlipElements/StrikeCheckAreas/Attack01" to="EnemyAI" method="do_trigger_strike_callback" binds= [ "Attack01" ]]
+[connection signal="body_entered" from="FlipElements/StrikeCheckAreas/Attack_Charge" to="EnemyAI" method="do_trigger_strike_callback" binds= [ "Attack_Charge" ]]
