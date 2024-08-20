@@ -100,6 +100,7 @@ func _ready():
 		action_state.enter()
 	else: #We've a major problem here
 		pass
+	
 
 #handle timing variables
 func handlecountdowns(delta):

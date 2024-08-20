@@ -11,7 +11,10 @@ onready var Global = get_node("/root/Global") #Collect and assign our globals fo
 var ai_states = {} # Dictionary of different actions we can do
 export(Vector2) var viewlimit = Vector2(50, 100)
 
+var setupAI = false
+
 func _ready():
+	yield(owner, "ready")
 	._ready() #remember to call our super!
 	for child in get_children():
 		if child is AI_State: #Check if this is an actor state class
@@ -19,9 +22,16 @@ func _ready():
 			ai_states[child.name] = child	#Add our action to our dictionary
 	
 	action_state.enter()
+	#We need to make sure that we do the yield owner to see our target actor
+	var target_enemy: Actor_Enemy = targetactor
+	
+	move_dir = target_enemy.initial_dir;
+	facing_dir = target_enemy.initial_dir;
+	targetactor.set_facing_scale(facing_dir)
+	setupAI = true
 
 func _process(delta):
-	if action_state:
+	if action_state && setupAI:
 		action_state.update(delta)
 		
 

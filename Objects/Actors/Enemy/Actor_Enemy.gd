@@ -7,6 +7,7 @@ export(float) var player_contact_knockback = 20
 
 var strike_check_areas = []	# All or our strike check areas that'll be collated at start
 
+export(float) var initial_dir = 1	#What's our initial facing direction?
 
 # Recursive function to get all descendants with the "StrikeCheckArea" script
 func get_strike_check_areas_recursive(node: Node) -> Array:

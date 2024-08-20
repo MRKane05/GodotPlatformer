@@ -37,8 +37,10 @@ var lerp_playerpos = Vector2(0,0) #So what I want to do is have something that'l
 export(float) var playerpos_lerp_rate = 0.5 #How quickly our player pos will be lerped to. Of course 1 means it's always on position
 
 var AI_Substate = "NONE"	#Things have got complicated. We need a substate machine...
+var state_time = 0			#How long have we been in a particular state? Will be used by some of the strike callbacks to add delays
 
 func enter(_msg := {}) -> bool:
+	state_time = 0	#Make sure this is zero to begin with
 	base_AI.targetactor.set_debug_header("NONE")
 	waiting_open_strike = true	
 	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
@@ -57,6 +59,7 @@ func update(_delta: float) -> void:
 	blockhold -= _delta
 	reblock_cooldown -= _delta
 	parry_cooldown -= _delta
+	state_time += _delta	#Increase this ticker for our combat system to use as a watcher
 	
 	#Little sub-state to handle how much this character moves back/forward. This is just a random system
 	if next_shift <= 0:	#reset our ticker and make another seed
@@ -137,16 +140,18 @@ func update(_delta: float) -> void:
 			#For the moment
 			base_AI.targetactor.change_action_state(base_AI.targetactor.strike_plain, false) #Do an attack after we got a parry
 			AI_Substate = "NONE"
-			base_AI.targetactor.set_debug_header("NONE")
+			#base_AI.targetactor.set_debug_header("NONE")
+			state_time = 0
 		if blockhold <= 0 || abs(Global.playerpos.x-base_AI.targetactor.position.x) > 30:
 			base_AI.targetactor.change_action_state("Actor_OnGround", false)
 			AI_Substate = "NONE"
-			base_AI.targetactor.set_debug_header("NONE")
+			state_time = 0
+			#base_AI.targetactor.set_debug_header("NONE")
 	#Strike codeblock==========================================================================================
 	#So for our attacks we kind of need an "attack on" for seeing if we can make attacks and then
 	#Something to carry out the attacks selected from the ones that were found
 	if !base_AI.targetactor.is_attacking && AI_Substate == "NONE":
-		base_AI.targetactor.set_debug_header("ATTACK")
+		#base_AI.targetactor.set_debug_header("ATTACK")
 		if doing_strike:
 			attack_found_cooldown -= _delta
 		
@@ -177,6 +182,7 @@ func do_trigger_strike_callback(body, strike_action: String):
 
 #Ideally this is called when we've finished our attack animation
 func anim_finished(anim_name: String) -> void:
+	state_time = 0 #reset our ticker counter
 	var combo_string = base_AI.targetactor.state_combo_next(triggered_attack)
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()

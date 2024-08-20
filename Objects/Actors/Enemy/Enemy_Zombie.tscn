@@ -710,10 +710,12 @@ __meta__ = {
 [node name="Attack01" type="Area2D" parent="FlipElements/StrikeCheckAreas"]
 collision_layer = 0
 script = ExtResource( 18 )
+strike_delay_duration = Vector2( 0.5, 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipElements/StrikeCheckAreas/Attack01"]
 position = Vector2( 16, 1.5 )
 shape = SubResource( 158 )
+disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 __meta__ = {
