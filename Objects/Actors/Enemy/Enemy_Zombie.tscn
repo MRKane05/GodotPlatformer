@@ -406,8 +406,8 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
+"args": [ "hurt" ],
+"method": "anim_finished"
 } ]
 }
 tracks/5/type = "audio"
@@ -590,8 +590,8 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
+"args": [ "hurt" ],
+"method": "anim_finished"
 } ]
 }
 
@@ -761,7 +761,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -6 )
 scale = Vector2( 0.675, 0.675 )
-texture = ExtResource( 20 )
+texture = ExtResource( 13 )
 hframes = 2
 vframes = 2
 frame = 2
@@ -807,7 +807,7 @@ disabled = true
 [node name="Attack_Charge" type="Area2D" parent="FlipElements/StrikeCheckAreas"]
 collision_layer = 0
 script = ExtResource( 18 )
-strike_delay_duration = Vector2( 0.5, 2 )
+strike_delay_duration = Vector2( 2, 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipElements/StrikeCheckAreas/Attack_Charge"]
 position = Vector2( 48.5, 2 )
