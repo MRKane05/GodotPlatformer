@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BaseAreaTilset.tres" type="TileSet" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Objects/Environmental/Platforms/MovingPlatform.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Objects/Environmental/GameControl/QuickRespawnArea.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scripts/Environmental/HurtSpikes.gd" type="Script" id=20]
+[ext_resource path="res://sprites/Level/Area_Dungeon/DungeonSpikes.tres" type="TileSet" id=21]
 
 [node name="Room002" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -56,11 +57,11 @@ collision_mask = 17
 script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="LevelSpikes"]
-tile_set = ExtResource( 2 )
+tile_set = ExtResource( 21 )
 cell_size = Vector2( 16, 16 )
 collision_use_parent = true
 format = 1
-tile_data = PoolIntArray( 917494, 14, 0, 917495, 14, 0, 917496, 14, 0, 917497, 14, 0, 917498, 14, 0, 917499, 14, 0, 917500, 14, 0, 917501, 14, 0, 917502, 14, 0, 917503, 14, 0, 851968, 14, 0, 851969, 14, 0, 851970, 14, 0, 851971, 14, 0, 851972, 14, 0, 851973, 14, 0, 851974, 14, 0, 851975, 14, 0, 1114179, 6, 0, 1114180, 6, 0, 1114181, 6, 0, 1179706, 6, 0, 1179707, 6, 0, 1179708, 6, 0, 1179729, 6, 0, 1179730, 6, 0, 1179733, 6, 0, 1179734, 6, 0, 1179737, 6, 0, 1179738, 6, 0, 1179741, 6, 0, 1179742, 6, 0, 1179743, 6, 0, 1179744, 6, 0, 1310762, 6, 0, 1310763, 6, 0, 1310764, 6, 0, 1310765, 6, 0 )
+tile_data = PoolIntArray( 1114193, 0, 0, 1114194, 0, 0, 1114197, 0, 0, 1114198, 0, 0, 1114200, 0, 0, 1114201, 0, 0, 1114202, 0, 0, 1114205, 0, 0, 1114206, 0, 3, 1114207, 0, 4, 1114208, 0, 0, 1245226, 0, 3, 1245227, 0, 1, 1245228, 0, 0, 1245229, 0, 2 )
 
 [node name="HurtSpikes_Left" type="Area2D" parent="."]
 collision_layer = 17
