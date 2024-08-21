@@ -32,7 +32,8 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	time += delta
-	if time > oscel_speed * 4 * 3.1415: #Good programming to have overflow checks
-		time = 0
-	self.position = Vector2(start_pos.x, start_pos.y + sin(time/oscel_speed) * oscel_range)
+	if !pickedup:
+		time += delta
+		if time > oscel_speed * 4 * 3.1415: #Good programming to have overflow checks
+			time = 0
+		self.position = Vector2(start_pos.x, start_pos.y + sin(time/oscel_speed) * oscel_range)

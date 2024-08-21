@@ -28,7 +28,7 @@ destroy_sound = ExtResource( 3 )
 destroyed_sprite = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.12, 0.12 )
+scale = Vector2( 0.6, 0.6 )
 z_index = 1
 texture = ExtResource( 1 )
 

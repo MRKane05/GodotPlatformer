@@ -101,6 +101,8 @@ func _ready():
 	else: #We've a major problem here
 		pass
 	
+	set_debug_header("", false) #Hide our debug label (not that the system is at all fleshed out...
+	
 
 #handle timing variables
 func handlecountdowns(delta):
@@ -120,7 +122,7 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		var new_actor_state = actor_states[new_state_name]
 		if action_state.exit():
 			if new_actor_state.enter():
-				set_debug_header(new_state_name)
+				#set_debug_header(new_state_name)
 				action_state = new_actor_state
 
 
@@ -139,8 +141,9 @@ func interrupt_change_action_state(new_state_name: String, reset_if_same: bool):
 				action_state = new_actor_state
 				#print(new_state_name)
 
-func set_debug_header(debug_text):
+func set_debug_header(debug_text, visible):
 	if $DebugLabel:
+		$DebugLabel.visible = visible
 		$DebugLabel.text = debug_text
 
 

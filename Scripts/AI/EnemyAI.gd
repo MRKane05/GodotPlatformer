@@ -44,7 +44,7 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		
 		if action_state.exit():
 			if new_actor_state.enter():
-				targetactor.set_debug_header(new_state_name)
+				#targetactor.set_debug_header(new_state_name)
 				action_state = new_actor_state
 
 

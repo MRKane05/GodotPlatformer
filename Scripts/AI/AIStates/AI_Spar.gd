@@ -41,7 +41,7 @@ var state_time = 0			#How long have we been in a particular state? Will be used 
 
 func enter(_msg := {}) -> bool:
 	state_time = 0	#Make sure this is zero to begin with
-	base_AI.targetactor.set_debug_header("NONE")
+	#base_AI.targetactor.set_debug_header("NONE")
 	waiting_open_strike = true	
 	base_AI.targetactor.set_strike_triggers(waiting_open_strike) #Set our AI so that it's looking to make a hit
 	lerp_playerpos = base_AI.Global.playerpos	#Set our position entering this state
@@ -133,7 +133,7 @@ func update(_delta: float) -> void:
 						blockhold = rng.randf_range(blockhold_duration.x, blockhold_duration.y) #Random block hold duration
 	
 	if AI_Substate == "BLOCK":
-		base_AI.targetactor.set_debug_header("BLOCK")
+		#base_AI.targetactor.set_debug_header("BLOCK")
 		#Check and see if we might have just parried the player
 		if Global.Player.action_state.name == "Actor_Parried" && parry_cooldown <=0:
 			#Should have something in here to decide if we're vindictive...
