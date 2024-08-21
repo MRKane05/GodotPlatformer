@@ -1,0 +1,19 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec4 vignette_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0); // Color of the vignette
+uniform sampler2D vignette_texture : hint_albedo;
+uniform float intensity : hint_range(0.0, 1.0) = 1.0; // Intensity of the vignette
+
+void fragment() {
+    vec2 uv = FRAGCOORD.xy / SCREEN_PIXEL_SIZE.xy;
+    vec4 vignette_tex = texture(vignette_texture, uv);
+
+    // Multiply the vignette texture with the vignette color
+    vec4 vignette_effect = vignette_tex * vignette_color;
+
+    // Mix the original color with the vignette effect
+    COLOR = texture(TEXTURE, UV) * mix(vec4(1.0), vignette_effect, intensity);
+}"

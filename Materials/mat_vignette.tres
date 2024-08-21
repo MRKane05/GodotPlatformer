@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Materials/Shaders/shader_vignette.tres" type="Shader" id=1]
+[ext_resource path="res://sprites/UI/vignette_screen.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/vignette_color = Color( 0, 0, 0, 1 )
+shader_param/intensity = 1.0
+shader_param/vignette_texture = ExtResource( 2 )
