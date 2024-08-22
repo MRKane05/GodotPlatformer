@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zombie_swipe.mp3-8a6b465457d2bdb938212ed13f54f1ed.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sounds/Character/Zombie/zombie_swipe.mp3"
+dest_files=[ "res://.import/zombie_swipe.mp3-8a6b465457d2bdb938212ed13f54f1ed.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

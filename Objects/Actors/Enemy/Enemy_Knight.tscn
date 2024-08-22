@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Enemy/Actor_Enemy.gd" type="Script" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://Scripts/AI/StrikeCheckArea.gd" type="Script" id=22]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=23]
 [ext_resource path="res://Objects/Actors/Projectiles/ParryEffect.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Audio/Sounds/Character/Player/swing-whoosh-weapon-1-189819.mp3" type="AudioStream" id=25]
+[ext_resource path="res://Audio/Sounds/Character/Knight/Knight_Hurt.wav" type="AudioStream" id=26]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 7, 17.5 )
@@ -105,6 +107,20 @@ tracks/5/keys = {
 "method": "attack_animation_finished"
 } ]
 }
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 25 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
 
 [sub_resource type="Animation" id=158]
 resource_name = "Attack02"
@@ -183,6 +199,20 @@ tracks/5/keys = {
 "method": "attack_animation_finished"
 } ]
 }
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 25 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
 
 [sub_resource type="Animation" id=164]
 resource_name = "Attack03"
@@ -259,6 +289,20 @@ tracks/5/keys = {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 25 )
+} ],
+"times": PoolRealArray( 0.1 )
 }
 
 [sub_resource type="Animation" id=165]
@@ -687,6 +731,20 @@ tracks/4/keys = {
 "args": [ "hurt" ],
 "method": "anim_finished"
 } ]
+}
+tracks/5/type = "audio"
+tracks/5/path = NodePath("AudioStreamPlayer2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 26 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=124]
@@ -1140,6 +1198,7 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 26 )
 __meta__ = {
 "_edit_group_": true
 }

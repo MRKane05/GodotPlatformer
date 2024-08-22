@@ -269,6 +269,7 @@ enabled=PoolStringArray(  )
 pixel=false
 etc=false
 plugins=false
+clear=false
 
 [gui]
 

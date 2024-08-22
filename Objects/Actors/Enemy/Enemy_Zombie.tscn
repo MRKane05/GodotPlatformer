@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Float.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Scripts/AI/StrikeCheckArea.gd" type="Script" id=18]
 [ext_resource path="res://Scripts/Actor/CombatActions/CombatStates/Attack_Charge.gd" type="Script" id=19]
 [ext_resource path="res://sprites/Enemy/Zombie/Zombie_Charge.png" type="Texture" id=20]
+[ext_resource path="res://Audio/Sounds/Character/Zombie/zombie_swipe.mp3" type="AudioStream" id=21]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 7.5, 14 )
@@ -100,6 +101,20 @@ tracks/5/keys = {
 "method": "attack_animation_finished"
 } ]
 }
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 21 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
 
 [sub_resource type="Animation" id=160]
 resource_name = "Attack_Charge"
@@ -175,6 +190,20 @@ tracks/5/keys = {
 "times": PoolRealArray(  ),
 "transitions": PoolRealArray(  ),
 "values": [  ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 21 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=123]
@@ -679,6 +708,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
+health = 10.0
 MAX_SPEED_RUN = 10.0
 strike_plain = "Attack01"
 initial_state = NodePath("ActorStates/Actor_OnGround")
@@ -761,10 +791,9 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -6 )
 scale = Vector2( 0.675, 0.675 )
-texture = ExtResource( 13 )
+texture = ExtResource( 20 )
 hframes = 2
 vframes = 2
-frame = 2
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
@@ -773,6 +802,7 @@ collision_mask = 3
 [node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
 position = Vector2( 16, 2.5 )
 shape = SubResource( 112 )
+disabled = true
 
 [node name="EdgeCheck" type="RayCast2D" parent="FlipElements"]
 position = Vector2( 8, 13 )
@@ -815,6 +845,7 @@ shape = SubResource( 159 )
 disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 21 )
 __meta__ = {
 "_edit_group_": true
 }
