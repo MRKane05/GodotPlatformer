@@ -18,6 +18,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	charge_time += _delta
 	if charge_time > charge_duration:
 		base_actor.change_action_state("Actor_OnGround", false)
+		animation_cleared = true
 	
 	var dash_dir = base_actor.move_dir
 	if dash_dir == 0:
