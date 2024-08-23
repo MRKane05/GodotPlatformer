@@ -8,7 +8,7 @@ var animation_cleared = false
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> bool:
 	#Can we be hurt twice?
-	print("Actor in hurt state")
+	#print("Actor in hurt state")
 	base_actor.set_animation("hurt")
 	return true
 

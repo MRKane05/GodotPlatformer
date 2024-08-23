@@ -143,15 +143,23 @@ func set_drop_collision(is_dropping):
 
 func set_quick_respawn_location(new_position):
 	quick_respawn_location = new_position - Vector2(0, 10) #This may need configured for player height
-
+	change_action_state("Actor_OnGround", false)
+	
 
 func touched_killspikes():
+	if (actor_states.has("Actor_SpikeDie")):
+		interrupt_change_action_state("Actor_SpikeDie", false)
+	else:
+		do_quick_respawn();
+	
+func do_quick_respawn():
 	if quick_respawn_location != Vector2(0,0): #we've got a quick respawn location set
 		#do the animation and then move after it
 		#Move using something eloquent
 		#Do set amount of damage as penalty
 		#For the moment just snap to location
 		self.position = quick_respawn_location
+		
 
 func set_collision_crouched(is_crouched):
 	$CollisionShape2D.set_deferred("disabled", is_crouched)

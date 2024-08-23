@@ -166,6 +166,13 @@ func handle_input(_event: InputEvent) -> void:
 	pass
 
 
+func dead():
+	is_dead = true
+	if (actor_states.has("Actor_Die")):
+		interrupt_change_action_state("Actor_Die", false)
+	else:
+		queue_free() #For the moment lets just vanish whatever dies
+
 func _process(delta):
 	if action_state: #Call through to our state so that we can do stuff!
 		action_state.update(delta)
