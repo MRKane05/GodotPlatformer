@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
-[ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BaseAreaTilset.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Environmental/SpikesHandler.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=6]
@@ -36,7 +35,7 @@ tile_data = PoolIntArray( 851959, 0, 0, 851963, 0, 0, 786433, 0, 0, 786435, 2, 0
 
 [node name="Door_Left" parent="." instance=ExtResource( 9 )]
 position = Vector2( 48, 221 )
-target_scene = "res://Rooms/Room001.tscn"
+target_scene = "res://Rooms/Room002.tscn"
 target_doorway = "Door_Standard"
 _scene_base = NodePath("..")
 
@@ -63,18 +62,18 @@ format = 1
 tile_data = PoolIntArray( 1048643, 0, 4, 1048644, 0, 4, 1048645, 0, 1, 1114170, 0, 3, 1114171, 0, 0, 1114172, 0, 1, 1114193, 0, 2, 1114194, 0, 3, 1114197, 0, 3, 1114198, 0, 1, 1114200, 0, 4, 1114201, 0, 3, 1114202, 0, 2, 1114205, 0, 3, 1114206, 0, 1, 1114207, 0, 1, 1114208, 0, 0, 1245226, 0, 3, 1245227, 0, 1, 1245228, 0, 0, 1245229, 0, 2 )
 
 [node name="HurtSpikes_Left" type="Area2D" parent="."]
-collision_layer = 17
-collision_mask = 17
+collision_layer = 273
+collision_mask = 0
 script = ExtResource( 20 )
-damage = 0.0
+damage = 3.0
 knockback = -30.0
 
 [node name="TileMap" type="TileMap" parent="HurtSpikes_Left"]
-tile_set = ExtResource( 2 )
+tile_set = ExtResource( 21 )
 cell_size = Vector2( 16, 16 )
 collision_use_parent = true
 format = 1
-tile_data = PoolIntArray( 655476, -1073741817, 0, 721012, -1073741817, 0, 917494, 14, 0, 917495, 14, 0, 917496, 14, 0, 917497, 14, 0, 917498, 14, 0, 917499, 14, 0, 917500, 14, 0, 917501, 14, 0, 917502, 14, 0, 917503, 14, 0, 851968, 14, 0, 851969, 14, 0, 851970, 14, 0, 851971, 14, 0, 851972, 14, 0, 851973, 14, 0, 851974, 14, 0, 851975, 14, 0, 917620, -1073741817, 0, 1179764, -1073741817, 0, 1245300, -1073741817, 0, 1376284, -1073741817, 0, 1441820, -1073741817, 0, 1507356, -1073741817, 0, 1572892, -1073741817, 0, 2752534, -1073741817, 0, 2818070, -1073741817, 0, 2883606, -1073741817, 0 )
+tile_data = PoolIntArray( 655476, -1073741817, 0, 721012, -1073741817, 0, 917494, 14, 0, 917495, 14, 0, 917496, 14, 0, 917497, 14, 0, 917498, 14, 0, 917499, 14, 0, 917500, 14, 0, 917501, 14, 0, 917502, 14, 0, 917503, 14, 0, 851968, 14, 0, 851969, 14, 0, 851970, 14, 0, 851971, 14, 0, 851972, 14, 0, 851973, 14, 0, 851974, 14, 0, 851975, 14, 0, 917527, -1073741823, 2, 917620, -1073741817, 0, 983063, -1073741823, 3, 1048599, -1073741823, 0, 1179764, -1073741817, 0, 1245300, -1073741817, 0, 1376284, -1073741817, 0, 1441820, -1073741817, 0, 1507356, -1073741817, 0, 1572892, -1073741817, 0, 2752534, -1073741817, 0, 2818070, -1073741817, 0, 2883606, -1073741817, 0 )
 
 [node name="QuickRespawnArea" parent="." instance=ExtResource( 19 )]
 position = Vector2( 664, 249 )
@@ -149,13 +148,14 @@ position = Vector2( 1264, 222 )
 position = Vector2( 1168, 165 )
 
 [node name="Player" parent="." instance=ExtResource( 17 )]
-position = Vector2( 644, 257 )
+position = Vector2( 287, 256 )
 can_wallgrab = true
 max_airdashes = 1
 max_airjumps = 1
 pistol_shots = 60
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
+visible = false
 position = Vector2( -191, -258 )
 stream = ExtResource( 7 )
 volume_db = -29.272

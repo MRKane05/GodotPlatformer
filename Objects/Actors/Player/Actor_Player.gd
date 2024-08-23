@@ -151,7 +151,16 @@ func touched_killspikes():
 		interrupt_change_action_state("Actor_SpikeDie", false)
 	else:
 		do_quick_respawn();
-	
+
+func do_die():
+	#This'll be a little more complicated because it's the player
+	#if Global.target_scene != "" && Global.target_door != "":
+		#We can do a proper reload with this information
+	#	LoadingScreen.change_scene(Global.target_scene, scene_base, Global.target_doorway) #load our first scene!
+	#You know what? Fuckit. Sometimes life is too complicated
+	get_tree().reload_current_scene()
+	queue_free()
+
 func do_quick_respawn():
 	if quick_respawn_location != Vector2(0,0): #we've got a quick respawn location set
 		#do the animation and then move after it

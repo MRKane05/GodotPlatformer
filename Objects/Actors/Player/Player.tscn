@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://sprites/Player/Die.png" type="Texture" id=45]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_SpikeDie.gd" type="Script" id=46]
 [ext_resource path="res://Audio/Sounds/Character/Player/Die_Fizzle.wav" type="AudioStream" id=47]
+[ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Die.gd" type="Script" id=48]
 
 [sub_resource type="RectangleShape2D" id=165]
 extents = Vector2( 6, 14 )
@@ -1457,7 +1458,7 @@ extents = Vector2( 11.5, 14.5 )
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 z_index = 1
-collision_mask = 7
+collision_mask = 23
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -1517,6 +1518,9 @@ script = ExtResource( 39 )
 
 [node name="Actor_SpikeDie" type="Node" parent="ActorStates"]
 script = ExtResource( 46 )
+
+[node name="Actor_Die" type="Node" parent="ActorStates"]
+script = ExtResource( 48 )
 
 [node name="CombatStates" type="Node" parent="."]
 script = ExtResource( 14 )
@@ -1721,10 +1725,8 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 45 )
+texture = ExtResource( 3 )
 hframes = 2
-vframes = 3
-frame = 5
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0

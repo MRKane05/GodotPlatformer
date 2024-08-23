@@ -23,7 +23,8 @@ func exit() -> bool: #There's a possibility that we won't be able to let the pla
 func anim_finished(anim_name: String) -> void:
 	if (anim_name == "die"):
 		animation_cleared = true
-		queue_free()
+		base_actor.do_die() #Call through to our base actor to do everything we should do if we've died
+		#queue_free()
 		#print("Animation cleared")
 		#base_actor.change_action_state("Actor_OnGround", false)
 		#Of course I don't actually have a setup for the player...

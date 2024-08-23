@@ -7,6 +7,7 @@ var can_wallgrab = false
 var player_airdashes = 0
 var player_airjumps = 0
 
+onready var Global = get_node("/root/Global") #Collect and assign our globals for referencing
 
 func set_bar_progress(progress):
 	$ProgressBar.value = progress
@@ -18,16 +19,25 @@ func change_scene(target_scene: String, current_scene, target_door) -> void:
 			var cur_player = current_scene.get_player()
 			if cur_player:
 				print ("Caching player details")
+				Global.target_scene = target_scene
+				Global.target_door = target_door
+				
 				player_health = cur_player.health
 				player_shots = cur_player.pistol_shots
 				can_wallgrab = cur_player.can_wallgrab
 				player_airdashes = cur_player.max_airdashes
 				player_airjumps = cur_player.max_airjumps
+				
+				#This needs to be in globals in case we die...
+				Global.player_health = cur_player.health;
+				Global.player_shots = cur_player.pistol_shots
+				Global.can_wallgrab = cur_player.can_wallgrab
+				Global.player_airdashes = cur_player.max_airdashes
+				Global.player_airjumps = cur_player.max_airjumps
 	
 	$dissolve_rect.visible = true #Because it should be disabled to save process
 	$AnimationPlayer.play("dissolve")
 	yield($AnimationPlayer, "animation_finished")
-	#get_tree().change_scene(target_scene)
 	
 	var loader = ResourceLoader.load_interactive(target_scene)
 	if loader == null:

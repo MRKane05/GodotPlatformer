@@ -173,6 +173,12 @@ func dead():
 	else:
 		queue_free() #For the moment lets just vanish whatever dies
 
+func do_die():
+	queue_free()
+
+func touched_killspikes():
+	dead()	#To pickup when we knock an enemy into spikes (for the moment)
+
 func _process(delta):
 	if action_state: #Call through to our state so that we can do stuff!
 		action_state.update(delta)
