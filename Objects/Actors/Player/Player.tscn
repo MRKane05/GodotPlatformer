@@ -1730,7 +1730,7 @@ hframes = 2
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
-collision_mask = 15
+collision_mask = 47
 
 [node name="StandardStriker" type="CollisionShape2D" parent="FlipElements/AttackArea2D"]
 visible = false
