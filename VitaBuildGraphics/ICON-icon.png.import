@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ICON-icon.png-34332416e33925947506bc147ea22648.stex"
+path="res://.import/ICON-icon.png-2c063dbd6342980f1d84aa8dd1f771f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Exports/VitaBuildGraphics/ICON-icon.png"
-dest_files=[ "res://.import/ICON-icon.png-34332416e33925947506bc147ea22648.stex" ]
+source_file="res://VitaBuildGraphics/ICON-icon.png"
+dest_files=[ "res://.import/ICON-icon.png-2c063dbd6342980f1d84aa8dd1f771f5.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/840x500.png-b7da49aabce7b11b89b1542bc2c9fbfa.stex"
+path="res://.import/840x500.png-2a4648833f85637e805895b13c2b303b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Exports/VitaBuildGraphics/840x500.png"
-dest_files=[ "res://.import/840x500.png-b7da49aabce7b11b89b1542bc2c9fbfa.stex" ]
+source_file="res://VitaBuildGraphics/840x500.png"
+dest_files=[ "res://.import/840x500.png-2a4648833f85637e805895b13c2b303b.stex" ]
 
 [params]
 
