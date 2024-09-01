@@ -33,7 +33,6 @@ tile_data = PoolIntArray( 851959, 0, 0, 851963, 0, 0, 786433, 0, 0, 786435, 2, 0
 [node name="Door_Standard" parent="." instance=ExtResource( 16 )]
 position = Vector2( 257, 237 )
 target_scene = "res://Rooms/Room002.tscn"
-target_doorway = "Door_Left"
 _scene_base = NodePath("..")
 
 [node name="WalkableTilemap" type="TileMap" parent="."]

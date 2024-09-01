@@ -28,6 +28,8 @@ func _ready():
 func dead():
 	#Mostly for testing
 	#if Global.gemhandler:
+	# we need to turn off our collider while we're dying so our player can move
+	$CollisionShape2D.disabled = true
 	Global.gemhandler.call_deferred("spawn_collectables", self.position, 5)		
 	.dead()
 

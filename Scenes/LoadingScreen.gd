@@ -51,6 +51,7 @@ func change_scene(target_scene: String, current_scene, target_door) -> void:
 			var resource = loader.get_resource()
 			var resource_instance = resource.instance()
 			get_tree().get_root().call_deferred("add_child", resource_instance)
+			
 			if target_door:
 				resource_instance.call_deferred("set_player_door", target_door)
 			

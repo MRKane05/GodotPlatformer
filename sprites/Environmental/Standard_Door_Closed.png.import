@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ChasingDawnSplash.png-3661be4790ad4dfec3ce62b1f1ed9205.stex"
+path="res://.import/Standard_Door_Closed.png-43dd39be1523e869af3f947081191c85.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ChasingDawnSplash.png"
-dest_files=[ "res://.import/ChasingDawnSplash.png-3661be4790ad4dfec3ce62b1f1ed9205.stex" ]
+source_file="res://sprites/Environmental/Standard_Door_Closed.png"
+dest_files=[ "res://.import/Standard_Door_Closed.png-43dd39be1523e869af3f947081191c85.stex" ]
 
 [params]
 
@@ -20,11 +20,11 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
