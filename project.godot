@@ -144,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/CombatActions/CombatStates/CombatState.gd"
 }, {
-"base": "StaticBody2D",
+"base": "Node2D",
 "class": "DropThroughPlatform",
 "language": "GDScript",
 "path": "res://Objects/Environmental/Platforms/DropThroughPlatform.gd"
@@ -162,7 +162,7 @@ _global_script_classes=[ {
 "base": "Interactable_Object",
 "class": "LC_Door_Standard",
 "language": "GDScript",
-"path": "res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.gd"
+"path": "res://Objects/Doors_Levelchange/LevelchangeDoor_Standard.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "ObjectBase",

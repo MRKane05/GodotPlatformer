@@ -26,3 +26,4 @@ func _init_tween():
 	
 func _physics_process(delta):
 	platform.position = platform.position.linear_interpolate(follow, 0.075)
+

@@ -3,7 +3,7 @@
 [ext_resource path="res://sprites/UI/LeftStickUpIcon.png" type="Texture" id=1]
 [ext_resource path="res://Audio/Sounds/Objects/mechanical1-107614.mp3" type="AudioStream" id=2]
 [ext_resource path="res://sprites/Environmental/Standard_Door.png" type="Texture" id=3]
-[ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.gd" type="Script" id=4]
+[ext_resource path="res://Objects/Doors_Levelchange/LevelchangeDoor_Standard.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 1.375 )

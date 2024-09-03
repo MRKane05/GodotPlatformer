@@ -15,7 +15,7 @@
 [ext_resource path="res://Objects/Environmental/GameControl/GemHandler.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Objects/Environmental/Platforms/DropThroughPlatform.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Environmental/Doors/BasicDoor.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Objects/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=16]
 
 [node name="Stage01" type="Node2D"]
 position = Vector2( 0, 1 )

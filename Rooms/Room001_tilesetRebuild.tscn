@@ -11,7 +11,7 @@
 [ext_resource path="res://Objects/Actors/Player/Player.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Environmental/Platforms/DropThroughPlatform.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Environmental/Switches/BasicLever.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Audio/Music/stranger-things-124008.mp3" type="AudioStream" id=14]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=15]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=16]

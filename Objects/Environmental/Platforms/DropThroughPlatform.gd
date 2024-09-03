@@ -1,4 +1,5 @@
-extends StaticBody2D
+#extends StaticBody2D
+extends Node2D
 class_name DropThroughPlatform
 
 onready var collision = $CollisionShape2D

@@ -2,12 +2,12 @@
 
 [ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Enemy/Enemy_Zombie.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/Environmental/Doors_Levelchange/ClosedDoor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Doors_Levelchange/ClosedDoor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Environmental/SpikesHandler.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=5]
 [ext_resource path="res://sprites/Level/Legacy Fantasy - Castle Prison/BackgroundTileset.tres" type="TileSet" id=6]
 [ext_resource path="res://Audio/Music/stranger-things-124008.mp3" type="AudioStream" id=7]
-[ext_resource path="res://Objects/Environmental/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Environmental/GameControl/GemHandler.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Environmental/Platforms/DropThroughPlatform.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Actors/Enemy/Enemy_Dog.tscn" type="PackedScene" id=12]
@@ -42,8 +42,7 @@ position = Vector2( 48, 221 )
 
 [node name="Door_Right" parent="." instance=ExtResource( 9 )]
 position = Vector2( 2106, 225 )
-target_scene = "res://Rooms/Room002.tscn"
-target_doorway = "Door_Standard"
+target_scene = "res://Rooms/Room003.tscn"
 _scene_base = NodePath("..")
 
 [node name="WalkableTilemap" type="TileMap" parent="."]
