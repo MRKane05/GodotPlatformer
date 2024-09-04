@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Helpers/RoomSetupHandler.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/ScreenShake.gd" type="Script" id=2]
@@ -10,8 +10,10 @@
 [ext_resource path="res://Objects/Environmental/Platforms/MovingPlatform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/Environmental/Switches/BasicLever.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Environmental/Doors/BasicDoor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Actors/Enemy/Enemy_Zombie.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Function/ChangeStage.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Objects/Environmental/GameControl/GemHandler.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Environmental/Switches/ActorDieSwitch.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Doors_Levelchange/LevelchangeDoor_Standard.tscn" type="PackedScene" id=16]
 
 [node name="Stage01" type="Node2D"]
@@ -29,7 +31,7 @@ format = 1
 tile_data = PoolIntArray( 851959, 0, 0, 851963, 0, 0, 786433, 0, 0, 786435, 2, 0, 786439, 0, 0, 786445, 0, 0, 786451, 0, 0, 1114102, 0, 0, 1114104, 2, 0, 1114108, 0, 0, 1048578, 0, 0, 1048586, 0, 0, 1179661, 0, 0, 1179662, 3, 0, 1179663, 3, 0, 1179667, 2, 0, 1179668, 3, 0, 1245205, 3, 0, 1245206, 3, 0, 1441782, 0, 0, 1441788, 0, 0, 1441789, 1, 0, 1376258, 0, 0, 1376264, 0, 0, 1376270, 0, 0, 1376278, 3, 0, 1441811, 3, 0, 1441812, 3, 0, 1441814, 3, 0, 1507341, 3, 0, 1507342, 3, 1, 1507343, 3, 2, 1638392, 3, 0, 1638393, 3, 1, 1638394, 3, 1, 1638395, 3, 2, 1572877, 3, 65536, 1572878, 3, 65537, 1572879, 3, 65538, 1703928, 3, 65536, 1703929, 3, 65537, 1703930, 3, 65537, 1703931, 3, 65538, 1638413, 3, 131072, 1638414, 3, 131073, 1638415, 3, 131074, 1769464, 3, 131072, 1769465, 3, 131073, 1769466, 3, 131073, 1769467, 3, 131074 )
 
 [node name="Door_Standard" parent="." instance=ExtResource( 16 )]
-position = Vector2( 1203, 592 )
+position = Vector2( 1122, 593 )
 target_scene = "res://Rooms/Room002.tscn"
 _scene_base = NodePath("..")
 
@@ -54,7 +56,7 @@ target_stage = "res://Scenes/Stage02.tscn"
 [node name="GemHandler" parent="." instance=ExtResource( 13 )]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 915, 391 )
+position = Vector2( 647, 540 )
 can_wallgrab = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
@@ -80,5 +82,13 @@ target_switchable = NodePath("../MovingPlatform")
 
 [node name="BasicDoor" parent="." instance=ExtResource( 10 )]
 position = Vector2( 881, 601 )
+
+[node name="ActorDieSwitch" parent="BasicDoor" instance=ExtResource( 14 )]
+target_actor = NodePath("../../Enemy_Zombie")
+target_switchable = NodePath("..")
+
+[node name="Enemy_Zombie" parent="." instance=ExtResource( 11 )]
+position = Vector2( 802, 604 )
+health = 5.0
 
 [connection signal="tween_all_completed" from="ScreenShake/Tween" to="ScreenShake" method="_on_Tween_tween_all_completed"]

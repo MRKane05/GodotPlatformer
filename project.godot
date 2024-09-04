@@ -124,7 +124,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/CombatActions/CombatStates/Attack_Slam.gd"
 }, {
-"base": "switch_trigger_object",
+"base": "Node2D",
 "class": "BasicDoor",
 "language": "GDScript",
 "path": "res://Objects/Environmental/Doors/BasicDoor.gd"
