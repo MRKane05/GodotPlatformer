@@ -62,6 +62,7 @@ func _ready():
 	._ready()
 	Global.Player = self
 	#Global.PlayerCollider = $CollisionShape2D
+	update_hud()
 
 #Player countdowns
 func handlecountdowns(delta):
