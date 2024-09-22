@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Jump.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Actors/Player/Actor_Player.gd" type="Script" id=2]
@@ -48,6 +48,9 @@
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_SpikeDie.gd" type="Script" id=46]
 [ext_resource path="res://Audio/Sounds/Character/Player/Die_Fizzle.wav" type="AudioStream" id=47]
 [ext_resource path="res://Scripts/Actor/ActorStates/ActorStates/Actor_Die.gd" type="Script" id=48]
+[ext_resource path="res://sprites/Player/AimPose_Standing.png" type="Texture" id=49]
+[ext_resource path="res://sprites/Player/Aim_GunArm.png" type="Texture" id=50]
+[ext_resource path="res://sprites/Player/Aim_GunArm_Shot.png" type="Texture" id=51]
 
 [sub_resource type="RectangleShape2D" id=165]
 extents = Vector2( 6, 14 )
@@ -61,6 +64,59 @@ extents = Vector2( 6, 8.25 )
 [sub_resource type="CanvasItemMaterial" id=171]
 blend_mode = 3
 light_mode = 1
+
+[sub_resource type="Animation" id=173]
+resource_name = "Aim_Standing"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlipElements/Sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FlipElements/Sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FlipElements/Sprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 49 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FlipElements/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=154]
 resource_name = "Attack01"
@@ -1509,6 +1565,8 @@ _parry_point = NodePath("../../FlipElements/ParryEffectPoint")
 [node name="Actor_Shoot" type="Node" parent="ActorStates"]
 script = ExtResource( 34 )
 Bullet = ExtResource( 35 )
+_shoot_marker = NodePath("../../FlipElements/ArmShoulderPoint/ShootMarker")
+_aiming_arm = NodePath("../../FlipElements/ArmShoulderPoint")
 
 [node name="Attack_Lift" type="Node" parent="ActorStates"]
 script = ExtResource( 38 )
@@ -1649,6 +1707,7 @@ texture = ExtResource( 43 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
+anims/Aim_Standing = SubResource( 173 )
 anims/Attack01 = SubResource( 154 )
 anims/Attack02 = SubResource( 166 )
 anims/Attack03 = SubResource( 167 )
@@ -1723,10 +1782,29 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="ArmShoulderPoint" type="Node2D" parent="FlipElements"]
+visible = false
+position = Vector2( 3, -9 )
+
+[node name="ShootMarker" type="Sprite" parent="FlipElements/ArmShoulderPoint"]
+visible = false
+texture = ExtResource( 33 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SpriteAim" type="Sprite" parent="FlipElements/ArmShoulderPoint"]
+position = Vector2( 13, -3 )
+texture = ExtResource( 50 )
+
+[node name="SpriteShot" type="Sprite" parent="FlipElements/ArmShoulderPoint"]
+visible = false
+position = Vector2( 13, -3 )
+texture = ExtResource( 51 )
+
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 3 )
-hframes = 2
+texture = ExtResource( 49 )
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
@@ -1740,14 +1818,6 @@ disabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 47 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ShootMarker" type="Sprite" parent="."]
-visible = false
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 33 )
 __meta__ = {
 "_edit_group_": true
 }
