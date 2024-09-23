@@ -8,11 +8,18 @@ export(String) var fall_anim_name = "fall"
 export(String) var move_anim_name = "run"
 export(String) var idle_anim_name = "Aim_Standing"
 
+export(String) var aim_idle_name = "AimAnim"
+export(String) var aim_shoot_name = "ShootAnim"
+
 export (NodePath) var _shoot_marker
 onready var shoot_marker:Node2D = get_node(_shoot_marker)
 
 export (NodePath) var _aiming_arm
 onready var aiming_arm:Node2D = get_node(_aiming_arm)
+
+#Get our animation players
+export (NodePath) var _arm_animation_player
+onready var arm_animation_player:AnimationPlayer = get_node(_arm_animation_player)
 
 var target_vector = Vector2(1, 0)
 
@@ -39,7 +46,16 @@ func interruptexit() -> bool:
 	shoot_marker.visible = false	#Turn our marker off
 	aiming_arm.visible = false
 	return true
-	
+
+func set_arm_animation(anim_name: String):
+	if arm_animation_player:
+		if arm_animation_player.has_animation(anim_name):
+			arm_animation_player.current_animation = anim_name	#Dunno if we can do this?
+		else:
+			pass
+	else:
+		pass
+
 func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vector2:
 	action_fall_hold -= _delta
 	hold_time -= _delta
@@ -54,8 +70,10 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 			base_actor.set_animation(move_anim_name)
 			aiming_arm.visible = false
 		else:
-			base_actor.set_animation(idle_anim_name)
-			aiming_arm.visible = true
+			if !fire_release:
+				base_actor.set_animation(idle_anim_name)
+				aiming_arm.visible = true
+				set_arm_animation(aim_idle_name)
 
 	#While we're on the ground we really only need to worry about movement and falling
 	#_velocity = calculatehorizontalmovement(_delta, _velocity, base_actor.move_dir)
@@ -83,6 +101,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	return _velocity
 
 func do_shoot():
+	set_arm_animation(aim_shoot_name)
 	#This is where we'd want to find our best target and do a little auto-aiming for our player
 	var b = Bullet.instance()
 	base_actor.owner.add_child(b)

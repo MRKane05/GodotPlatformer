@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Aim_GunArm_Shot.png-1510bccf91cbcf0d9f5e0bae5bca373e.stex"
+path="res://.import/Aim_GunArm_Shoot.png-59c63b7862bdc7d819a1cbc93ee2a232.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Player/Aim_GunArm_Shot.png"
-dest_files=[ "res://.import/Aim_GunArm_Shot.png-1510bccf91cbcf0d9f5e0bae5bca373e.stex" ]
+source_file="res://sprites/Player/Aim_GunArm_Shoot.png"
+dest_files=[ "res://.import/Aim_GunArm_Shoot.png-59c63b7862bdc7d819a1cbc93ee2a232.stex" ]
 
 [params]
 

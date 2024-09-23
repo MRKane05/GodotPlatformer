@@ -18,7 +18,7 @@ func spawn_collectables(start_position: Vector2, count: int):
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
 		var b
-		if rng.randf() > 0.9:	#Bias to select between getting ammo/health
+		if rng.randf() > 0.2:	#Bias to select between getting ammo/health
 			b = HealthPickup.instance()
 		else:
 			b = BulletPickup.instance()
