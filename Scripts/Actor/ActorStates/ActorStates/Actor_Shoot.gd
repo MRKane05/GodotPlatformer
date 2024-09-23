@@ -64,6 +64,12 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 		base_actor.set_animation(fall_anim_name)
 		if action_fall_hold > 0:
 			base_actor.fall_hold = max(action_fall_hold, base_actor.fall_hold)
+		
+		if !fire_release:
+				#Of course the shoulder position is at a different point while in the fall animation position...never easy is it
+				#base_actor.set_animation(idle_anim_name)
+				aiming_arm.visible = true
+				set_arm_animation(aim_idle_name)
 	else:
 		#animation handling
 		if abs(_velocity.x) > 0:	#If we're moving we shouldn't be aiming

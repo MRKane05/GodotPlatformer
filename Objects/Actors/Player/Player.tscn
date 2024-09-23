@@ -1734,6 +1734,7 @@ _parry_point = NodePath("../../FlipElements/ParryEffectPoint")
 [node name="Actor_Shoot" type="Node" parent="ActorStates"]
 script = ExtResource( 34 )
 Bullet = ExtResource( 35 )
+aim_shoot_name = "fall"
 _shoot_marker = NodePath("../../FlipElements/ArmShoulderPoint/ShootMarker")
 _aiming_arm = NodePath("../../FlipElements/ArmShoulderPoint")
 _arm_animation_player = NodePath("../../FlipElements/ArmShoulderPoint/ShootAnimationPlayer")
@@ -1974,7 +1975,7 @@ anims/ShootAnim = SubResource( 176 )
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 49 )
+texture = ExtResource( 28 )
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0
