@@ -1737,6 +1737,8 @@ Bullet = ExtResource( 35 )
 aim_shoot_name = "fall"
 _shoot_marker = NodePath("../../FlipElements/ArmShoulderPoint/ShootMarker")
 _aiming_arm = NodePath("../../FlipElements/ArmShoulderPoint")
+_arm_point_standing = NodePath("../../FlipElements/ArmPoint_Standing")
+_arm_point_jumping = NodePath("../../FlipElements/ArmPoint_Jumping")
 _arm_animation_player = NodePath("../../FlipElements/ArmShoulderPoint/ShootAnimationPlayer")
 
 [node name="Attack_Lift" type="Node" parent="ActorStates"]
@@ -1952,6 +1954,12 @@ position = Vector2( 3, -11 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="ArmPoint_Standing" type="Node2D" parent="FlipElements"]
+position = Vector2( 3, -9 )
+
+[node name="ArmPoint_Jumping" type="Node2D" parent="FlipElements"]
+position = Vector2( 1, -2 )
 
 [node name="ArmShoulderPoint" type="Node2D" parent="FlipElements"]
 visible = false

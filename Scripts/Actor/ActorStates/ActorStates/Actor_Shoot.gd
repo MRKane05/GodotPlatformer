@@ -17,6 +17,12 @@ onready var shoot_marker:Node2D = get_node(_shoot_marker)
 export (NodePath) var _aiming_arm
 onready var aiming_arm:Node2D = get_node(_aiming_arm)
 
+export (NodePath) var _arm_point_standing
+onready var arm_point_standing:Node2D = get_node(_arm_point_standing)
+
+export (NodePath) var _arm_point_jumping
+onready var arm_point_jumping:Node2D = get_node(_arm_point_jumping)
+
 #Get our animation players
 export (NodePath) var _arm_animation_player
 onready var arm_animation_player:AnimationPlayer = get_node(_arm_animation_player)
@@ -61,6 +67,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 	hold_time -= _delta
 	
 	if !base_actor.on_ground:
+		aiming_arm.position = arm_point_jumping.position
 		base_actor.set_animation(fall_anim_name)
 		if action_fall_hold > 0:
 			base_actor.fall_hold = max(action_fall_hold, base_actor.fall_hold)
@@ -71,6 +78,7 @@ func physics_update(_delta: float, _velocity: Vector2, _move_dir: float) -> Vect
 				aiming_arm.visible = true
 				set_arm_animation(aim_idle_name)
 	else:
+		aiming_arm.position = arm_point_standing.position
 		#animation handling
 		if abs(_velocity.x) > 0:	#If we're moving we shouldn't be aiming
 			base_actor.set_animation(move_anim_name)
