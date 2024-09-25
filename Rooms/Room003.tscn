@@ -133,7 +133,7 @@ position = Vector2( 803, 605 )
 
 [node name="Door_Standard" parent="." instance=ExtResource( 16 )]
 position = Vector2( 1087, 594 )
-target_scene = "res://Rooms/Room002.tscn"
+target_scene = "res://Rooms/Room004.tscn"
 _scene_base = NodePath("..")
 
 [node name="BasicDoor_Bottom" parent="." instance=ExtResource( 10 )]
