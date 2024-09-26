@@ -18,6 +18,7 @@ const FLOOR = Vector2(0, -1)	#The normal direction of the floor (used with move_
 const CROUCH_THRESHOLD = 0.8	#At what point in our analogue control do we stop moving and start crouching? This might need to be higher
 
 var functionactive = true	#If this is disabled we'll disable a lot of our calls so as to optimise for when enemies are offscreen
+var prior_functionactive = true
 var is_launched = false	 	#Were we launched by an attack
 var is_lifting = false		#Are we lifting into an attack after launching something?
 
@@ -70,7 +71,7 @@ var next_block_time = 0
 var is_attacking = false
 #export(CollisionShape2D) var combatstikers = []	# well that's a pain in the ass...
 var combatstrikers = []
-
+var raycasts = []
 #So the idea is that the actor has a set of actor states defining what the actor can do
 #These states are selected by an input driver state controller, this might be the player, or the AI
 #So this base actor class should be a heap of helper functions
@@ -102,7 +103,17 @@ func _ready():
 	else: #We've a major problem here
 		pass
 	
+	#Gather our raycasts so that they can be disabled when we're not supposed to be active
+	gather_raycasts(self)
+	
 	set_debug_header("", false) #Hide our debug label (not that the system is at all fleshed out...
+
+func gather_raycasts(this_parent):
+	for child in this_parent.get_children():
+		if child is RayCast2D:
+			raycasts.append(child)
+			if child.get_child_count() > 0:
+				gather_raycasts(child)
 	
 
 #handle timing variables
@@ -123,7 +134,7 @@ func change_action_state(new_state_name: String, reset_if_same: bool):
 		var new_actor_state = actor_states[new_state_name]
 		if action_state.exit():
 			if new_actor_state.enter():
-				#set_debug_header(new_state_name)
+				#set_debug_header(new_state_name, true)
 				action_state = new_actor_state
 
 
@@ -187,9 +198,16 @@ func _process(delta):
 	#if attack_presses > 0 && !is_attacking: #we want to do an attack, and we can do an attacdk
 	#	select_attack_action()
 
+func set_character_raycasts(state: bool):
+	pass
+
 func _physics_process(delta):
 	handlecountdowns(delta) #Important for our built-in tickers
 	functionactive = playerwithinlimit(Vector2(175, 130)); #This number is half our screen span with a little bit for the edge
+	if (functionactive != prior_functionactive):
+		prior_functionactive = functionactive
+		set_character_raycasts(functionactive) #Make sure we turn off any raycasts that this character might be using
+
 	if functionactive:
 		if action_state: #Call through to our state so that we can do stuff!
 			velocity = action_state.physics_update(delta, velocity, move_dir)

@@ -55,7 +55,11 @@ func is_at_edge():
 
 func backed_to_edge():
 	return !$FlipElements/EdgeCheck_Back.is_colliding()
-	
+
+func set_character_raycasts(state: bool):
+	for this_ray in raycasts:
+		this_ray.enabled = state
+
 #Dirt basic function to see if we can see our player (exclusion based)
 func seeplayer():
 	if sign(Global.playerpos.x - self.position.x) * facing_dir > 0: #our player is in "front" of this actor

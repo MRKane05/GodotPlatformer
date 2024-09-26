@@ -82,7 +82,7 @@ target_stage = "res://Scenes/Stage02.tscn"
 [node name="GemHandler" parent="." instance=ExtResource( 13 )]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 320, 354 )
+position = Vector2( 78, 350 )
 can_wallgrab = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
@@ -145,11 +145,6 @@ position = Vector2( 186, 424 )
 [node name="BasicDoor_Top" parent="." instance=ExtResource( 10 )]
 position = Vector2( 200, 248 )
 
-[node name="Enemy_Dog2" parent="." instance=ExtResource( 19 )]
-position = Vector2( 555, 316 )
-initial_state = NodePath("../Enemy_Dog/ActorStates/Actor_OnGround")
-_animation_player = NodePath("../Enemy_Dog/AnimationPlayer")
-
 [node name="Enemy_Zombie" parent="." instance=ExtResource( 18 )]
 position = Vector2( 491, 284 )
 
@@ -170,6 +165,10 @@ position = Vector2( 116, 250 )
 
 [node name="Enemy_Dog" parent="." instance=ExtResource( 19 )]
 position = Vector2( 848, 317 )
+
+[node name="Enemy_Dog2" parent="." instance=ExtResource( 19 )]
+position = Vector2( 655, 321 )
+initial_dir = -1.0
 
 [connection signal="body_entered" from="HurtSpikes_Left" to="HurtSpikes_Left" method="_on_LevelSpikes_body_entered"]
 [connection signal="body_entered" from="HurtSpikes_Right" to="HurtSpikes_Right" method="_on_LevelSpikes_body_entered"]
