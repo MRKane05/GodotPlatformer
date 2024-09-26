@@ -31,7 +31,7 @@ func _ready():
 	setupAI = true
 
 func _process(delta):
-	if action_state && setupAI:
+	if action_state && setupAI && targetactor.functionactive:
 		action_state.update(delta)
 		
 

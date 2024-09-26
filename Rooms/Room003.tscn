@@ -82,7 +82,7 @@ target_stage = "res://Scenes/Stage02.tscn"
 [node name="GemHandler" parent="." instance=ExtResource( 13 )]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 121, 346 )
+position = Vector2( 320, 354 )
 can_wallgrab = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]

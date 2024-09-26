@@ -17,6 +17,7 @@ const LAUNCH_POWER = -200		#Float velocity. Used when the player is jumping up t
 const FLOOR = Vector2(0, -1)	#The normal direction of the floor (used with move_and_slide system to see where collisions should happen with the ground)
 const CROUCH_THRESHOLD = 0.8	#At what point in our analogue control do we stop moving and start crouching? This might need to be higher
 
+var functionactive = true	#If this is disabled we'll disable a lot of our calls so as to optimise for when enemies are offscreen
 var is_launched = false	 	#Were we launched by an attack
 var is_lifting = false		#Are we lifting into an attack after launching something?
 
@@ -188,18 +189,20 @@ func _process(delta):
 
 func _physics_process(delta):
 	handlecountdowns(delta) #Important for our built-in tickers
-	if action_state: #Call through to our state so that we can do stuff!
-		velocity = action_state.physics_update(delta, velocity, move_dir)
-		#Move according to what our velocity says we should do
-		#velocity = move_and_slide(velocity, FLOOR) #this automatically includes delta time behind the scenes
-		var snap = Vector2.DOWN * 0.2 if is_on_floor() else Vector2.ZERO
-		velocity = move_and_slide_with_snap(velocity, snap, FLOOR) #this automatically includes delta time behind the scenes
-		#Handle our collisions
-		handlemovementcontacts()
-		#set our globals. This position will be referenced by AI and probably other functions
-		#Global.playerpos = self.position
-	else:
-		pass
+	functionactive = playerwithinlimit(Vector2(175, 130)); #This number is half our screen span with a little bit for the edge
+	if functionactive:
+		if action_state: #Call through to our state so that we can do stuff!
+			velocity = action_state.physics_update(delta, velocity, move_dir)
+			#Move according to what our velocity says we should do
+			#velocity = move_and_slide(velocity, FLOOR) #this automatically includes delta time behind the scenes
+			var snap = Vector2.DOWN * 0.2 if is_on_floor() else Vector2.ZERO
+			velocity = move_and_slide_with_snap(velocity, snap, FLOOR) #this automatically includes delta time behind the scenes
+			#Handle our collisions
+			handlemovementcontacts()
+			#set our globals. This position will be referenced by AI and probably other functions
+			#Global.playerpos = self.position
+		else:
+			pass
 
 #Check to see if we're against a wall
 func touchingwall():
@@ -389,3 +392,9 @@ func state_combo_next(target_action: String):
 			if target_state.next_combo_state != "":
 				return target_state.next_combo_state
 	return ""
+	
+#Check and see if the player is within our "attention zone" (this is to save on raycasts)
+func playerwithinlimit(limitArea: Vector2):
+	if abs(self.position.x - Global.playerpos.x) < limitArea.x && abs(self.position.y - Global.playerpos.y) < limitArea.y:
+		return true
+	return false

@@ -59,19 +59,13 @@ func backed_to_edge():
 #Dirt basic function to see if we can see our player (exclusion based)
 func seeplayer():
 	if sign(Global.playerpos.x - self.position.x) * facing_dir > 0: #our player is in "front" of this actor
-		if playerwithinlimit():	#See if we're within our box of "caring about"
+		if playerwithinlimit(viewlimit):	#See if we're within our box of "caring about"
 			$PlayerRayCheck.enabled = true #Turn our our raycast
 			$PlayerRayCheck.cast_to = Global.playerpos -  self.position
 			if $PlayerRayCheck.is_colliding():
 				return ($PlayerRayCheck.get_collider() == Global.Player)
 		else:
 			$PlayerRayCheck.enabled = false
-	return false
-
-#Check and see if the player is within our "attention zone" (this is to save on raycasts)
-func playerwithinlimit():
-	if abs(self.position.x - Global.playerpos.x) < viewlimit.x && abs(self.position.y - Global.playerpos.y) < viewlimit.y:
-		return true
 	return false
 
 #This will need to be linked up manually for every enemy type
