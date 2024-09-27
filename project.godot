@@ -184,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/AI/StrikeCheckArea.gd"
 }, {
+"base": "StaticBody2D",
+"class": "TemporaryPlatform",
+"language": "GDScript",
+"path": "res://Objects/Environmental/Platforms/TemporaryPlatform.gd"
+}, {
 "base": "ObjectBase",
 "class": "breakable_prop",
 "language": "GDScript",
@@ -245,6 +250,7 @@ _global_script_class_icons={
 "PlayerController": "",
 "Room_Setup_Handler": "",
 "StrikeCheckArea": "",
+"TemporaryPlatform": "",
 "breakable_prop": "",
 "collectable_ability": "",
 "moving_platform": "",
