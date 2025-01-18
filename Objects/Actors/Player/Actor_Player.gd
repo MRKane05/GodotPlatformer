@@ -40,6 +40,10 @@ func set_ability(ability_name, state):
 	match ability_name:
 		"wallgrab":
 			can_wallgrab = bool(state)
+		"airdash":
+			max_airdashes = 1
+		"doublejump":
+			max_airjumps = 1
 			
 
 #var combo_counter = 0
@@ -126,8 +130,18 @@ func take_damage(damageAmount, knockback, attackstun, on_damage_function, hurt_t
 	#And update our health bar!
 	$Camera2D/HUD._on_health_updated((health/30.0) * 100.0, 30)
 
+var camera_zoom = 0.75
+var target_camera_zoom = 0.75
+
+func setTargetCameraZoom(toThis):
+	target_camera_zoom = toThis;
+
 func _physics_process(delta):
 	Global.playerpos = self.position
+	
+	if (abs(camera_zoom-target_camera_zoom) > 0.01):
+		camera_zoom = lerp(camera_zoom, target_camera_zoom, delta * 4.0)
+		$Camera2D._setCameraZoom(camera_zoom)
 
 #Used for dropping through platforms that can be dropped through
 func check_drop_function():

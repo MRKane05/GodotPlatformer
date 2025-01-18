@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/Pickups/Ability_AirdashSprite.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Collectables/collectable_ability.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="pickup_airdash" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource( 2 )
+ability = "airdash"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.6, 0.6 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.188, 0.188 )
+texture = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 0.3, 0.3 )
+shape = SubResource( 1 )
+
+[node name="UnlockLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = -25.0
+margin_top = -24.0
+margin_right = 40.0
+margin_bottom = -7.0
+custom_colors/default_color = Color( 0.968627, 1, 0, 1 )
+text = "airdash"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

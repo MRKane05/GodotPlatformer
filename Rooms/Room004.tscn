@@ -44,7 +44,7 @@ position = Vector2( 48, 221 )
 
 [node name="Door_Right" parent="." instance=ExtResource( 16 )]
 position = Vector2( 1230, 305 )
-target_scene = "res://Rooms/Room001.tscn"
+target_scene = "res://Rooms/Room005.tscn"
 _scene_base = NodePath("..")
 
 [node name="WalkableTilemap" type="TileMap" parent="."]

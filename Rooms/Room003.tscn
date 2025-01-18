@@ -90,6 +90,7 @@ visible = false
 position = Vector2( -191, -258 )
 stream = ExtResource( 3 )
 volume_db = -29.272
+autoplay = true
 attenuation = 1.07177
 
 [node name="ClosedDoor" parent="." instance=ExtResource( 7 )]

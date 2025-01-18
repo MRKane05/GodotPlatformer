@@ -66,10 +66,10 @@ position = Vector2( 79, 320 )
 position = Vector2( 200, 298 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
-visible = false
 position = Vector2( -191, -258 )
 stream = ExtResource( 3 )
 volume_db = -29.272
+autoplay = true
 attenuation = 1.07177
 
 [node name="FallCage" parent="." instance=ExtResource( 8 )]

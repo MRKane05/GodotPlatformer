@@ -114,24 +114,25 @@ func update(_delta: float) -> void:
 		if abs(Global.playerpos.x-base_AI.targetactor.position.x) < 30: #Don't worry if we're not close enough
 			#We need to see if we're in a state that we can block from
 			if base_AI.targetactor.action_state.name == "Actor_OnGround":
-				if Global.Player.is_attacking:	#So in theory there's a tiny window before we're hit...
-					#Calculate the odds that we'll actually block
-					var block_chance = lerp(health_blocking_odds.x, health_blocking_odds.y, base_AI.targetactor.health/base_AI.targetactor.base_health)
-					var rng = RandomNumberGenerator.new()
-					rng.randomize()	
-					#Have some random that becomes higher the more we get hurt as a thing of self-preservation
-					if base_AI.targetactor.actor_states.has("Actor_Block") && rng.randf() < block_chance:
-						
-						rng.randomize()							
-						reblock_cooldown = rng.randf_range(reblock_cooldown_range.x, reblock_cooldown_range.y) #Reset our ticker to something
-						
-						AI_Substate = "BLOCK"
-						base_AI.targetactor.change_action_state("Actor_Block", false)
-						parry_cooldown = rng.randf_range(parry_followup_cooldown.x, parry_followup_cooldown.y)
-						#var rng = RandomNumberGenerator.new()
+				if Global.Player:
+					if Global.Player.is_attacking:	#So in theory there's a tiny window before we're hit...
+						#Calculate the odds that we'll actually block
+						var block_chance = lerp(health_blocking_odds.x, health_blocking_odds.y, base_AI.targetactor.health/base_AI.targetactor.base_health)
+						var rng = RandomNumberGenerator.new()
 						rng.randomize()	
-						blockhold = rng.randf_range(blockhold_duration.x, blockhold_duration.y) #Random block hold duration
-	
+						#Have some random that becomes higher the more we get hurt as a thing of self-preservation
+						if base_AI.targetactor.actor_states.has("Actor_Block") && rng.randf() < block_chance:
+							
+							rng.randomize()							
+							reblock_cooldown = rng.randf_range(reblock_cooldown_range.x, reblock_cooldown_range.y) #Reset our ticker to something
+							
+							AI_Substate = "BLOCK"
+							base_AI.targetactor.change_action_state("Actor_Block", false)
+							parry_cooldown = rng.randf_range(parry_followup_cooldown.x, parry_followup_cooldown.y)
+							#var rng = RandomNumberGenerator.new()
+							rng.randomize()	
+							blockhold = rng.randf_range(blockhold_duration.x, blockhold_duration.y) #Random block hold duration
+		
 	if AI_Substate == "BLOCK":
 		#base_AI.targetactor.set_debug_header("BLOCK")
 		#Check and see if we might have just parried the player

@@ -10,3 +10,6 @@ func _ready():
 	limit_top = tilemap_rect.position.y * tilemap_cell_size.y
 	limit_bottom = tilemap_rect.end.y * tilemap_cell_size.y
 
+func _setCameraZoom(toThis):
+	zoom = Vector2(toThis, toThis);
+	
