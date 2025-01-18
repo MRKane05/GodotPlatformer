@@ -20,7 +20,7 @@
 [ext_resource path="res://Objects/Actors/Enemy/Enemy_Zombie.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Objects/Actors/Enemy/Enemy_Dog.tscn" type="PackedScene" id=19]
 
-[node name="Stage01" type="Node2D"]
+[node name="Stage03" type="Node2D"]
 position = Vector2( 35, 8 )
 script = ExtResource( 1 )
 
@@ -82,7 +82,7 @@ target_stage = "res://Scenes/Stage02.tscn"
 [node name="GemHandler" parent="." instance=ExtResource( 13 )]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 78, 350 )
+position = Vector2( 71, 353 )
 can_wallgrab = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]

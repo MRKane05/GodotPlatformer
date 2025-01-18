@@ -173,8 +173,10 @@ func do_die():
 		#We can do a proper reload with this information
 	#	LoadingScreen.change_scene(Global.target_scene, scene_base, Global.target_doorway) #load our first scene!
 	#You know what? Fuckit. Sometimes life is too complicated
-	get_tree().reload_current_scene()
-	queue_free()
+	#get_tree().reload_current_scene()
+	LoadingScreen.reload_scene(self.get_parent())
+	
+	#queue_free()	#This should be cleared in the reload
 
 func do_quick_respawn():
 	if quick_respawn_location != Vector2(0,0): #we've got a quick respawn location set

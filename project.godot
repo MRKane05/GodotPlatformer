@@ -260,8 +260,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Godot Platformer"
-run/main_scene="res://Scenes/TitleScreen.tscn"
+config/name="Chasing Dawn"
+run/main_scene="res://Scenes/PrototypeNotificationScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -288,6 +288,7 @@ pixel=false
 etc=false
 plugins=false
 clear=false
+level=false
 
 [gui]
 

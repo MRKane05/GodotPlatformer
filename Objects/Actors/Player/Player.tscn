@@ -1983,7 +1983,8 @@ anims/ShootAnim = SubResource( 176 )
 
 [node name="Sprite" type="Sprite" parent="FlipElements"]
 position = Vector2( 0, -2.519 )
-texture = ExtResource( 28 )
+texture = ExtResource( 3 )
+hframes = 2
 
 [node name="AttackArea2D" type="Area2D" parent="FlipElements"]
 collision_layer = 0

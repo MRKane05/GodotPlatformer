@@ -114,7 +114,7 @@ func update(_delta: float) -> void:
 		if abs(Global.playerpos.x-base_AI.targetactor.position.x) < 30: #Don't worry if we're not close enough
 			#We need to see if we're in a state that we can block from
 			if base_AI.targetactor.action_state.name == "Actor_OnGround":
-				if Global.Player:
+				if Global.Player != null:
 					if Global.Player.is_attacking:	#So in theory there's a tiny window before we're hit...
 						#Calculate the odds that we'll actually block
 						var block_chance = lerp(health_blocking_odds.x, health_blocking_odds.y, base_AI.targetactor.health/base_AI.targetactor.base_health)
